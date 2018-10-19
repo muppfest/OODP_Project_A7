@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Program {
 	private String name;
+	
 	private List<Course> courses;
 	private List<Teacher> teachers;
 	private List<Student> students;
