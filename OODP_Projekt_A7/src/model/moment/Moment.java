@@ -1,4 +1,4 @@
-package model;
+package model.moment;
 
 import java.sql.Date;
 
