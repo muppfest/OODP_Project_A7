@@ -10,6 +10,19 @@ public class Moment {
 	private Date date;
 	private double credit;
 	private String place;
+	
+	public String getPlace() {
+		return place;
+	}
+	public void setPlace(String place) {
+		this.place = place;
+	}
+	public Date getLastRegisterDate() {
+		return lastRegisterDate;
+	}
+	public void setLastRegisterDate(Date lastRegisterDate) {
+		this.lastRegisterDate = lastRegisterDate;
+	}
 	private Date lastRegisterDate;
 	
 	public String getCode() {
