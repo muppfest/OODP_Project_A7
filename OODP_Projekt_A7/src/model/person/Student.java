@@ -1,4 +1,4 @@
-package model;
+package model.person;
 
 public class Student extends Person {
 	private String city;

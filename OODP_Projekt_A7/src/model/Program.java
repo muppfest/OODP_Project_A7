@@ -2,6 +2,9 @@ package model;
 
 import java.util.List;
 
+import model.person.Student;
+import model.person.Teacher;
+
 public class Program {
 	private String name;
 	private List<Course> courses;
