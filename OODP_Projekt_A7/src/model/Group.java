@@ -3,14 +3,12 @@ package model;
 import java.util.List;
 
 import model.person.Student;
-import model.person.Teacher;
 
-public class Program {
+public class Group {
 	private String name;
-	
-	private List<Course> courses;
-	private List<Teacher> teachers;
+	private String description;
 	private List<Student> students;
+	private List<Moment> moments;
 	
 	public String getName() {
 		return name;
@@ -18,11 +16,11 @@ public class Program {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<Teacher> getTeachers() {
-		return teachers;
+	public String getDescription() {
+		return description;
 	}
-	public void setTeachers(List<Teacher> teachers) {
-		this.teachers = teachers;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public List<Student> getStudents() {
 		return students;
@@ -30,11 +28,12 @@ public class Program {
 	public void setStudents(List<Student> students) {
 		this.students = students;
 	}
-	public List<Course> getCourses() {
-		return courses;
+	public List<Moment> getMoments() {
+		return moments;
 	}
-	public void setCourses(List<Course> courses) {
-		this.courses = courses;
+	public void setMoments(List<Moment> moments) {
+		this.moments = moments;
 	}
+	
 	
 }
