@@ -1,4 +1,4 @@
-package model.moment;
+package model;
 
 import java.sql.Date;
 
@@ -9,6 +9,8 @@ public class Moment {
 	private String grade;
 	private Date date;
 	private double credit;
+	private String place;
+	private Date lastRegisterDate;
 	
 	public String getCode() {
 		return code;
