@@ -49,28 +49,28 @@ studentId INTEGER REFERENCES students NOT NULL);
 
 CREATE TABLE momentGroups
 (momentGroupId SERIAL PRIMARY KEY,
-momentCode VARCHAR(255) REFERENCES moments NOT NULL,
+momentId INTEGER REFERENCES moments NOT NULL,
 groupId INTEGER REFERENCES groups NOT NULL);
 
 CREATE TABLE courseTeachers
 (courseTeacherId SERIAL PRIMARY KEY,
-courseCode VARCHAR(255) REFERENCES courses NOT NULL,
+courseId INTEGER REFERENCES courses NOT NULL,
 teacherId INTEGER REFERENCES teachers NOT NULL);
 
 CREATE TABLE programTeachers 
 (programTeacherId SERIAL PRIMARY KEY,
 teacherId INTEGER REFERENCES teachers NOT NULL,
-programCode VARCHAR(20) REFERENCES programs NOT NULL);
+programId INTEGER REFERENCES programs NOT NULL);
 
 CREATE TABLE courseStudents
 (courseStudentId SERIAL PRIMARY KEY,
 studentId INTEGER REFERENCES students NOT NULL,
-courseCode VARCHAR(255) REFERENCES courses NOT NULL);
+courseId INTEGER REFERENCES courses NOT NULL);
 
 CREATE TABLE programCourses
 (programCourseId SERIAL PRIMARY KEY,
-courseCode VARCHAR(255) REFERENCES courses NOT NULL,
-programCode VARCHAR(20) REFERENCES programs NOT NULL);
+courseId INTEGER REFERENCES courses NOT NULL,
+programId INTEGER REFERENCES programs NOT NULL);
 
 
 
