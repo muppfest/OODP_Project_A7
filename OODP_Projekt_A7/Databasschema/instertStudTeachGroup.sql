@@ -1,11 +1,11 @@
 INSERT INTO students (name, email, phoneNr, city, address, programCode)
-VALUES ('Felix', 'felix.palmberg@gmail.com', '0734176067', 'Gävle', 'södrakungsgatan 56B', 'HIG-19104');
+VALUES ('Felix', 'felix.palmberg@gmail.com', '0734176067', 'Gävle', 'södrakungsgatan 56B', '1');
 INSERT INTO students (name, email, phoneNr, city, address, programCode)
-VALUES ('Marcus', 'marcus@gmail.com', '07072957265', 'Storvik', 'Stoviksvägen 22', 'HIG-19104');
+VALUES ('Marcus', 'marcus@gmail.com', '07072957265', 'Storvik', 'Stoviksvägen 22', '1');
 INSERT INTO students (name, email, phoneNr, city, address, programCode)
-VALUES ('Fabian', 'fabian.palmberg@gmail', '0734177072', 'Älvkarleby', 'Västanåvägen 20', 'HIG-19200');
+VALUES ('Fabian', 'fabian.palmberg@gmail', '0734177072', 'Älvkarleby', 'Västanåvägen 20', '2');
 INSERT INTO students (name, email, phoneNr, city, address, programCode)
-VALUES ('Alfred', 'Alfred.nilsson@hotmail.se', '0764789022', '', '', 'HIG-29815');
+VALUES ('Alfred', 'Alfred.nilsson@hotmail.se', '0764789022', '', '', '3');
 
 INSERT INTO teachers (name, email, office)
 VALUES ('Åke', 'ake@hig.se', '99530');
