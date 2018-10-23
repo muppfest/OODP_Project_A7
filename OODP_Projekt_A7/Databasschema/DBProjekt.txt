@@ -38,7 +38,7 @@ type VARCHAR(255) NOT NULL,
 description VARCHAR(255),
 grade VARCHAR(10),
 date VARCHAR(255),
-credit VARCHAR(10),
+credit DECIMAL(5,2),
 place VARCHAR(255),
 courseCode VARCHAR(255) REFERENCES courses NOT NULL);
 
