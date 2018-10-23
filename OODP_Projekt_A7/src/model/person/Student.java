@@ -2,7 +2,16 @@ package model.person;
 
 public class Student extends Person {
 	private String city;
-
+	private String address;
+	
+	public String getAddress() {
+		return address;
+	}
+	
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
 	public String getCity() {
 		return city;
 	}
