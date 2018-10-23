@@ -25,7 +25,7 @@ email VARCHAR(255),
 phoneNr VARCHAR(255),
 city VARCHAR(255),
 address VARCHAR(255),
-programCode VARCHAR(20) REFERENCES programs NOT NULL);
+programCode VARCHAR(20) REFERENCES programs);
 
 CREATE TABLE groups 
 (groupId SERIAL PRIMARY KEY,
