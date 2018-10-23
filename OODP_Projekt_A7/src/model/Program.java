@@ -7,6 +7,7 @@ import model.person.Teacher;
 
 public class Program {
 	private String name;
+	private String description;
 	
 	private List<Course> courses;
 	private List<Teacher> teachers;
@@ -35,6 +36,5 @@ public class Program {
 	}
 	public void setCourses(List<Course> courses) {
 		this.courses = courses;
-	}
-	
+	}	
 }
