@@ -1,5 +1,6 @@
 CREATE table courses 
-(courseCode VARCHAR(255) NOT NULL PRIMARY KEY,
+(courseId SERIAL PRIMARY KEY,
+courseCode VARCHAR(255) NOT NULL,
 name VARCHAR(255) NOT NULL, 
 description TEXT,
 finalGrade VARCHAR(10),
@@ -7,16 +8,13 @@ courseScheduleURL VARCHAR(255),
 coursePlanURL VARCHAR(255),
 startDate DATE);
 
-CREATE TABLE teachers 
-(teacherId SERIAL PRIMARY KEY,
-name VARCHAR(255) NOT NULL,
-email VARCHAR(255),
-office VARCHAR(255));
-
 CREATE TABLE programs
-(programCode VARCHAR(20) NOT NULL PRIMARY KEY,
+(programId SERIAL PRIMARY KEY,
+programCode VARCHAR(20) NOT NULL,
 name VARCHAR(255) NOT NULL,
 description TEXT);
+
+
 
 CREATE TABLE students 
 (studentId SERIAL PRIMARY KEY,
@@ -25,7 +23,7 @@ email VARCHAR(255),
 phoneNr VARCHAR(255),
 city VARCHAR(255),
 address VARCHAR(255),
-programCode VARCHAR(20) REFERENCES programs);
+programId INTEGER REFERENCES programs);
 
 CREATE TABLE groups 
 (groupId SERIAL PRIMARY KEY,
@@ -33,14 +31,15 @@ name VARCHAR(255),
 description TEXT);
 
 CREATE TABLE moments
-(momentCode VARCHAR(255) NOT NULL PRIMARY KEY,
+(momentId SERIAL PRIMARY KEY,
+momentCode VARCHAR(255) NOT NULL,
 type VARCHAR(255) NOT NULL,
 description TEXT,
 grade VARCHAR(10),
 date DATE,
 credit DECIMAL(5,2),
 place VARCHAR(255),
-courseCode VARCHAR(255) REFERENCES courses NOT NULL);
+courseId INTEGER REFERENCES courses NOT NULL);
 
 CREATE TABLE studentGroups
 (studentGroupId SERIAL PRIMARY KEY,
