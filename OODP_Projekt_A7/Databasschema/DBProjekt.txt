@@ -1,0 +1,77 @@
+CREATE table courses 
+(courseCode VARCHAR(255) NOT NULL PRIMARY KEY,
+name VARCHAR(255) NOT NULL, 
+description VARCHAR(255),
+finalGrade VARCHAR(10),
+courseSheduleURL VARCHAR(255),
+coursePlanURL VARCHAR(255),
+startDate DATE)
+
+CREATE TABLE teachers 
+(teacherId SERIAL PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+email VARCHAR(255),
+office VARCHAR(255))
+
+CREATE TABLE programs
+(programCode VARCHAR(20) NOT NULL PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+description VARCHAR(255))
+
+CREATE TABLE students 
+(studentId SERIAL PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+email VARCHAR(255), 
+phoneNr VARCHAR(255),
+city VARCHAR(255)
+address VARCHAR(255),
+programCode VARCHAR(20) REFERENCES programs NOT NULL)
+
+CREATE TABLE groups 
+(groupId SERIAL PRIMARY KEY,
+name VARCHAR(255),
+description VARCHAR(255))
+
+CREATE TABLE moments
+(momentCode VARCHAR(255) NOT NULL PRIMARY KEY,
+type VARCHAR(255) NOT NULL,
+description VARCHAR(255),
+grade VARCHAR(10),
+date VARCHAR(255),
+credit VARCHAR(10),
+place VARCHAR(255),
+courseCode VARCHAR(255) REFERENCES courses NOT NULL)
+
+CREATE TABLE studentGroups
+(studentGroupId SERIAL PRIMARY KEY,
+groupId INTEGER REFERENCES groups NOT NULL,
+studentId INTEGER REFERENCES students NOT NULL)
+
+CREATE TABLE momentGroups
+(momentGroupId SERIAL PRIMARY KEY,
+momentCode VARCHAR(255) REFERENCES moments NOT NULL,
+groupId INTEGER REFERENCES groups NOT NULL)
+
+CREATE TABLE courseTeachers
+(courseTeacherId SERIAL PRIMARY,
+courseCode VARCHAR(255) REFERENCES courses NOT NULL,
+teacherId INTEGER REFERENCES teachers NOT NULL)
+
+CREATE TABLE programTeachers 
+(programTeacherId SERIAL PRIMARY KEY,
+teacherId INTEGER REFERENCES teachers NOT NULL,
+programCode VARCHAR(20) REFERENCES programs NOT NULL)
+
+CREATE TABLE courseStudents
+(courseStudentId SERIAL PRIMARY KEY,
+studentId INTEGER REFERENCES students NOT NULL,
+courseCode VARCHAR(255) REFERENCES courses NOT NULL)
+
+CREATE TABLE programCourses
+(programCourseId SERIAL PRIMARY KEY,
+courseCode VARCHAR(255) REFERENCES courses NOT NULL,
+programCode VARCHAR(20) REFERENCES programs NOT NULL)
+
+
+
+
