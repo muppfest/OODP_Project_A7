@@ -5,11 +5,18 @@ import java.util.List;
 import model.person.Student;
 
 public class Group {
+	private int groupId;
 	private String name;
 	private String description;
 	private List<Student> students;
 	private List<Moment> moments;
 	
+	public int getGroupId() {
+		return groupId;
+	}
+	public void setGroupId(int groupId) {
+		this.groupId = groupId;
+	}
 	public String getName() {
 		return name;
 	}

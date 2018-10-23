@@ -6,13 +6,20 @@ import model.person.Student;
 import model.person.Teacher;
 
 public class Program {
+	private String programCode;
 	private String name;
 	private String description;
 	
 	private List<Course> courses;
 	private List<Teacher> teachers;
 	private List<Student> students;
-	
+
+	public String getProgramCode() {
+		return programCode;
+	}
+	public void setProgramCode(String programCode) {
+		this.programCode = programCode;
+	}
 	public String getName() {
 		return name;
 	}
