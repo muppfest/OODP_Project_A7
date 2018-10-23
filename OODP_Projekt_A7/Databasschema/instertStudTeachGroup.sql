@@ -3,9 +3,9 @@ VALUES ('Felix', 'felix.palmberg@gmail.com', '0734176067', 'Gävle', 'södrakung
 INSERT INTO students (name, email, phoneNr, city, address, programCode)
 VALUES ('Marcus', 'marcus@gmail.com', '07072957265', 'Storvik', 'Stoviksvägen 22', 'HIG-19104');
 INSERT INTO students (name, email, phoneNr, city, address, programCode)
-VALUES ('Fabian', 'fabian.palmberg@gmail', '0734177072', 'Älvkarleby', 'Västanåvägen 20', 'HIG-29815');
+VALUES ('Fabian', 'fabian.palmberg@gmail', '0734177072', 'Älvkarleby', 'Västanåvägen 20', 'HIG-19200');
 INSERT INTO students (name, email, phoneNr, city, address, programCode)
-VALUES ('Alfred', 'Alfred.nilsson@hotmail.se', '0764789022', '', '', 'HIG-19200');
+VALUES ('Alfred', 'Alfred.nilsson@hotmail.se', '0764789022', '', '', 'HIG-29815');
 
 INSERT INTO teachers (name, email, office)
 VALUES ('Åke', 'ake@hig.se', '99530');
