@@ -9,6 +9,7 @@ import model.person.Teacher;
 public class Course {
 	private String courseCode;
 	private String name;
+	private Date startDate;
 	private String description;
 	private String finalGrade;
 	private URL courseScheduleURL;
@@ -18,7 +19,12 @@ public class Course {
 	private List<Teacher> teachers;
 	private List<Moment> moments;
 	
-	
+	public Date getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
 	public String getCourseCode() {
 		return courseCode;
 	}
