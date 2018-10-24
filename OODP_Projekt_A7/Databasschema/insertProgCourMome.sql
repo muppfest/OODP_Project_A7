@@ -1,4 +1,4 @@
-INSERT INTO programs (programCode, name, description) 
+﻿INSERT INTO programs (programCode, name, description) 
 VALUES ('HIG-19104','Dataingenjörsprogrammet', 'Vårt samhälle och vardag fungerar allt oftare genom olika system och IT-lösningar. Som dataingenjör möter du därför fler utmaningar än ren programmering och ofta handlar det om att hitta lösningar där någon annan kanske upplever ett problem. Här skriver du koden framtiden behöver!');
 INSERT INTO programs (programCode, name, description) 
 VALUES ('HIG-19200','Automationsingenjör (Co-op)','Automatiseringar finns överallt i vår omgivning - från smarta styrsystem för vår inomhusmiljö till industriella produktionsprocesser. Automation gör vår vardag enklare genom att samordna olika tekniska system som elektronik, IT, människa/maskin samt ekonomi och miljö.');
@@ -16,15 +16,15 @@ VALUES ('DVG328','Databasteknik','','2018-08-20','','http://schema.hig.se/setup/
 INSERT INTO courses (courseCode, name, description, startDate, finalGrade, courseScheduleURL, coursePlanURL)
 VALUES ('DVG320','Programvaruteknik - utveckling och underhåll av programvara','','2018-08-17','','http://schema.hig.se/setup/jsp/Schema.jsp?startDatum=idag&intervallTyp=m&intervallAntal=6&sokMedAND=true&sprak=SV&resurser=k.DVG320.28414.19-%2C','http://utb.hig.se/fafne/app/public/pdf/jasper/course.pdf?identifier=DVG320');
 
-INSERT INTO moments (momentCode, type, description, grade, date, credit, place, courseCode) 
-VALUES ('DVG326.0010','Skriftlig tentamen','','','',3.0,'','DVG326');
-INSERT INTO moments (momentCode, type, description, grade, date, credit, place, courseCode) 
-VALUES ('DVG326.0020','Inlämningsuppgifter','','','',3.0,'','DVG326');
-INSERT INTO moments (momentCode, type, description, grade, date, credit, place, courseCode) 
-VALUES ('DVG326.0030','Utvecklingsprojekt','','','',1.5,'','DVG326');
-INSERT INTO moments (momentCode, type, description, grade, date, credit, place, courseCode) 
-VALUES ('DVG320.0010','Skriftlig tentamen','','','',5.0,'','DVG320');
-INSERT INTO moments (momentCode, type, description, grade, date, credit, place, courseCode) 
-VALUES ('DVG320.0020','Skriftlig tentamen','','','',5.0,'','DVG320');
-INSERT INTO moments (momentCode, type, description, grade, date, credit, place, courseCode) 
-VALUES ('DVG320.0030','Skriftlig tentamen','','','',5.0,'','DVG320');
+INSERT INTO moments (momentCode, type, description, grade, date, credit, place, courseId) 
+VALUES ('DVG326.0010','Skriftlig tentamen','','','2018-11-22',3.0,'',2);
+INSERT INTO moments (momentCode, type, description, grade, date, credit, place, courseId) 
+VALUES ('DVG326.0020','Inlämningsuppgifter','','','2018-11-15',3.0,'',2);
+INSERT INTO moments (momentCode, type, description, grade, date, credit, place, courseId) 
+VALUES ('DVG326.0030','Utvecklingsprojekt','','','2018-11-21',1.5,'',2);
+INSERT INTO moments (momentCode, type, description, grade, date, credit, place, courseId) 
+VALUES ('DVG320.0010','Skriftlig tentamen','','','2019-03-19',5.0,'',3);
+INSERT INTO moments (momentCode, type, description, grade, date, credit, place, courseId) 
+VALUES ('DVG320.0020','Skriftlig tentamen','','','2019-01-01',5.0,'',3);
+INSERT INTO moments (momentCode, type, description, grade, date, credit, place, courseId) 
+VALUES ('DVG320.0030','Skriftlig tentamen','','','2018-12-24',5.0,'',3);
