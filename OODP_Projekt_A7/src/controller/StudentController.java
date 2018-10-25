@@ -18,6 +18,7 @@ public class StudentController {
 	}
 	
 	public List<Student> ListStudents() {
-		return null;
+		List<Student> slist = studentDao.getAll();
+		return slist;
 	}
 }
