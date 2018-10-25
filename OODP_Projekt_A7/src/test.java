@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.CourseDao;
+import dao.GroupDao;
 import dao.MomentDao;
 import dao.ProgramDao;
 import dao.StudentDao;
 import dao.TeacherDao;
 import db.DbConnectionManager;
 import model.Course;
+import model.Group;
 import model.Moment;
 import model.Program;
 import model.person.Student;
@@ -60,6 +62,15 @@ public class test {
 		
 		for(Teacher teacher : tlist) {
 			teacher.printTeacher();
+			System.out.println();
+		}
+		
+		GroupDao dg = new GroupDao();
+		List<Group> glist = new ArrayList<Group>();
+		glist = dg.getAll();
+		
+		for(Group group : glist) {
+			group.printGroup();
 			System.out.println();
 		}
 	}

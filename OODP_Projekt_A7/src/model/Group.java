@@ -47,6 +47,7 @@ public class Group {
 	public void setMoments(List<Moment> moments) {
 		this.moments = moments;
 	}
-	
-	
+	public void printGroup() {
+		System.out.printf("Gruppid: %d%nNamn: %s%nBeskrivning: %s%n", getGroupId(), getName(), getDescription());
+	}
 }
