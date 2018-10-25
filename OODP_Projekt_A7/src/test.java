@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.CourseDao;
+import dao.MomentDao;
 import dao.ProgramDao;
 import dao.StudentDao;
 import db.DbConnectionManager;
 import model.Course;
+import model.Moment;
 import model.Program;
 import model.person.Student;
 
@@ -38,6 +40,15 @@ public class test {
 		
 		for(Course course : clist) {
 			course.printCourse();
+			System.out.println();
+		}
+		
+		MomentDao dm = new MomentDao();
+		List<Moment> mlist = new ArrayList<Moment>();
+		mlist = dm.getAll();
+
+		for(Moment moment : mlist) {
+			moment.printMoment();
 			System.out.println();
 		}
 	}

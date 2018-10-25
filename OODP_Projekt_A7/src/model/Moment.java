@@ -3,7 +3,8 @@ package model;
 import java.sql.Date;
 
 public class Moment {
-	private String code;
+	private int momentId;
+	private String momentCode;
 	private String type;
 	private String description;
 	private String grade;
@@ -11,25 +12,23 @@ public class Moment {
 	private double credit;
 	private String place;
 	
+	public int getMomentId() {
+		return momentId;
+	}
+	public void setMomentId(int momentId) {
+		this.momentId = momentId;
+	}
 	public String getPlace() {
 		return place;
 	}
 	public void setPlace(String place) {
 		this.place = place;
+	}	
+	public String getMomentCode() {
+		return momentCode;
 	}
-	public Date getLastRegisterDate() {
-		return lastRegisterDate;
-	}
-	public void setLastRegisterDate(Date lastRegisterDate) {
-		this.lastRegisterDate = lastRegisterDate;
-	}
-	private Date lastRegisterDate;
-	
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
+	public void setMomentCode(String code) {
+		this.momentCode = code;
 	}
 	public String getType() {
 		return type;
@@ -61,6 +60,8 @@ public class Moment {
 	public void setCredit(double credit) {
 		this.credit = credit;
 	}
-	
+	public void printMoment() {
+		System.out.printf("Momentid: %d%nMomentkod: %s%nTyp: %s%nPlats: %s%nDatum: %s%nBeskrivning: %s%nBetyg: %s%nAntal poäng: %f hp%n", getMomentId(), getMomentCode(), getType(), getPlace(), getDate().toString(), getDescription(), getGrade(), getCredit());
+	}
 	
 }
