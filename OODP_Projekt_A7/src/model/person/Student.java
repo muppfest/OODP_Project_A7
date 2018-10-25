@@ -4,6 +4,7 @@ public class Student extends Person {
 	private int studentId;
 	private String city;
 	private String address;
+	private int programId;
 	
 	public int getStudentId() {
 		return studentId;
@@ -27,5 +28,17 @@ public class Student extends Person {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public int getProgramId() {
+		return programId;
+	}
+
+	public void setProgramId(int programId) {
+		this.programId = programId;
+	}
+
+	public void printStudent() {
+		System.out.printf("StudentId: %d%nProgramId: %s%nNamn: %s%nE-post: %s%nTelefonnummer: %s%nAdress: %s%nOrt: %s",getStudentId(), getProgramId(), getName(), getEmail(), getPhoneNr(), getAddress(), getCity());
 	}
 }
