@@ -39,6 +39,6 @@ public class Student extends Person {
 	}
 
 	public void printStudent() {
-		System.out.printf("StudentId: %d%nProgramId: %s%nNamn: %s%nE-post: %s%nTelefonnummer: %s%nAdress: %s%nOrt: %s",getStudentId(), getProgramId(), getName(), getEmail(), getPhoneNr(), getAddress(), getCity());
+		System.out.printf("StudentId: %d%nProgramId: %s%nNamn: %s%nE-post: %s%nTelefonnummer: %s%nAdress: %s%nOrt: %s%n",getStudentId(), getProgramId(), getName(), getEmail(), getPhoneNr(), getAddress(), getCity());
 	}
 }

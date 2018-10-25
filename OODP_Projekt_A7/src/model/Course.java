@@ -8,6 +8,7 @@ import model.person.Student;
 import model.person.Teacher;
 
 public class Course {
+	private int courseId;
 	private String courseCode;
 	private String name;
 	private Date startDate;
@@ -20,6 +21,12 @@ public class Course {
 	private List<Teacher> teachers;
 	private List<Moment> moments;
 	
+	public int getCourseId() {
+		return courseId;
+	}
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
+	}
 	public Date getStartDate() {
 		return startDate;
 	}

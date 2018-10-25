@@ -6,6 +6,7 @@ import model.person.Student;
 import model.person.Teacher;
 
 public class Program {
+	private int programId;
 	private String programCode;
 	private String name;
 	private String description;
@@ -14,6 +15,12 @@ public class Program {
 	private List<Teacher> teachers;
 	private List<Student> students;
 
+	public int getProgramId() {
+		return programId;
+	}
+	public void setProgramId(int programId) {
+		this.programId = programId;
+	}
 	public String getProgramCode() {
 		return programCode;
 	}
@@ -50,4 +57,7 @@ public class Program {
 	public void setCourses(List<Course> courses) {
 		this.courses = courses;
 	}	
+	public void printProgram() {
+		System.out.printf("ProgramId: %s%nProgramCode: %s%nName: %s%nDescription: %s%n", getProgramId(), getProgramCode(), getName(), getDescription());
+	}
 }
