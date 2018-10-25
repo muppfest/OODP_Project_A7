@@ -16,4 +16,7 @@ public class Teacher extends Person {
 	public void setOffice(String office) {
 		this.office = office;
 	}
+	public void printTeacher() {
+		System.out.printf("LärarId: %d%nNamn: %s%nE-post: %s%nTelefonnummer: %s%nKontorsrum: %s%n", getTeacherId(), getName(), getEmail(), getPhoneNr(), getOffice());
+	}
 }

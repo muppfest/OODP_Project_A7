@@ -1,3 +1,9 @@
+/**
+ * DAO-klass för att hämta och manipulera data i grouptabellen i databasen. 
+ * 
+ * Gjord av Marcus
+ */
+
 package model;
 
 import java.util.List;

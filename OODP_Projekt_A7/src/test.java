@@ -7,11 +7,13 @@ import dao.CourseDao;
 import dao.MomentDao;
 import dao.ProgramDao;
 import dao.StudentDao;
+import dao.TeacherDao;
 import db.DbConnectionManager;
 import model.Course;
 import model.Moment;
 import model.Program;
 import model.person.Student;
+import model.person.Teacher;
 
 public class test {
 
@@ -49,6 +51,15 @@ public class test {
 
 		for(Moment moment : mlist) {
 			moment.printMoment();
+			System.out.println();
+		}
+		
+		TeacherDao dt = new TeacherDao();
+		List<Teacher> tlist = new ArrayList<Teacher>();
+		tlist = dt.getAll();
+		
+		for(Teacher teacher : tlist) {
+			teacher.printTeacher();
 			System.out.println();
 		}
 	}

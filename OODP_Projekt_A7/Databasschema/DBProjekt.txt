@@ -18,6 +18,7 @@ CREATE TABLE teachers
 (teacherId SERIAL PRIMARY KEY,
 name VARCHAR(255) NOT NULL,
 email VARCHAR(255),
+phoneNr VARCHAR(255),
 office VARCHAR(255));
 
 CREATE TABLE students 
