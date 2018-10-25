@@ -58,6 +58,6 @@ public class Program {
 		this.courses = courses;
 	}	
 	public void printProgram() {
-		System.out.printf("ProgramId: %s%nProgramCode: %s%nName: %s%nDescription: %s%n", getProgramId(), getProgramCode(), getName(), getDescription());
+		System.out.printf("ProgramId: %s%nProgramkod: %s%nNamn: %s%nBeskrivning: %s%n", getProgramId(), getProgramCode(), getName(), getDescription());
 	}
 }

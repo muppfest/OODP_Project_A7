@@ -3,9 +3,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.CourseDao;
 import dao.ProgramDao;
 import dao.StudentDao;
 import db.DbConnectionManager;
+import model.Course;
 import model.Program;
 import model.person.Student;
 
@@ -27,6 +29,15 @@ public class test {
 		
 		for(Program program : plist) {
 			program.printProgram();
+			System.out.println();
+		}
+		
+		CourseDao dc = new CourseDao();
+		List<Course> clist = new ArrayList<Course>();
+		clist = dc.getAll();
+		
+		for(Course course : clist) {
+			course.printCourse();
 			System.out.println();
 		}
 	}

@@ -87,6 +87,7 @@ public class Course {
 	public void setMoments(List<Moment> moments) {
 		this.moments = moments;
 	}
-	
-	
+	public void printCourse() {
+		System.out.printf("KursId: %s%nKurskod: %s%nNamn: %s%nBeskrivning: %s%nStartdatum: %s%nKursplan: %s%nKursschema: %s%nBetyg: %s%n", getCourseId(), getCourseCode(), getName(), getDescription(), getStartDate().toString(), getCoursePlanURL().toString(), getCourseScheduleURL().toString(), getFinalGrade());
+	}
 }

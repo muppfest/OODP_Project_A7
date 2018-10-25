@@ -6,6 +6,8 @@
 
 package dao;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -66,12 +68,12 @@ public class CourseDao implements IDao<Course> {
 				c.setName(rs.getString(3));
 				c.setDescription(rs.getString(4));
 				c.setFinalGrade(rs.getString(5));
-				c.setCourseScheduleURL(rs.getURL(6));
-				c.setCoursePlanURL(rs.getURL(7));
+				c.setCourseScheduleURL(new URL(rs.getString(6)));
+				c.setCoursePlanURL(new URL(rs.getString(7)));
 				c.setStartDate(rs.getDate(8));
 				clist.add(c);
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | MalformedURLException e) {
 			System.out.println(e.getMessage());
 		}
 		
@@ -88,8 +90,8 @@ public class CourseDao implements IDao<Course> {
 			preparedStatement.setString(2, object.getName());
 			preparedStatement.setString(3, object.getDescription());
 			preparedStatement.setString(4, object.getFinalGrade());
-			preparedStatement.setURL(5, object.getCourseScheduleURL());
-			preparedStatement.setURL(6, object.getCoursePlanURL());
+			preparedStatement.setString(5, object.getCourseScheduleURL().toString());
+			preparedStatement.setString(6, object.getCoursePlanURL().toString());
 			preparedStatement.setDate(7, object.getStartDate());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
