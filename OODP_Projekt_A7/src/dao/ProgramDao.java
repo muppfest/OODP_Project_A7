@@ -29,10 +29,10 @@ public class ProgramDao implements IDao<Program> {
 	@Override
 	public Program getById(int id) {
 		Program p = new Program();
-		String programStatementString = "SELECT programId, programCode, name, description FROM programs WHERE programId = ?";
+		String statementString = "SELECT programId, programCode, name, description FROM programs WHERE programId = ?";
 		
 		try {
-			preparedStatement = db.preparedStatement(programStatementString);
+			preparedStatement = db.preparedStatement(statementString);
 			preparedStatement.setInt(1, id);
 			rs = preparedStatement.executeQuery();
 			
