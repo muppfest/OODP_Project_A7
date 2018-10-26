@@ -1,4 +1,3 @@
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,18 +8,20 @@ import dao.MomentDao;
 import dao.ProgramDao;
 import dao.StudentDao;
 import dao.TeacherDao;
-import db.DbConnectionManager;
 import model.Course;
 import model.Group;
 import model.Moment;
 import model.Program;
 import model.person.Student;
 import model.person.Teacher;
+import view.StudentTest;
 
 public class test {
 
 	public static void main(String[] args) throws SQLException {
-		StudentDao d = new StudentDao();
+		StudentTest t = new StudentTest();
+		
+		/*		StudentDao d = new StudentDao();
 		
 		List<Student> slist = new ArrayList<Student>();
 		slist = d.getAll();
@@ -72,6 +73,6 @@ public class test {
 		for(Group group : glist) {
 			group.printGroup();
 			System.out.println();
-		}
-	}
+		} */
+	} 
 }

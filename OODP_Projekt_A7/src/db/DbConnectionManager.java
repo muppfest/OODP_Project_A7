@@ -10,13 +10,12 @@ import java.sql.SQLException;
 public class DbConnectionManager {
 	private static final String DB_NAME = "studentapp";
 	private static final String DB_USER = "postgres";
-	private static final String DB_PASSWORD = "m0zartk0g3l";
+	private static final String DB_PASSWORD = "postgres";
 	private static final String DB_PORT = "5433";
 	private static final String DB_CONNECTION_URL = "jdbc:postgresql://localhost" + ":" + DB_PORT + "/" + DB_NAME;
 	
 	private Connection connection = null;
 	private Statement statement = null;
-	private ResultSet resultSet = null;
 	
 	private static DbConnectionManager instance;
 

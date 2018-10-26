@@ -14,7 +14,8 @@ public class StudentController {
 	}
 	
 	public Student ShowStudent(int id) {
-		return null;
+		Student s = (Student) studentDao.getById(id);
+		return s;
 	}
 	
 	public List<Student> ListStudents() {
