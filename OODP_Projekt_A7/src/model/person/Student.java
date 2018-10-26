@@ -1,11 +1,23 @@
 package model.person;
 
+import model.Program;
+
 public class Student extends Person {
 	private int studentId;
 	private String city;
 	private String address;
 	private int programId;
 	
+	private Program program;
+
+	public Program getProgram() {
+		return program;
+	}
+
+	public void setProgram(Program program) {
+		this.program = program;
+	}
+
 	public int getStudentId() {
 		return studentId;
 	}

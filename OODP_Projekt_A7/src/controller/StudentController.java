@@ -3,18 +3,23 @@ package controller;
 import java.util.List;
 
 import dao.IDao;
+import dao.ProgramDao;
 import dao.StudentDao;
+import model.Program;
 import model.person.Student;
 
 public class StudentController {
-	private IDao studentDao;
+	private IDao<Student> studentDao;
+	private IDao<Program> programDao;
 	
 	public StudentController() {
 		studentDao = new StudentDao();
+		programDao = new ProgramDao();
 	}
 	
 	public Student ShowStudent(int id) {
-		Student s = (Student) studentDao.getById(id);
+		Student s = studentDao.getById(id);
+		s.setProgram(programDao.getById(s.getProgramId()));
 		return s;
 	}
 	

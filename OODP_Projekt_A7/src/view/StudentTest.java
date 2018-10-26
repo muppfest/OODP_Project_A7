@@ -59,21 +59,10 @@ public class StudentTest extends JFrame implements Observer {
 	
 	public void showStudent(int id) {
 		Student student = controller.ShowStudent(id);
-
-		JTextField sname = new JTextField(student.getName());
-		JTextField semail = new JTextField(student.getEmail());
-		JTextField sphone = new JTextField(student.getPhoneNr());
 		
-		sname.setEditable(false);
-		semail.setEditable(false);
-		sphone.setEditable(false);
+		ShowStudentPanel panel = new ShowStudentPanel(student);
 		
 		frame.getContentPane().removeAll();
-		JPanel panel = new JPanel();
-		panel.add(sname);
-		panel.add(semail);
-		panel.add(sphone);
-		
 		frame.add(panel);
 		frame.revalidate();
 		frame.repaint();
