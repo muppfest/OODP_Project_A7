@@ -27,4 +27,12 @@ public class StudentController {
 		List<Student> slist = studentDao.getAll();
 		return slist;
 	}
+	
+	public boolean updateStudent(Student student) {	
+		if(studentDao.update(student)) {
+			return true;
+		}
+		System.out.println("Något gick fel");
+		return false;
+	}
 }
