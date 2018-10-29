@@ -3,8 +3,6 @@
  */
 
 package view;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -26,16 +24,15 @@ import javax.swing.table.DefaultTableModel;
 
 import model.person.Student;
 
-public class ListStudentsPanel extends JPanel implements IListPanel<Student> {
-	private StudentTest frame;
-	private List<ListRowStudent> studentRows = new ArrayList<ListRowStudent>();
+public class ListStudents extends JPanel implements IListPanel<Student> {
+	private StudentView studentView;
 	
-	public ListStudentsPanel(List<Student> students, StudentTest frame) {
+	public ListStudents(List<Student> students, StudentView studentView) {
 		super();
-		this.frame = frame;
+		this.studentView = studentView;
 		
-		JLabel title = new JLabel("Lista studenter");
-		title.setFont(new Font("Arial", Font.BOLD, 18));
+		JLabel title = new JLabel("Studenter");
+		title.setFont(new Font("Arial", Font.BOLD, 20));
 		add(title);
 		
 		JLabel nameLabel = new JLabel("Fullständigt namn");
@@ -55,7 +52,7 @@ public class ListStudentsPanel extends JPanel implements IListPanel<Student> {
 		add(headers);
 		
 		for(Student student : students) {
-			ListRowStudent studentRow = new ListRowStudent(student, this);
+			StudentListRow studentRow = new StudentListRow(student, this);
 			add(studentRow);			
 		}
 		
@@ -74,12 +71,12 @@ public class ListStudentsPanel extends JPanel implements IListPanel<Student> {
 	
 	@Override
 	public void show(int id) {
-		frame.showStudent(id);
+		studentView.show(id);
 	}
 	
 	@Override
 	public void create() {
-		frame.createStudent();
+		studentView.create();
 		
 	}
 
@@ -88,7 +85,7 @@ public class ListStudentsPanel extends JPanel implements IListPanel<Student> {
 		int dialogResult = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill ta bort studenten?", "", dialogButton);
 		
 		if(dialogResult == JOptionPane.YES_OPTION) {
-			frame.deleteStudent(id);
+			studentView.delete(id);
 		}
 	}
 	

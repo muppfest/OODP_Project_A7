@@ -2,7 +2,7 @@ package view;
 
 public interface IShowPanel<T> {	
 	public void edit();
-	public T save();
+	public void save();
 	public void enableFields();
 	public void disableFields();
 	public void cancel();

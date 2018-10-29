@@ -15,7 +15,7 @@ public class Course {
 	private String description;
 	private String finalGrade;
 	private URL courseScheduleURL;
-	private URL coursePlanURL;
+	private URL coursePlanURL;	
 	
 	private List<Student> students;
 	private List<Teacher> teachers;

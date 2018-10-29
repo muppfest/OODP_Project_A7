@@ -15,9 +15,8 @@ import javax.swing.JPanel;
 
 import model.person.Student;
 
-public class ListRowStudent extends JPanel {
-	private JPanel panel;
-	private JLabel id;
+public class StudentListRow extends JPanel {
+	private JPanel listStudents;
 	private JLabel name;
 	private JLabel email;
 	private JLabel phoneNr;
@@ -25,12 +24,10 @@ public class ListRowStudent extends JPanel {
 	private JButton showButton = new JButton("Visa student");
 	private JButton deleteButton = new JButton("Ta bort student");
 	
-	public ListRowStudent(Student student, ListStudentsPanel panel) {
+	public StudentListRow(Student student, ListStudents listStudents) {
 		super();
-		this.panel = panel;
+		this.listStudents = listStudents;
 		
-		id = new JLabel();
-		id.setVisible(false);
 		name = new JLabel(student.getName());
 		email = new JLabel(student.getEmail());
 		phoneNr = new JLabel(student.getPhoneNr());
@@ -41,7 +38,7 @@ public class ListRowStudent extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				panel.show(student.getStudentId());
+				listStudents.show(student.getStudentId());
 			}
 		});
 		
@@ -49,7 +46,7 @@ public class ListRowStudent extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				panel.delete(student.getStudentId());
+				listStudents.delete(student.getStudentId());
 			}
 		});
 		

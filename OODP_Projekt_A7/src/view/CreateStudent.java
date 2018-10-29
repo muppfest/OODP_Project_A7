@@ -17,8 +17,8 @@ import javax.swing.JTextField;
 
 import model.person.Student;
 
-public class CreateStudentPanel extends JPanel implements ICreatePanel {
-	private StudentTest frame;
+public class CreateStudent extends JPanel implements ICreatePanel {
+	private StudentView studentView;
 	
 	private JTextField name;
 	private JTextField email;
@@ -30,11 +30,11 @@ public class CreateStudentPanel extends JPanel implements ICreatePanel {
 	private JButton saveButton = new JButton("Lägg till student");
 	private JButton backButton = new JButton("Gå tillbaka");
 	
-	public CreateStudentPanel(StudentTest frame) {
-		this.frame = frame;
+	public CreateStudent(StudentView studentView) {
+		this.studentView = studentView;
 		
 		JLabel title = new JLabel("Lägg till student");
-		title.setFont(new Font("Arial", Font.BOLD, 18));
+		title.setFont(new Font("Arial", Font.BOLD, 20));
 		add(title);
 		
 		JLabel nameLabel = new JLabel("Fullständigt namn");
@@ -54,7 +54,7 @@ public class CreateStudentPanel extends JPanel implements ICreatePanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(name.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(frame,
+					JOptionPane.showMessageDialog(studentView,
 						    "Namn måste fyllas i.");
 				} else {
 					createStudent();
@@ -66,7 +66,7 @@ public class CreateStudentPanel extends JPanel implements ICreatePanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.listStudents();
+				studentView.list();
 			}
 		});
 		
@@ -94,6 +94,6 @@ public class CreateStudentPanel extends JPanel implements ICreatePanel {
 		s.setEmail(email.getText());
 		s.setPhoneNr(phoneNr.getText());
 		
-		frame.insertStudent(s);
+		studentView.insert(s);
 	}
 }

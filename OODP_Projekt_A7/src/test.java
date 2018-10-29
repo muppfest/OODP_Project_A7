@@ -14,12 +14,12 @@ import model.Moment;
 import model.Program;
 import model.person.Student;
 import model.person.Teacher;
-import view.StudentTest;
+import view.View;
 
 public class test {
 
 	public static void main(String[] args) throws SQLException {
-		StudentTest t = new StudentTest();
+		View t = new View();
 		
 		/*		StudentDao d = new StudentDao();
 		
