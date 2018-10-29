@@ -17,40 +17,18 @@ import model.person.Student;
 public class StudentTest extends JFrame implements Observer {
 	private StudentController controller;
 	private ShowStudentPanel showStudentPanel;
-
+	private ListStudentsPanel listStudentsPanel;
+	private CreateStudentPanel createStudentPanel;
 	
 	public StudentTest() {
-		controller = new StudentController();
-		
-		List<Student> slist = controller.ListStudents();
+		setSize(800,800);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(new Dimension(1000,1000));
 		
-		for(Student student : slist) {
-			JLabel sname = new JLabel(student.getName());
-			JLabel semail = new JLabel(student.getEmail());
-			JLabel sphone = new JLabel(student.getPhoneNr());
-			JButton sbutton = new JButton("Detaljer");
-			sbutton.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					showStudent(student.getStudentId());
-				}
-			});
-			
-			JPanel panel = new JPanel();
-			
-			panel.add(sname);
-			panel.add(semail);
-			panel.add(sphone);
-			panel.add(sbutton);
-
-			add(panel);
-			setLayout(new FlowLayout());
-		}
+		controller = new StudentController();
+		listStudents();
 	}
+	
 	
 	@Override
 	public void notify(Observable observable) {
@@ -58,18 +36,34 @@ public class StudentTest extends JFrame implements Observer {
 		
 	}
 	
-	public void showStudent(int id) {
-		Student student = controller.ShowStudent(id);
-		
-		ActionListener saveListener = new ActionListener() {
+	public void listStudents() {
+		List<Student> students = controller.ListStudents();
+				
+		ActionListener createListener = new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				updateStudent();
+				System.out.println("create");
 			}
 		};
 		
-		showStudentPanel = new ShowStudentPanel(student, saveListener);
+		listStudentsPanel = new ListStudentsPanel(students, this);
+		listStudentsPanel.setVisible(true);
+		getContentPane().removeAll();
+		add(listStudentsPanel);
+		refresh();
+	}
+	
+	public void createStudent() {
+		createStudentPanel = new CreateStudentPanel(this);
+		getContentPane().removeAll();
+		add(createStudentPanel);
+		refresh();
+	}
+	
+	public void showStudent(int id) {
+		Student student = controller.ShowStudent(id);		
+		showStudentPanel = new ShowStudentPanel(student, this);
 		getContentPane().removeAll();
 		add(showStudentPanel);
 		refresh();
@@ -78,6 +72,18 @@ public class StudentTest extends JFrame implements Observer {
 	public void refresh() {
 		revalidate();
 		repaint();
+		pack();
+	}
+	
+	public void insertStudent(Student s) {
+		if(controller.insertStudent(s)) {
+			JOptionPane.showMessageDialog(this,
+				    "Studenten lades till.");
+			listStudents();
+		} else {
+			JOptionPane.showMessageDialog(this,
+				    "Något gick fel.");
+		}
 	}
 	
 	public void updateStudent() {
@@ -89,7 +95,18 @@ public class StudentTest extends JFrame implements Observer {
 				    "Studenten uppdaterades.");
 		} else {
 			JOptionPane.showMessageDialog(this,
-				    "Något gick fel med uppdateringen.");
+				    "Något gick fel.");
+		}
+	}
+	
+	public void deleteStudent(int id) {
+		if(controller.deleteStudent(id)) {
+			JOptionPane.showMessageDialog(this,
+				    "Studenten togs bort.");
+			listStudents();
+		} else {
+			JOptionPane.showMessageDialog(this,
+				    "Något gick fel.");
 		}
 	}
 }

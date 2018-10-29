@@ -1,17 +1,26 @@
+/**
+ * View för detaljer av studenter gjord av: Marcus
+ */
+
 package view;
 
 import java.util.List;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.person.Student;
 
 public class ShowStudentPanel extends JPanel implements IShowPanel<Student> {
+	private StudentTest frame;
+	
 	private int id;
 	private int programId;
 	private JTextField name;
@@ -22,10 +31,16 @@ public class ShowStudentPanel extends JPanel implements IShowPanel<Student> {
 	private JTextField programName;
 	
 	private JButton editButton = new JButton("Redigera");
-	private JButton saveButton = new JButton("Spara");
+	private JButton saveButton = new JButton("Spara ändringar");
 	private JButton cancelButton = new JButton("Avbryt");
 	
-	public ShowStudentPanel(Student student, ActionListener saveListener) {
+	private JLabel title = new JLabel("Visa student");
+	
+	public ShowStudentPanel(Student student, StudentTest frame) {
+		super();
+		this.frame = frame;
+		title.setFont(new Font("Arial", Font.BOLD, 18));
+		
 		id = student.getStudentId();
 		programId = student.getProgramId();
 		name = new JTextField(student.getName());
@@ -41,16 +56,39 @@ public class ShowStudentPanel extends JPanel implements IShowPanel<Student> {
 		address.setEditable(false);
 		city.setEditable(false);
 		programName.setEditable(false);
-				
+			
+		JLabel nameLabel = new JLabel("Namn: ");
+		JLabel emailLabel = new JLabel("E-postadress: ");
+		JLabel phoneNrLabel = new JLabel("Telefonnummer: ");
+		JLabel addressLabel = new JLabel("Adress: ");
+		JLabel cityLabel = new JLabel("Ort: ");
+		JLabel programLabel = new JLabel("Program: ");
+		
+		add(title);
+		add(new JLabel());
+		add(nameLabel);
 		add(name);
+		add(emailLabel);
 		add(email);
+		add(phoneNrLabel);
 		add(phoneNr);
+		add(addressLabel);
 		add(address);
+		add(cityLabel);
 		add(city);
+		add(programLabel);
 		add(programName);
 		
+		setLayout(new GridLayout(0,2));
 		
-		saveButton.addActionListener(saveListener);
+		saveButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				frame.updateStudent();
+			}
+		});
 		editButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -67,9 +105,20 @@ public class ShowStudentPanel extends JPanel implements IShowPanel<Student> {
 			}
 		});
 		
+		JButton backButton = new JButton("Gå tillbaka");
+		backButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.listStudents();				
+			}
+		});
+		
 		add(editButton);
+		add(new JLabel());
 		add(saveButton);
 		add(cancelButton);
+		add(backButton);
 		
 		saveButton.setVisible(false);
 		cancelButton.setVisible(false);
@@ -77,9 +126,9 @@ public class ShowStudentPanel extends JPanel implements IShowPanel<Student> {
 
 	@Override
 	public void edit() {	
-		editButton.setVisible(false);;
-		saveButton.setVisible(true);;
-		cancelButton.setVisible(true);;
+		editButton.setVisible(false);
+		saveButton.setVisible(true);
+		cancelButton.setVisible(true);
 		enableFields();
 		refresh();
 	}
@@ -87,7 +136,7 @@ public class ShowStudentPanel extends JPanel implements IShowPanel<Student> {
 	@Override
 	public Student save() {		
 		Student s = new Student();
-		s.setStudentId(id);
+		s.setStudentId(id);	
 		s.setProgramId(programId);
 		s.setName(name.getText());
 		s.setAddress(address.getText());

@@ -1,3 +1,7 @@
+/**
+ * Controller studenter gjord av: Marcus
+ */
+
 package controller;
 
 import java.util.List;
@@ -30,6 +34,22 @@ public class StudentController {
 	
 	public boolean updateStudent(Student student) {	
 		if(studentDao.update(student)) {
+			return true;
+		}
+		System.out.println("Något gick fel");
+		return false;
+	}
+	
+	public boolean insertStudent(Student student) {
+		if(studentDao.insert(student)) {
+			return true;
+		}
+		System.out.println("Något gick fel");
+		return false;
+	}
+	
+	public boolean deleteStudent(int id) {
+		if(studentDao.delete(id)) {
 			return true;
 		}
 		System.out.println("Något gick fel");

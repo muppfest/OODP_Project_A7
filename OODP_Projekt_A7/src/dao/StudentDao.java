@@ -82,16 +82,15 @@ public class StudentDao implements IDao<Student> {
 
 	@Override
 	public boolean insert(Student object) {
-		String statementString = "INSERT INTO students (programId, name, email, phoneNr, address, city) VALUES (?,?,?,?,?,?)";
+		String statementString = "INSERT INTO students (name, email, phoneNr, address, city) VALUES (?,?,?,?,?)";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);
-			preparedStatement.setInt(1, object.getProgramId());
-			preparedStatement.setString(2, object.getName());
-			preparedStatement.setString(3, object.getEmail());
-			preparedStatement.setString(4, object.getPhoneNr());
-			preparedStatement.setString(5, object.getAddress());
-			preparedStatement.setString(6, object.getCity());
+			preparedStatement.setString(1, object.getName());
+			preparedStatement.setString(2, object.getEmail());
+			preparedStatement.setString(3, object.getPhoneNr());
+			preparedStatement.setString(4, object.getAddress());
+			preparedStatement.setString(5, object.getCity());
 			preparedStatement.executeUpdate();
 			
 		} catch (SQLException e) {
