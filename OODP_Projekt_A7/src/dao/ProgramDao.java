@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import db.DbConnectionManager;
+import model.Course;
 import model.Program;
 
 import model.Program;
@@ -81,8 +82,9 @@ public class ProgramDao implements IDao<Program> {
 		try {
 			preparedStatement = db.preparedStatement(statementString);
 			preparedStatement.setString(1, object.getProgramCode());
-			preparedStatement.setString(1, object.getName());
-			preparedStatement.setString(1, object.getDescription());
+			preparedStatement.setString(2, object.getName());
+			preparedStatement.setString(3, object.getDescription());
+			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -109,19 +111,54 @@ public class ProgramDao implements IDao<Program> {
 
 	@Override
 	public boolean update(Program object) {
-		String statementString = "UPDATE students SET programCode = ?, name = ?, description = ? WHERE programId = ?";
+		String statementString = "UPDATE programs SET programCode = ?, name = ?, description = ? WHERE programId = ?";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);
 			preparedStatement.setString(1, object.getProgramCode());
 			preparedStatement.setString(2, object.getName());
 			preparedStatement.setString(3, object.getDescription());
+			preparedStatement.setInt(4, object.getProgramId());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
 		
-		return false;
+		return true;
 	}
+	
+	/*
+	public List<Course> getCoursesInProgram(int programId) {
+		List<Course> courses = new ArrayList<Course>();
+		String statementString = "SELECT programCoursesId, courseId, programId FROM programcourses WHERE programId = ?";
+				
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, programId);
+			rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return courses;
+	}
+	
+	public boolean addCourseToProgram(int courseId, int programId) {
+		String statementString = "INSERT INTO programcourses (courseId, programId) VALUES (?,?)";
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, courseId);
+			preparedStatement.setInt(2, programId);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			return false;
+		}
+		return true;
+	} */
 }

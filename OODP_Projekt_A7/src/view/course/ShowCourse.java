@@ -1,4 +1,4 @@
-package view;
+package view.course;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -15,6 +15,7 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -23,9 +24,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.Course;
+import model.Moment;
+import view.IShowPanel;
+import view.moment.ListMoments;
 
 public class ShowCourse extends JPanel implements IShowPanel<Course> {
 	private CourseView courseView;
+	private ListMoments listMoments;
 	
 	private int id;
 	private JTextField courseCode;
@@ -39,6 +44,8 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 	private JButton editButton = new JButton("Redigera");
 	private JButton saveButton = new JButton("Spara ändringar");
 	private JButton cancelButton = new JButton("Avbryt");
+	private JButton showMomentsButton = new JButton("Visa kursmoment");
+	private JButton backButton = new JButton("Gå tillbaka");
 	
 	private JLabel title = new JLabel("Kurs");
 	
@@ -191,7 +198,6 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 			}
 		});
 		
-		JButton backButton = new JButton("Gå tillbaka");
 		backButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -200,13 +206,22 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 			}
 		});
 		
+		showMomentsButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				courseView.listMoments(course.getCourseId());
+			}
+		});
+		
 		add(editButton);
 		add(saveButton);
 		add(cancelButton);
+		add(showMomentsButton);
 		add(backButton);
 		
 		saveButton.setVisible(false);
-		cancelButton.setVisible(false);	
+		cancelButton.setVisible(false);
 	}
 	
 	@Override

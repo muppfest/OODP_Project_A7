@@ -1,6 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import dao.CourseDao;
 import dao.IDao;
@@ -28,10 +30,16 @@ public class CourseController {
 	
 	public Course ShowCourse(int id) {
 		Course c = courseDao.getById(id);
+		
+		List<Moment> mlist = momentDao.getAll();
+		mlist = mlist.stream().filter(f -> f.getCourseId() == id).collect(Collectors.toList());
+		
+		c.setMoments(mlist);
+		
 		return c;
 	}
 	
-	public List<Course> ListCourses() {
+	public List<Course> listCourses() {
 		List<Course> clist = courseDao.getAll();
 		return clist;
 	}

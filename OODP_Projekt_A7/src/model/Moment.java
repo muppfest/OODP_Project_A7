@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Moment {
 	private int momentId;
+	private int courseId;
 	private String momentCode;
 	private String type;
 	private String description;
@@ -12,6 +13,21 @@ public class Moment {
 	private double credit;
 	private String place;
 	
+	private Course course;
+	
+	
+	public int getCourseId() {
+		return courseId;
+	}
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
+	}
+	public Course getCourse() {
+		return course;
+	}
+	public void setCourse(Course course) {
+		this.course = course;
+	}
 	public int getMomentId() {
 		return momentId;
 	}

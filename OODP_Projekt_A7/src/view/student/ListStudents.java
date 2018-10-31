@@ -2,7 +2,7 @@
  * View för listning av studenter gjord av: Marcus
  */
 
-package view;
+package view.student;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -23,6 +23,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import model.person.Student;
+import view.IListPanel;
 
 public class ListStudents extends JPanel implements IListPanel<Student> {
 	private StudentView studentView;
@@ -35,7 +36,7 @@ public class ListStudents extends JPanel implements IListPanel<Student> {
 		title.setFont(new Font("Arial", Font.BOLD, 20));
 		add(title);
 		
-		JLabel nameLabel = new JLabel("Fullständigt namn");
+		JLabel nameLabel = new JLabel("Namn");
 		nameLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel emailLabel = new JLabel("E-postadress");
 		emailLabel.setFont(new Font("Arial", Font.BOLD, 14));

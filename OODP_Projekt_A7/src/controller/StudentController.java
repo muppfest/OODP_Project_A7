@@ -27,7 +27,7 @@ public class StudentController {
 		return s;
 	}
 	
-	public List<Student> ListStudents() {
+	public List<Student> listStudents() {
 		List<Student> slist = studentDao.getAll();
 		return slist;
 	}

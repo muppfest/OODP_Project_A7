@@ -1,4 +1,4 @@
-package view;
+package view.course;
 
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.Course;
+import view.IListPanel;
 
 public class ListCourses extends JPanel implements IListPanel<Course> {
 	private CourseView courseView;
@@ -28,16 +29,13 @@ public class ListCourses extends JPanel implements IListPanel<Course> {
 		courseCodeLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel courseLabel = new JLabel("Kursnamn");
 		courseLabel.setFont(new Font("Arial", Font.BOLD, 14));
-		JLabel dateLabel = new JLabel("Startdatum");
-		dateLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		
 		JPanel headers = new JPanel();
 		headers.add(courseCodeLabel);
 		headers.add(courseLabel);
-		headers.add(dateLabel);
 		headers.add(new JLabel());
 		headers.add(new JLabel());
-		headers.setLayout(new GridLayout(0,5));
+		headers.setLayout(new GridLayout(0,4));
 		add(headers);
 		
 		for(Course course : courses) {

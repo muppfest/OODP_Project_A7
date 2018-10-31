@@ -1,4 +1,4 @@
-package view;
+package view.course;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -14,7 +14,6 @@ public class CourseListRow extends JPanel {
 	private JPanel listCourses;
 	private JLabel courseCode;
 	private JLabel courseName;
-	private JLabel date;
 	
 	private JButton showButton = new JButton("Visa kurs");
 	private JButton deleteButton = new JButton("Ta bort kurs");
@@ -25,9 +24,8 @@ public class CourseListRow extends JPanel {
 		
 		courseCode = new JLabel(course.getCourseCode());
 		courseName = new JLabel(course.getName());
-		date = new JLabel(course.getStartDate().toString());
 		
-		setLayout(new GridLayout(0,5));
+		setLayout(new GridLayout(0,4));
 		
 		showButton.addActionListener(new ActionListener() {
 			
@@ -47,7 +45,6 @@ public class CourseListRow extends JPanel {
 		
 		add(courseCode);
 		add(courseName);
-		add(date);
 		add(showButton);
 		add(deleteButton);
 	}

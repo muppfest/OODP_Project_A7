@@ -1,4 +1,4 @@
-package view;
+package view.course;
 
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 
 import model.Course;
 import model.person.Student;
+import view.ICreatePanel;
 
 public class CreateCourse extends JPanel implements ICreatePanel {
 	private CourseView courseView;

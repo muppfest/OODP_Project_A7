@@ -24,11 +24,11 @@ public class MomentDao implements IDao<Moment> {
 	public MomentDao() {
 		db = db.getInstance();
 	}
-
+	
 	@Override
 	public Moment getById(int id) {
 		Moment m = new Moment();
-		String statementString = "SELECT momentId, momentCode, type, description, grade, date, credit, place FROM moments WHERE momentId = ?";
+		String statementString = "SELECT momentId, momentCode, type, description, grade, date, credit, place, courseId FROM moments WHERE momentId = ?";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);
@@ -44,6 +44,7 @@ public class MomentDao implements IDao<Moment> {
 				m.setDate(rs.getDate(6));
 				m.setCredit(rs.getDouble(7));
 				m.setPlace(rs.getString(8));
+				m.setCourseId(rs.getInt(9));
 			} 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -51,11 +52,11 @@ public class MomentDao implements IDao<Moment> {
 		
 		return m;
 	}
-
+	
 	@Override
 	public List<Moment> getAll() {
 		List<Moment> mlist = new ArrayList<Moment>();
-		String sqlQueryString = "SELECT momentId, momentCode, type, description, grade, date, credit, place FROM moments";
+		String sqlQueryString = "SELECT momentId, momentCode, type, description, grade, date, credit, place, courseId FROM moments";
 		
 		try {
 			rs = db.executeQuery(sqlQueryString);
@@ -70,6 +71,7 @@ public class MomentDao implements IDao<Moment> {
 				m.setDate(rs.getDate(6));
 				m.setCredit(rs.getDouble(7));
 				m.setPlace(rs.getString(8));
+				m.setCourseId(rs.getInt(9));
 				mlist.add(m);
 			} 
 		} catch (SQLException e) {
@@ -81,7 +83,7 @@ public class MomentDao implements IDao<Moment> {
 
 	@Override
 	public boolean insert(Moment object) {
-		String statementString = "INSERT INTO moments (momentCode, type, description, grade, date, credit, place) VALUES (?,?,?,?,?,?,?)";
+		String statementString = "INSERT INTO moments (momentCode, type, description, grade, date, credit, place, courseId) VALUES (?,?,?,?,?,?,?,?)";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);
@@ -92,6 +94,7 @@ public class MomentDao implements IDao<Moment> {
 			preparedStatement.setDate(5, object.getDate());
 			preparedStatement.setDouble(6, object.getCredit());
 			preparedStatement.setString(7, object.getPlace());
+			preparedStatement.setInt(8, object.getCourseId());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -118,7 +121,7 @@ public class MomentDao implements IDao<Moment> {
 
 	@Override
 	public boolean update(Moment object) {
-		String statementString = "UPDATE moments SET momentCode = ?, type = ?, description = ?, grade = ?, date = ?, credit = ?, place = ?";
+		String statementString = "UPDATE moments SET momentCode = ?, type = ?, description = ?, grade = ?, date = ?, credit = ?, place = ?, courseId = ?";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);
@@ -129,6 +132,7 @@ public class MomentDao implements IDao<Moment> {
 			preparedStatement.setDate(5, object.getDate());
 			preparedStatement.setDouble(6, object.getCredit());
 			preparedStatement.setString(7, object.getPlace());
+			preparedStatement.setInt(8, object.getCourseId());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

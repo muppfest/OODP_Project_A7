@@ -2,7 +2,7 @@
  * View för detaljer av studenter gjord av: Marcus
  */
 
-package view;
+package view.student;
 
 import java.util.List;
 import java.awt.Font;
@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.person.Student;
+import view.IShowPanel;
 
 public class ShowStudent extends JPanel implements IShowPanel<Student> {
 	private StudentView studentView;
@@ -110,7 +111,7 @@ public class ShowStudent extends JPanel implements IShowPanel<Student> {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				studentView.list();				
+				studentView.list();		
 			}
 		});
 		

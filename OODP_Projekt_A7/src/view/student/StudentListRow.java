@@ -2,7 +2,7 @@
  * View för rader av studenter vid listning av studenter gjord av: Marcus
  */
 
-package view;
+package view.student;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

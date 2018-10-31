@@ -1,12 +1,17 @@
-package view;
+package view.course;
 
 import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import controller.CourseController;
 import model.Course;
+import model.Moment;
+import view.IView;
+import view.View;
+import view.moment.ListMoments;
 
 public class CourseView extends JPanel implements IView<Course> {
 	private View frame;
@@ -15,16 +20,29 @@ public class CourseView extends JPanel implements IView<Course> {
 	private ListCourses listCoursesPanel;
 	private ShowCourse showCoursePanel;
 	private CreateCourse createCoursePanel;
-	
+	private ListMoments listMomentsPanel;
+		
 	public CourseView(View frame) {
 		this.frame = frame;
 		controller = new CourseController();
 		list();
 	}
 	
+	public View getFrame() {
+		return frame;
+	}
+	
+	public void listMoments(int courseId) {
+		Course c = controller.ShowCourse(courseId);
+		listMomentsPanel = new ListMoments(this, c);
+		removeAll();
+		add(listMomentsPanel);
+		frame.refresh();
+	}
+	
 	@Override
 	public void list() {
-		List<Course> courses = controller.ListCourses();
+		List<Course> courses = controller.listCourses();
 		listCoursesPanel = new ListCourses(courses, this);
 		removeAll();
 		add(listCoursesPanel);

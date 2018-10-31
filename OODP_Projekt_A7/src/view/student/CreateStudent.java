@@ -2,7 +2,7 @@
  * View för skapande av studenter gjord av: Marcus
  */
 
-package view;
+package view.student;
 
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.person.Student;
+import view.ICreatePanel;
 
 public class CreateStudent extends JPanel implements ICreatePanel {
 	private StudentView studentView;

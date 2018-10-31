@@ -20,59 +20,5 @@ public class test {
 
 	public static void main(String[] args) throws SQLException {
 		View t = new View();
-		
-		/*		StudentDao d = new StudentDao();
-		
-		List<Student> slist = new ArrayList<Student>();
-		slist = d.getAll();
-		for(Student student : slist) {
-			student.printStudent();
-			System.out.println();
-		}
-		
-		ProgramDao dp = new ProgramDao();
-		List<Program> plist = new ArrayList<Program>();
-		plist = dp.getAll();
-		
-		for(Program program : plist) {
-			program.printProgram();
-			System.out.println();
-		}
-		
-		CourseDao dc = new CourseDao();
-		List<Course> clist = new ArrayList<Course>();
-		clist = dc.getAll();
-		
-		for(Course course : clist) {
-			course.printCourse();
-			System.out.println();
-		}
-		
-		MomentDao dm = new MomentDao();
-		List<Moment> mlist = new ArrayList<Moment>();
-		mlist = dm.getAll();
-
-		for(Moment moment : mlist) {
-			moment.printMoment();
-			System.out.println();
-		}
-		
-		TeacherDao dt = new TeacherDao();
-		List<Teacher> tlist = new ArrayList<Teacher>();
-		tlist = dt.getAll();
-		
-		for(Teacher teacher : tlist) {
-			teacher.printTeacher();
-			System.out.println();
-		}
-		
-		GroupDao dg = new GroupDao();
-		List<Group> glist = new ArrayList<Group>();
-		glist = dg.getAll();
-		
-		for(Group group : glist) {
-			group.printGroup();
-			System.out.println();
-		} */
 	} 
 }

@@ -1,4 +1,4 @@
-package view;
+package view.student;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 
 import controller.StudentController;
 import model.person.Student;
+import view.IView;
+import view.View;
 
 public class StudentView extends JPanel implements IView<Student> {
 	private View frame;
@@ -26,7 +28,7 @@ public class StudentView extends JPanel implements IView<Student> {
 	
 	@Override
 	public void list() {
-		List<Student> students = controller.ListStudents();						
+		List<Student> students = controller.listStudents();						
 		listStudentsPanel = new ListStudents(students, this);
 		removeAll();
 		add(listStudentsPanel);
