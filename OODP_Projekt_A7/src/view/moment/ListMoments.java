@@ -18,12 +18,16 @@ import view.course.ShowCourse;
 
 public class ListMoments extends JPanel implements IListPanel<Moment> {
 	private CourseView courseView;
+	private int courseId;
+	private String courseName;
 	
 	public ListMoments(CourseView courseView, Course course) {
 		super();
 		this.courseView = courseView;
+		courseId = course.getCourseId();
+		courseName = course.getName();
 		
-		JLabel title = new JLabel("Kursmoment inom " + course.getName());
+		JLabel title = new JLabel("Kursmoment inom " + courseName);
 		title.setFont(new Font("Arial", Font.BOLD, 20));
 		add(title);
 		
@@ -73,14 +77,12 @@ public class ListMoments extends JPanel implements IListPanel<Moment> {
 		
 	@Override
 	public void show(int id) {
-		// TODO Auto-generated method stub
-		
+		courseView.showMoment(id);
 	}
 
 	@Override
 	public void create() {
-		// TODO Auto-generated method stub
-		
+		courseView.createMoment(courseId, courseName);
 	}
 
 	@Override
@@ -91,8 +93,7 @@ public class ListMoments extends JPanel implements IListPanel<Moment> {
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
-		
+		courseView.deleteMoment(courseId, id);
 	}
 
 }

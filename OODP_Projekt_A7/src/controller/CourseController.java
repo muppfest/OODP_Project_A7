@@ -39,6 +39,13 @@ public class CourseController {
 		return c;
 	}
 	
+	public Moment ShowMoment(int momentId) {
+		Moment moment = momentDao.getById(momentId);
+		moment.setCourse(courseDao.getById(moment.getCourseId()));
+		
+		return moment;
+	}		
+	
 	public List<Course> listCourses() {
 		List<Course> clist = courseDao.getAll();
 		return clist;
@@ -62,6 +69,30 @@ public class CourseController {
 	
 	public boolean deleteCourse(int id) {
 		if(courseDao.delete(id)) {
+			return true;
+		}
+		System.out.println("Något gick fel");
+		return false;
+	}
+	
+	public boolean insertMoment(Moment moment) {
+		if(momentDao.insert(moment)) {
+			return true;
+		}
+		System.out.println("Något gick fel");
+		return false;
+	}
+	
+	public boolean updateMoment(Moment moment) {
+		if(momentDao.update(moment)) {
+			return true;
+		}
+		System.out.println("Något gick fel");
+		return false;
+	}
+	
+	public boolean deleteMoment(int id) {
+		if(momentDao.delete(id)) {
 			return true;
 		}
 		System.out.println("Något gick fel");

@@ -11,7 +11,9 @@ import model.Course;
 import model.Moment;
 import view.IView;
 import view.View;
+import view.moment.CreateMoment;
 import view.moment.ListMoments;
+import view.moment.ShowMoment;
 
 public class CourseView extends JPanel implements IView<Course> {
 	private View frame;
@@ -21,6 +23,8 @@ public class CourseView extends JPanel implements IView<Course> {
 	private ShowCourse showCoursePanel;
 	private CreateCourse createCoursePanel;
 	private ListMoments listMomentsPanel;
+	private CreateMoment createMomentPanel;
+	private ShowMoment showMomentPanel;
 		
 	public CourseView(View frame) {
 		this.frame = frame;
@@ -30,6 +34,47 @@ public class CourseView extends JPanel implements IView<Course> {
 	
 	public View getFrame() {
 		return frame;
+	}
+	
+	public List<Course> getListOfCourses() {
+		return controller.listCourses();
+	}
+	
+	public void createMoment(int courseId, String courseName) {
+		createMomentPanel = new CreateMoment(this, courseId, courseName);
+		removeAll();
+		add(createMomentPanel);
+		frame.refresh();
+	}
+	
+	public void insertMoment(Moment moment) {
+		if(controller.insertMoment(moment)) {
+			JOptionPane.showMessageDialog(frame,
+				    "Kursmomentet lades till.");
+			listMoments(moment.getCourseId());
+		} else {
+			JOptionPane.showMessageDialog(frame,
+				    "Något gick fel.");
+		}				
+	}
+	
+	public void deleteMoment(int courseId, int momentId) {
+		if(controller.deleteMoment(momentId)) {
+			JOptionPane.showMessageDialog(frame,
+				    "Kursmomentet togs bort.");
+			listMoments(courseId);
+		} else {
+			JOptionPane.showMessageDialog(frame,
+				    "Något gick fel.");
+		}	
+	}
+	
+	public void showMoment(int momentId) {
+		Moment m = controller.ShowMoment(momentId);
+		showMomentPanel = new ShowMoment(this, m);
+		removeAll();
+		add(showMomentPanel);
+		frame.refresh();
 	}
 	
 	public void listMoments(int courseId) {

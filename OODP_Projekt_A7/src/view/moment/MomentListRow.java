@@ -24,7 +24,12 @@ public class MomentListRow extends JPanel {
 		
 		type = new JLabel(moment.getType());
 		credit = new JLabel(Double.toString(moment.getCredit()) + " hp");
-		date = new JLabel(moment.getDate().toString());
+		
+		if(moment.getDate() == null) {
+			date = new JLabel();
+		} else {
+			date = new JLabel(moment.getDate().toString());
+		}
 		
 		setLayout(new GridLayout(0,5));
 		
