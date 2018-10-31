@@ -41,6 +41,7 @@ public class View extends JFrame implements Observer {
 		setSize(800,600);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setTitle("Studentapplikationen");
 				
 		JButton studentButton = new JButton("Studenter");
 		studentButton.addActionListener(new ActionListener() {
@@ -70,20 +71,6 @@ public class View extends JFrame implements Observer {
 			}
 		});
 		
-		JButton momentButton = new JButton("Kursmoment");
-		momentButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				getContentPane().removeAll();
-				scrollPane = new JScrollPane(momentView);
-				add(buttonPanel, BorderLayout.NORTH);
-				getContentPane().add(scrollPane, BorderLayout.CENTER);
-				momentView.list();
-				refresh();
-			}
-		});
-		
 		JButton programButton = new JButton("Program");
 		programButton.addActionListener(new ActionListener() {
 			
@@ -104,7 +91,6 @@ public class View extends JFrame implements Observer {
 		buttonPanel.add(studentButton);
 		buttonPanel.add(courseButton);
 		buttonPanel.add(programButton);
-		buttonPanel.add(momentButton);
 		
 		add(buttonPanel, BorderLayout.NORTH);
 		JPanel test = new JPanel();

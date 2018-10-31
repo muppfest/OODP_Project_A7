@@ -31,8 +31,8 @@ public class ListPrograms extends JPanel implements IListPanel<Program> {
 		nameLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		
 		JPanel headers = new JPanel();
-		headers.add(nameLabel);
 		headers.add(codeLabel);
+		headers.add(nameLabel);
 		headers.add(new JLabel());
 		headers.add(new JLabel());
 		headers.setLayout(new GridLayout(0,4));

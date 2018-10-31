@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -46,7 +47,10 @@ public class ShowMoment extends JPanel implements IShowPanel<Moment> {
 		description = new JTextField(moment.getDescription());
 		credit = new JTextField(String.valueOf(moment.getCredit()));
 		grade = new JTextField(moment.getGrade());
-		date = new JTextField(moment.getDate().toString());
+		date = new JTextField();
+		if(moment.getDate() != null) {
+			date.setText(moment.getDate().toString());
+		}
 		place = new JTextField(moment.getPlace());
 		
 		momentCode.setEditable(false);
@@ -135,8 +139,18 @@ public class ShowMoment extends JPanel implements IShowPanel<Moment> {
 
 	@Override
 	public void save() {
-		// TODO Auto-generated method stub
+		Moment m = new Moment();
+		m.setCourseId(courseId);
+		m.setMomentId(momentId);
+		m.setCredit(Double.parseDouble(credit.getText()));
+		m.setDate(Date.valueOf(date.getText()));
+		m.setGrade(grade.getText());
+		m.setMomentCode(momentCode.getText());
+		m.setDescription(description.getText());
+		m.setPlace(place.getText());
+		m.setType(momentType.getText());
 		
+		courseView.updateMoment(m);
 	}
 
 	@Override

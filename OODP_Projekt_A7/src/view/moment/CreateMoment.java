@@ -29,7 +29,7 @@ public class CreateMoment extends JPanel {
 	private JTextField credit;
 	private JTextField place;
 	
-	private JButton saveButton = new JButton("Lägg till program");
+	private JButton saveButton = new JButton("Lägg till kursmoment");
 	private JButton backButton = new JButton("Gå tillbaka");
 	
 	public CreateMoment(CourseView courseView, int courseId, String courseName) {
@@ -37,7 +37,7 @@ public class CreateMoment extends JPanel {
 		this.courseId = courseId;
 		this.courseName = courseName;
 		
-		JLabel title = new JLabel("Lägg till moment i " + courseName);
+		JLabel title = new JLabel("Lägg till kursmoment i " + courseName);
 		title.setFont(new Font("Arial", Font.BOLD, 20));
 		add(title);
 		
@@ -48,8 +48,8 @@ public class CreateMoment extends JPanel {
 		credit = new JTextField();
 		place = new JTextField();
 		
-		JLabel codeLabel = new JLabel("Programkod");
-		JLabel typeLabel = new JLabel("Namn");;
+		JLabel codeLabel = new JLabel("Kursmomentskod");
+		JLabel typeLabel = new JLabel("Typ");
 		JLabel descriptionLabel = new JLabel("Beskrivning");
 		JLabel gradeLabel = new JLabel("Betyg");
 		JLabel creditLabel = new JLabel("Högskolepoäng");

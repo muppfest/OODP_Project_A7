@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.Course;
@@ -93,7 +94,12 @@ public class ListMoments extends JPanel implements IListPanel<Moment> {
 
 	@Override
 	public void delete(int id) {
-		courseView.deleteMoment(courseId, id);
+		int dialogButton = JOptionPane.YES_NO_OPTION;
+		int dialogResult = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill ta bort kursmomentet?", "", dialogButton);
+		
+		if(dialogResult == JOptionPane.YES_OPTION) {
+			courseView.deleteMoment(courseId, id);
+		}
 	}
 
 }

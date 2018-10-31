@@ -47,6 +47,16 @@ public class CourseView extends JPanel implements IView<Course> {
 		frame.refresh();
 	}
 	
+	public void updateMoment(Moment moment) {
+		if(controller.updateMoment(moment)) {
+			JOptionPane.showMessageDialog(frame,
+				    "Kursmomentet uppdaterades.");
+		} else {
+			JOptionPane.showMessageDialog(frame,
+				    "Något gick fel.");
+		}	
+	}
+	
 	public void insertMoment(Moment moment) {
 		if(controller.insertMoment(moment)) {
 			JOptionPane.showMessageDialog(frame,
