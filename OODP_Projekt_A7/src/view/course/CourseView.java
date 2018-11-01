@@ -16,6 +16,7 @@ import view.moment.CreateMoment;
 import view.moment.ListMoments;
 import view.moment.ShowMoment;
 import view.teacher.ListTeachers;
+import view.teacher.ShowTeacher;
 
 public class CourseView extends JPanel implements IView<Course> {
 	private View frame;
@@ -28,6 +29,7 @@ public class CourseView extends JPanel implements IView<Course> {
 	private CreateMoment createMomentPanel;
 	private ShowMoment showMomentPanel;
 	private ListTeachers listTeachersPanel;
+	private ShowTeacher showTeacherPanel;
 		
 	public CourseView(View frame) {
 		this.frame = frame;
@@ -59,7 +61,11 @@ public class CourseView extends JPanel implements IView<Course> {
 	}
 	
 	public void showTeacher(int teacherId) {
-		
+		Teacher teacher = controller.showTeacher(teacherId);
+		showTeacherPanel = new ShowTeacher(this, teacher);
+		removeAll();
+		add(showTeacherPanel);
+		frame.refresh();
 	}
 	
 	public void updateMoment(Moment moment) {
@@ -105,7 +111,7 @@ public class CourseView extends JPanel implements IView<Course> {
 	}
 
 	public void showMoment(int momentId) {
-		Moment m = controller.ShowMoment(momentId);
+		Moment m = controller.showMoment(momentId);
 		showMomentPanel = new ShowMoment(this, m);
 		removeAll();
 		add(showMomentPanel);

@@ -2,21 +2,14 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.*;
 
-import controller.StudentController;
 import model.Observable;
-import model.person.Student;
 import view.course.CourseView;
-import view.moment.MomentView;
 import view.program.ProgramView;
 import view.student.StudentView;
 

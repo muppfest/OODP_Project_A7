@@ -44,8 +44,22 @@ public class CourseController {
 		
 		return c;
 	}
+	
+	public Teacher showTeacher(int teacherId) {
+		Teacher t = teacherDao.getById(teacherId);
+		List<Course> courses = teacherDao.getAllCoursesFromTeacher(teacherId);
 		
-	public Moment ShowMoment(int momentId) {
+		for(int i = 0; i < courses.size(); i++) {
+			Course c = courseDao.getById(i);
+			courses.set(i, c);
+		}
+		
+		t.setCourses(courses);
+		
+		return t;
+	}
+	
+	public Moment showMoment(int momentId) {
 		Moment moment = momentDao.getById(momentId);
 		moment.setCourse(courseDao.getById(moment.getCourseId()));
 		

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import db.DbConnectionManager;
+import model.Course;
 import model.person.Teacher;
 
 public class TeacherDao implements IDao<Teacher> {
@@ -172,5 +173,25 @@ public class TeacherDao implements IDao<Teacher> {
 			System.out.println(e.getMessage());
 		}
 		return teachers;
+	}
+	
+	public List<Course> getAllCoursesFromTeacher(int teacherId) {
+		String statementString = "SELECT courseId FROM courseteachers WHERE courseId = ?";
+		List<Course> courses = new ArrayList<Course>();
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, teacherId);
+			rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				Course c = new Course();
+				c.setCourseId(rs.getInt(1));
+				courses.add(c);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return courses;
 	}
 }

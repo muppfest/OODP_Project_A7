@@ -1,9 +1,29 @@
 package model.person;
 
+import java.util.List;
+
+import model.Course;
+import model.Program;
+
 public class Teacher extends Person {
 	private int teacherId;
 	private String office;
 
+	List<Course> courses;
+	List<Program> programs;
+
+	public List<Course> getCourses() {
+		return courses;
+	}
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+	public List<Program> getPrograms() {
+		return programs;
+	}
+	public void setPrograms(List<Program> programs) {
+		this.programs = programs;
+	}
 	public int getTeacherId() {
 		return teacherId;
 	}
