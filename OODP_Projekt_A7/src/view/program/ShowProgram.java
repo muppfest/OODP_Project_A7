@@ -24,6 +24,7 @@ public class ShowProgram extends JPanel implements IShowPanel<Program> {
 	private JTextField description;
 	
 	private JButton editButton = new JButton("Redigera program");
+	private JButton coursesButton = new JButton("Visa kurser inom programmet");
 	private JButton saveButton = new JButton("Spara ändringar");
 	private JButton cancelButton = new JButton("Avbryt");
 	
@@ -82,6 +83,14 @@ public class ShowProgram extends JPanel implements IShowPanel<Program> {
 			}
 		});
 		
+		coursesButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				showCourses();
+			}
+		});
+		
 		JButton backButton = new JButton("Gå tillbaka");
 		backButton.addActionListener(new ActionListener() {
 			
@@ -94,6 +103,7 @@ public class ShowProgram extends JPanel implements IShowPanel<Program> {
 		add(editButton);
 		add(saveButton);
 		add(cancelButton);		
+		add(coursesButton);
 		add(backButton);
 		
 		saveButton.setVisible(false);
@@ -138,7 +148,11 @@ public class ShowProgram extends JPanel implements IShowPanel<Program> {
 		programName.setEditable(false);
 		description.setEditable(false);
 	}
-
+	
+	private void showCourses() {
+		
+	}
+	
 	@Override
 	public void cancel() {
 		saveButton.setVisible(false);;

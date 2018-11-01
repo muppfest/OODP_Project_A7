@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.*;
 
 import controller.StudentController;
+import group.GroupView;
 import model.Observable;
 import model.person.Student;
 import view.course.CourseView;
@@ -25,6 +26,7 @@ public class View extends JFrame implements Observer {
 	private CourseView courseView;
 	private MomentView momentView;
 	private ProgramView programView;
+	private GroupView groupView;
 	
 	private JScrollPane scrollPane;
 	private JPanel buttonPanel;
@@ -35,6 +37,7 @@ public class View extends JFrame implements Observer {
 		courseView = new CourseView(this);
 		momentView = new MomentView(this);
 		programView = new ProgramView(this);
+		groupView = new GroupView(this);
 		
 		title.setFont(new Font("Arial", Font.BOLD, 18));
 				
@@ -85,17 +88,40 @@ public class View extends JFrame implements Observer {
 			}
 		});
 		
+		JButton groupButton = new JButton("Grupper");
+		groupButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				getContentPane().removeAll();
+				scrollPane = new JScrollPane(groupView);
+				add(buttonPanel, BorderLayout.NORTH);
+				getContentPane().add(scrollPane, BorderLayout.CENTER);
+				groupView.list();
+				refresh();
+			}
+		});
+		
 		buttonPanel = new JPanel();
 		
 		buttonPanel.add(title, BorderLayout.NORTH);
 		buttonPanel.add(studentButton);
 		buttonPanel.add(courseButton);
 		buttonPanel.add(programButton);
+		buttonPanel.add(groupButton);
 		
 		add(buttonPanel, BorderLayout.NORTH);
 		JPanel test = new JPanel();
 		test.add(programView);
 		test.add(courseView);
+		refresh();
+	}
+	
+	public void changePanel(JPanel panel) {
+		getContentPane().removeAll();
+		scrollPane = new JScrollPane(panel);
+		add(buttonPanel, BorderLayout.NORTH);
+		getContentPane().add(scrollPane, BorderLayout.CENTER);
 		refresh();
 	}
 	
@@ -110,4 +136,38 @@ public class View extends JFrame implements Observer {
 		repaint();
 		pack();
 	}
+
+	public StudentView getStudentView() {
+		return studentView;
+	}
+
+	public void setStudentView(StudentView studentView) {
+		this.studentView = studentView;
+	}
+
+	public CourseView getCourseView() {
+		return courseView;
+	}
+
+	public void setCourseView(CourseView courseView) {
+		this.courseView = courseView;
+	}
+
+	public MomentView getMomentView() {
+		return momentView;
+	}
+
+	public void setMomentView(MomentView momentView) {
+		this.momentView = momentView;
+	}
+
+	public ProgramView getProgramView() {
+		return programView;
+	}
+
+	public void setProgramView(ProgramView programView) {
+		this.programView = programView;
+	}
+	
+	
 }

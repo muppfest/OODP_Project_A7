@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.CourseDao;
@@ -13,10 +14,10 @@ import model.person.Student;
 import model.person.Teacher;
 
 public class ProgramController {
-	private IDao<Program> programDao;
-	private IDao<Course> courseDao;
-	private IDao<Teacher> teacherDao;
-	private IDao<Student> studentDao;
+	private ProgramDao programDao;
+	private CourseDao courseDao;
+	private TeacherDao teacherDao;
+	private StudentDao studentDao;
 	
 	public ProgramController() {
 		programDao = new ProgramDao();
@@ -27,7 +28,7 @@ public class ProgramController {
 	
 	public Program showProgram(int id) {
 		Program p = programDao.getById(id);
-		
+		p.setCourses(programDao.selectAllCoursesFromProgram(id));
 		return p;
 	}
 	
@@ -59,4 +60,20 @@ public class ProgramController {
 		System.out.println("Något gick fel");
 		return false;
 	}
+	
+	public boolean insertCourseToProgram (int courseId, int programId) {
+		if(programDao.insertCourseToProgram(courseId, programId)) {
+			return true;
+		}
+		System.out.println("Något gick fel");
+		return false;
+	}
+	
+	public boolean deleteCourseFromProgram (int courseId, int programId) {
+		if(programDao.deleteCourseFromProgram(courseId, programId)) {
+			return true;
+		}
+		return false;
+	}
+	
 }

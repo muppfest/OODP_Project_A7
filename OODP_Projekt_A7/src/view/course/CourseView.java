@@ -111,6 +111,13 @@ public class CourseView extends JPanel implements IView<Course> {
 		add(createCoursePanel);
 		frame.refresh();
 	}
+	
+	public void createProgramCourse (int programId) {
+		createCoursePanel = new CreateCourse(programId, this);
+		removeAll();
+		add(createCoursePanel);
+		frame.refresh();
+	}
 
 	@Override
 	public void show(int id) {	

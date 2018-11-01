@@ -20,6 +20,7 @@ import view.ICreatePanel;
 
 public class CreateCourse extends JPanel implements ICreatePanel {
 	private CourseView courseView;
+	private int programId;
 	
 	private JTextField courseCode;
 	private JTextField courseName;
@@ -31,6 +32,11 @@ public class CreateCourse extends JPanel implements ICreatePanel {
 	
 	private JButton saveButton = new JButton("Lägg till kurs");
 	private JButton backButton = new JButton("Gå tillbaka");
+	
+	public CreateCourse(int programId, CourseView courseView) {
+		this(courseView);
+		this.programId = programId;
+	}
 	
 	public CreateCourse(CourseView courseView) {
 		this.courseView = courseView;
@@ -121,5 +127,6 @@ public class CreateCourse extends JPanel implements ICreatePanel {
 		c.setFinalGrade(finalGrade.getText());
 		
 		courseView.insert(c);
+		
 	}
 }

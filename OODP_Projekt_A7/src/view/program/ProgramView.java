@@ -10,6 +10,9 @@ import model.Course;
 import model.Program;
 import view.IView;
 import view.View;
+import view.course.ListCourses;
+import view.course.ListCoursesInProgram;
+import view.course.ShowCourse;
 import view.moment.ListMoments;
 
 public class ProgramView extends JPanel implements IView<Program> {
@@ -19,7 +22,17 @@ public class ProgramView extends JPanel implements IView<Program> {
 	private ListPrograms listProgramsPanel;
 	private ShowProgram showProgramPanel;
 	private CreateProgram createProgramPanel;
+	private ListCoursesInProgram listCoursesInProgramPanel;
+	private CreateProgramCourse createProgramCoursePanel;
+	private ListCoursesInProgram listCoursePanel;
+	private int programId;
 	
+	public ProgramView(View frame, int programId) {
+		this.frame = frame;
+		controller = new ProgramController();
+		this.programId = programId;
+		list();
+	}
 		
 	public ProgramView(View frame) {
 		this.frame = frame;
@@ -40,6 +53,14 @@ public class ProgramView extends JPanel implements IView<Program> {
 		frame.refresh();
 	}
 	
+	public void listCourses(int programId) {
+		//List<Course> courses = controller.getCoursesFromProgram(programId);
+		//listCoursesInProgramPanel = new ListCoursesInProgram(courses, this);
+		removeAll();
+		add(listCoursesInProgramPanel);
+		frame.refresh();
+	}
+	
 	@Override
 	public void create() {
 		createProgramPanel = new CreateProgram(this);
@@ -56,6 +77,20 @@ public class ProgramView extends JPanel implements IView<Program> {
 		removeAll();
 		add(showProgramPanel);
 		frame.refresh();
+	}
+	
+	public void showCourses(int id) {
+		List<Course> courses = controller.showProgram(id).getCourses();
+		listCoursePanel = new ListCoursesInProgram(courses, this);
+		removeAll();
+		add(listCoursePanel);
+		frame.refresh();
+	}
+	
+	public void showCourse(int courseId, int programId) {
+		Course c = new Course();
+		//c.getCourseId(courseId);
+		
 	}
 
 	@Override
@@ -93,5 +128,15 @@ public class ProgramView extends JPanel implements IView<Program> {
 				    "Något gick fel.");
 		}
 	}
-
+	
+	public void deleteCourse (int courseId) {
+		
+	}
+	
+	public void createCourse(int programId) {
+		this.createProgramCoursePanel = new CreateProgramCourse();
+		removeAll();
+		add(createProgramPanel);
+		frame.refresh();
+	}
 }

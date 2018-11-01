@@ -92,6 +92,60 @@ public class ProgramDao implements IDao<Program> {
 		
 		return true;
 	}
+	
+	public boolean insertCourseToProgram(int courseId, int programId) {
+		String statementString = "INSERT INTO programcourses (courseId, programId) VALUES (?,?)";
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, courseId);
+			preparedStatement.setInt(2, programId);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean deleteCourseFromProgram(int courseId, int programId) {
+		String statementString = "DELETE FROM programcourses WHERE courseId = ? AND programId = ?";
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, courseId);
+			preparedStatement.setInt(2, programId);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public List<Course> selectAllCoursesFromProgram(int programId) {
+		String statementString = "SELECT courseId FROM programcourses WHERE programId = ?";
+		List<Course> courses = new ArrayList<Course>();
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, programId);
+			rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				int id = rs.getInt(1);
+				Course c = new Course();
+				c.setCourseId(id);
+				courses.add(c);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return courses;
+	}
 
 	@Override
 	public boolean delete(int id) {
