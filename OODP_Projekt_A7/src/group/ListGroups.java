@@ -2,8 +2,11 @@ package group;
 
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -39,6 +42,15 @@ public class ListGroups extends JPanel implements IListPanel {
 			GroupListRow courseRow = new GroupListRow(group, this);
 			add(courseRow);
 		}
+		
+		JButton createButton = new JButton("Lägg till kurs");
+		createButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				create();
+			}
+		});
 	}
 
 	@Override
@@ -48,7 +60,7 @@ public class ListGroups extends JPanel implements IListPanel {
 
 	@Override
 	public void create() {
-		
+		groupView.create();
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public class GroupView extends JPanel implements IView {
 
 	@Override
 	public void create() {
-		
+		createGroupPanel = new CreateGroup(this);
 	}
 
 	@Override
