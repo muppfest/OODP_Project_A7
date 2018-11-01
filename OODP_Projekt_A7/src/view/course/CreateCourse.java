@@ -105,18 +105,9 @@ public class CreateCourse extends JPanel implements ICreatePanel {
 		if(!date.getText().isEmpty()) {
 			c.setStartDate(Date.valueOf(date.getText()));
 		}
-		
-		if(!coursePlanURL.getText().isEmpty() || !courseScheduleURL.getText().isEmpty()) {
-			try {
-				c.setCoursePlanURL(new URL(coursePlanURL.getText()));
-				c.setCourseScheduleURL(new URL(courseScheduleURL.getText()));
 				
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
+		c.setCoursePlanURL(coursePlanURL.getText());
+		c.setCourseScheduleURL(courseScheduleURL.getText());
 		c.setDescription(description.getText());
 		c.setFinalGrade(finalGrade.getText());
 		

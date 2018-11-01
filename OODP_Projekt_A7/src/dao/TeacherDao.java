@@ -122,5 +122,55 @@ public class TeacherDao implements IDao<Teacher> {
 		
 		return true;
 	}
-
+	
+	public boolean insertTeacherToCourse(int courseId, int teacherId) {
+		String statementString = "INSERT INTO courseteachers (courseId, teacherId) VALUES (?,?)";
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, courseId);
+			preparedStatement.setInt(2, teacherId);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean deleteTeacherFromCourse(int courseId, int teacherId) {
+		String statementString = "DELETE FROM courseteachers WHERE courseId = ? AND teacherId = ?";
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, teacherId);
+			preparedStatement.setInt(2, courseId);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
+	public List<Teacher> getAllTeachersFromCourse(int courseId) {
+		String statementString = "SELECT teacherId FROM courseteachers WHERE courseId = ?";
+		List<Teacher> teachers = new ArrayList<Teacher>();
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, courseId);
+			rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				int teacherId = rs.getInt(1);
+				Teacher t = new Teacher();
+				t.setTeacherId(teacherId);
+				teachers.add(t);
+			} 
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return teachers;
+	}
 }

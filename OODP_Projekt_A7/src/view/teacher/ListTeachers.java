@@ -1,4 +1,4 @@
-package view.course;
+package view.teacher;
 
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -12,38 +12,41 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.Course;
+import model.person.Teacher;
 import view.IListPanel;
+import view.course.CourseView;
+import view.teacher.TeacherListRow;
 
-public class ListCourses extends JPanel implements IListPanel<Course> {
+public class ListTeachers extends JPanel implements IListPanel {
 	private CourseView courseView;
+	private int courseId;
+	private String courseName;
 	
-	public ListCourses(List<Course> courses, CourseView courseView) {
-		super();
+	public ListTeachers(CourseView courseView, Course course) {
 		this.courseView = courseView;
-				
-		JLabel title = new JLabel("Kurser");
+		this.courseId = course.getCourseId();
+		this.courseName = course.getName();
+		
+		JLabel title = new JLabel("Lärare inom " + courseName);
 		title.setFont(new Font("Arial", Font.BOLD, 20));
 		add(title);
 		
-		JLabel courseCodeLabel = new JLabel("Kurskod");
-		courseCodeLabel.setFont(new Font("Arial", Font.BOLD, 14));
-		JLabel courseLabel = new JLabel("Kursnamn");
-		courseLabel.setFont(new Font("Arial", Font.BOLD, 14));
+		JLabel nameLabel = new JLabel("Namn");
+		nameLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		
 		JPanel headers = new JPanel();
-		headers.add(courseCodeLabel);
-		headers.add(courseLabel);
+		headers.add(nameLabel);
 		headers.add(new JLabel());
 		headers.add(new JLabel());
-		headers.setLayout(new GridLayout(0,4));
+		headers.setLayout(new GridLayout(0,3));
 		add(headers);
-		
-		for(Course course : courses) {
-			CourseListRow courseRow = new CourseListRow(course, this);
-			add(courseRow);
+				
+		for(Teacher teacher : course.getTeachers()) {
+			TeacherListRow teacherRow = new TeacherListRow(teacher, this);
+			add(teacherRow);
 		}
 		
-		JButton createButton = new JButton("Lägg till kurs");
+		JButton createButton = new JButton("Lägg till lärare");
 		createButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -53,17 +56,20 @@ public class ListCourses extends JPanel implements IListPanel<Course> {
 		});
 		
 		add(createButton);
+		
 		setLayout(new GridLayout(0,1));
 	}
 
 	@Override
 	public void show(int id) {
-		courseView.show(id);		
+		courseView.showTeacher(id);
+		
 	}
 
 	@Override
 	public void create() {
-		courseView.create();
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -75,11 +81,10 @@ public class ListCourses extends JPanel implements IListPanel<Course> {
 	@Override
 	public void delete(int id) {
 		int dialogButton = JOptionPane.YES_NO_OPTION;
-		int dialogResult = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill ta bort kursen?", "", dialogButton);
+		int dialogResult = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill ta bort läraren från kursen?", "", dialogButton);
 		
 		if(dialogResult == JOptionPane.YES_OPTION) {
-			courseView.delete(id);
-			
+			courseView.deleteTeacher(courseId, id);
 		}
 	}
 }

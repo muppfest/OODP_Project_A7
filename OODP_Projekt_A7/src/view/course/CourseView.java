@@ -9,11 +9,13 @@ import javax.swing.JScrollPane;
 import controller.CourseController;
 import model.Course;
 import model.Moment;
+import model.person.Teacher;
 import view.IView;
 import view.View;
 import view.moment.CreateMoment;
 import view.moment.ListMoments;
 import view.moment.ShowMoment;
+import view.teacher.ListTeachers;
 
 public class CourseView extends JPanel implements IView<Course> {
 	private View frame;
@@ -25,6 +27,7 @@ public class CourseView extends JPanel implements IView<Course> {
 	private ListMoments listMomentsPanel;
 	private CreateMoment createMomentPanel;
 	private ShowMoment showMomentPanel;
+	private ListTeachers listTeachersPanel;
 		
 	public CourseView(View frame) {
 		this.frame = frame;
@@ -45,6 +48,18 @@ public class CourseView extends JPanel implements IView<Course> {
 		removeAll();
 		add(createMomentPanel);
 		frame.refresh();
+	}
+	
+	public void listTeachers(int courseId) {
+		Course course = controller.ShowCourse(courseId);
+		listTeachersPanel = new ListTeachers(this, course);
+		removeAll();
+		add(listTeachersPanel);
+		frame.refresh();
+	}
+	
+	public void showTeacher(int teacherId) {
+		
 	}
 	
 	public void updateMoment(Moment moment) {
@@ -79,6 +94,16 @@ public class CourseView extends JPanel implements IView<Course> {
 		}	
 	}
 	
+	public void deleteTeacher(int courseId, int teacherId) {
+		if(controller.deleteCourseTeachers(courseId, teacherId)) {
+			JOptionPane.showMessageDialog(frame,
+				    "Läraren togs bort från programmet.");
+		} else {
+			JOptionPane.showMessageDialog(frame,
+				    "Något gick fel.");
+		}
+	}
+
 	public void showMoment(int momentId) {
 		Moment m = controller.ShowMoment(momentId);
 		showMomentPanel = new ShowMoment(this, m);

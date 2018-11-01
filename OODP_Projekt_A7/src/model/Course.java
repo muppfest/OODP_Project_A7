@@ -14,13 +14,25 @@ public class Course {
 	private Date startDate;
 	private String description;
 	private String finalGrade;
-	private URL courseScheduleURL;
-	private URL coursePlanURL;	
+	private String courseScheduleURL;
+	private String coursePlanURL;	
 	
 	private List<Student> students;
 	private List<Teacher> teachers;
 	private List<Moment> moments;
 	
+	public String getCourseScheduleURL() {
+		return courseScheduleURL;
+	}
+	public void setCourseScheduleURL(String courseScheduleURL) {
+		this.courseScheduleURL = courseScheduleURL;
+	}
+	public String getCoursePlanURL() {
+		return coursePlanURL;
+	}
+	public void setCoursePlanURL(String coursePlanURL) {
+		this.coursePlanURL = coursePlanURL;
+	}
 	public int getCourseId() {
 		return courseId;
 	}
@@ -56,18 +68,6 @@ public class Course {
 	}
 	public void setFinalGrade(String finalGrade) {
 		this.finalGrade = finalGrade;
-	}
-	public URL getCourseScheduleURL() {
-		return courseScheduleURL;
-	}
-	public void setCourseScheduleURL(URL courseScheduleURL) {
-		this.courseScheduleURL = courseScheduleURL;
-	}
-	public URL getCoursePlanURL() {
-		return coursePlanURL;
-	}
-	public void setCoursePlanURL(URL coursePlanURL) {
-		this.coursePlanURL = coursePlanURL;
 	}
 	public List<Student> getStudents() {
 		return students;

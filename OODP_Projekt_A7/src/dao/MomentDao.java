@@ -118,7 +118,21 @@ public class MomentDao implements IDao<Moment> {
 		}
 		return true;
 	}
-
+	
+	public boolean deleteAllCourseMoments(int courseId) {
+		String statementString = "DELETE FROM moments WHERE courseId = ?";
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, courseId);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
 	@Override
 	public boolean update(Moment object) {
 		String statementString = "UPDATE moments SET momentCode = ?, type = ?, description = ?, grade = ?, date = ?, credit = ?, place = ? WHERE courseId = ?";

@@ -19,7 +19,6 @@ public class ProgramView extends JPanel implements IView<Program> {
 	private ListPrograms listProgramsPanel;
 	private ShowProgram showProgramPanel;
 	private CreateProgram createProgramPanel;
-	
 		
 	public ProgramView(View frame) {
 		this.frame = frame;
@@ -39,7 +38,7 @@ public class ProgramView extends JPanel implements IView<Program> {
 		add(listProgramsPanel);
 		frame.refresh();
 	}
-	
+
 	@Override
 	public void create() {
 		createProgramPanel = new CreateProgram(this);

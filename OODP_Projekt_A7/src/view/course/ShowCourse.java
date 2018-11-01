@@ -46,6 +46,7 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 	private JButton cancelButton = new JButton("Avbryt");
 	private JButton showMomentsButton = new JButton("Visa kursmoment");
 	private JButton backButton = new JButton("Gå tillbaka");
+	private JButton showTeachersButton = new JButton("Visa kursens lärare");
 	
 	private JLabel title = new JLabel("Kurs");
 	
@@ -57,9 +58,13 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 		id = course.getCourseId();
 		courseCode = new JTextField(course.getCourseCode());
 		courseName = new JTextField(course.getName());
-		date = new JTextField(course.getStartDate().toString());
-		coursePlanURL = new JTextField(course.getCoursePlanURL().toString());
-		courseScheduleURL = new JTextField(course.getCourseScheduleURL().toString());
+		if(course.getStartDate() != null) {
+			date = new JTextField(course.getStartDate().toString());
+		} else {
+			date = new JTextField();
+		}
+		coursePlanURL = new JTextField(course.getCoursePlanURL());
+		courseScheduleURL = new JTextField(course.getCourseScheduleURL());
 		finalGrade = new JTextField(course.getFinalGrade());
 		description = new JTextField(course.getDescription());
 		
@@ -105,7 +110,7 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 			public void mouseReleased(MouseEvent e) {
 				if(!coursePlanURL.isEditable()) {
 					try {
-						Desktop.getDesktop().browse(course.getCoursePlanURL().toURI());
+						Desktop.getDesktop().browse(new URL(course.getCoursePlanURL()).toURI());
 					} catch (IOException | URISyntaxException exception) {
 						System.out.println(exception);
 					}
@@ -142,7 +147,7 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 			public void mouseReleased(MouseEvent e) {
 				if(!courseScheduleURL.isEditable()) {
 					try {
-						Desktop.getDesktop().browse(course.getCourseScheduleURL().toURI());
+						Desktop.getDesktop().browse(new URL(course.getCourseScheduleURL()).toURI());
 					} catch (IOException | URISyntaxException exception) {
 						System.out.println(exception);
 					}
@@ -214,10 +219,19 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 			}
 		});
 		
+		showTeachersButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				courseView.listTeachers(id);
+			}
+		});
+		
 		add(editButton);
 		add(saveButton);
 		add(cancelButton);
 		add(showMomentsButton);
+		add(showTeachersButton);
 		add(backButton);
 		
 		saveButton.setVisible(false);
@@ -240,13 +254,8 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 		c.setCourseCode(courseCode.getText());
 		c.setName(courseName.getText());
 		c.setStartDate(Date.valueOf(date.getText()));
-		try {
-			c.setCoursePlanURL(new URL(coursePlanURL.getText()));
-			c.setCourseScheduleURL(new URL(courseScheduleURL.getText()));
-		} catch (MalformedURLException e) {
-			JOptionPane.showMessageDialog(courseView, "Felaktig URL");
-			e.printStackTrace();
-		}
+		c.setCoursePlanURL(coursePlanURL.getText());
+		c.setCourseScheduleURL(courseScheduleURL.getText());
 		c.setDescription(description.getText());
 		c.setFinalGrade(finalGrade.getText());
 		

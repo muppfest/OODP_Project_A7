@@ -16,10 +16,10 @@ import model.person.Student;
 import model.person.Teacher;
 
 public class CourseController {
-	private IDao<Course> courseDao;
-	private IDao<Student> studentDao;
-	private IDao<Teacher> teacherDao;
-	private IDao<Moment> momentDao;
+	private CourseDao courseDao;
+	private StudentDao studentDao;
+	private TeacherDao teacherDao;
+	private MomentDao momentDao;
 	
 	public CourseController() {
 		courseDao = new CourseDao();
@@ -30,15 +30,21 @@ public class CourseController {
 	
 	public Course ShowCourse(int id) {
 		Course c = courseDao.getById(id);
+		c.setMoments(momentDao.getAll().stream().filter(f -> f.getCourseId() == id).collect(Collectors.toList()));
 		
-		List<Moment> mlist = momentDao.getAll();
-		mlist = mlist.stream().filter(f -> f.getCourseId() == id).collect(Collectors.toList());
+		List<Teacher> teachers = teacherDao.getAllTeachersFromCourse(id);
 		
-		c.setMoments(mlist);
+		for(int i = 0; i < teachers.size(); i++) {
+			Teacher t = new Teacher();
+			t = teacherDao.getById(teachers.get(i).getTeacherId());
+			teachers.set(i, t);
+		}
+		
+		c.setTeachers(teachers);
 		
 		return c;
 	}
-	
+		
 	public Moment ShowMoment(int momentId) {
 		Moment moment = momentDao.getById(momentId);
 		moment.setCourse(courseDao.getById(moment.getCourseId()));
@@ -68,8 +74,11 @@ public class CourseController {
 	}
 	
 	public boolean deleteCourse(int id) {
-		if(courseDao.delete(id)) {
-			return true;
+		if(deleteCourseMoments(id)) {
+			if(courseDao.delete(id)) {
+				return true;
+			}
+			return false;
 		}
 		System.out.println("Något gick fel");
 		return false;
@@ -97,5 +106,25 @@ public class CourseController {
 		}
 		System.out.println("Något gick fel");
 		return false;
+	}
+	
+	public boolean deleteCourseMoments(int courseId) {
+		if(momentDao.deleteAllCourseMoments(courseId)) {
+			return true;
+		}
+		System.out.println("Något gick fel");
+		return false;
+	}
+	
+	public boolean deleteCourseTeachers(int courseId, int teacherId) {
+		if(teacherDao.deleteTeacherFromCourse(courseId, teacherId)) {
+			return true;
+		}
+		System.out.println("Något gick fel");
+		return false;
+	}
+	
+	public String getCourseName(int id) {
+		return courseDao.getById(id).getName();
 	}
 }

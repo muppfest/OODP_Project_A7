@@ -42,12 +42,12 @@ public class CourseDao implements IDao<Course> {
 				c.setName(rs.getString(3));
 				c.setDescription(rs.getString(4));
 				c.setFinalGrade(rs.getString(5));
-				c.setCourseScheduleURL(new URL(rs.getString(6)));
-				c.setCoursePlanURL(new URL(rs.getString(7)));
+				c.setCourseScheduleURL(rs.getString(6));
+				c.setCoursePlanURL(rs.getString(7));
 				c.setStartDate(rs.getDate(8));
 			}
 			
-		} catch (SQLException | MalformedURLException e) {
+		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		
@@ -69,12 +69,12 @@ public class CourseDao implements IDao<Course> {
 				c.setName(rs.getString(3));
 				c.setDescription(rs.getString(4));
 				c.setFinalGrade(rs.getString(5));
-				c.setCourseScheduleURL(new URL(rs.getString(6)));
-				c.setCoursePlanURL(new URL(rs.getString(7)));
+				c.setCourseScheduleURL(rs.getString(6));
+				c.setCoursePlanURL(rs.getString(7));
 				c.setStartDate(rs.getDate(8));
 				clist.add(c);
 			}
-		} catch (SQLException | MalformedURLException e) {
+		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		
@@ -92,7 +92,7 @@ public class CourseDao implements IDao<Course> {
 			preparedStatement.setString(3, object.getDescription());
 			preparedStatement.setString(4, object.getFinalGrade());
 			preparedStatement.setString(5, object.getCourseScheduleURL().toString());
-			preparedStatement.setString(6, object.getCoursePlanURL().toString());
+			preparedStatement.setString(6, object.getCoursePlanURL().toString());			
 			preparedStatement.setDate(7, object.getStartDate());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
