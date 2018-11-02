@@ -27,14 +27,10 @@ public class ShowProgram extends JPanel implements IShowPanel<Program> {
 	private JButton saveButton = new JButton("Spara ändringar");
 	private JButton cancelButton = new JButton("Avbryt");
 	
-	private JLabel title = new JLabel("Program");
-
 	public ShowProgram(Program program, ProgramView programView) {
 		super();
 		this.programView = programView;
-		
-		title.setFont(new Font("Arial", Font.BOLD, 20));
-		
+				
 		id = program.getProgramId();
 		programCode = new JTextField(program.getProgramCode());
 		programName = new JTextField(program.getName());
@@ -48,7 +44,7 @@ public class ShowProgram extends JPanel implements IShowPanel<Program> {
 		JLabel nameLabel = new JLabel("Namn");
 		JLabel descriptionLabel = new JLabel("Beskrivning");
 		
-		add(title);
+		
 		add(codeLabel);
 		add(programCode);
 		add(nameLabel);

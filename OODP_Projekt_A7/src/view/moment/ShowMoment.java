@@ -143,12 +143,19 @@ public class ShowMoment extends JPanel implements IShowPanel<Moment> {
 		m.setCourseId(courseId);
 		m.setMomentId(momentId);
 		m.setCredit(Double.parseDouble(credit.getText()));
-		m.setDate(Date.valueOf(date.getText()));
+		if(!date.getText().isEmpty()) {
+			m.setDate(Date.valueOf(date.getText()));
+		}
 		m.setGrade(grade.getText());
 		m.setMomentCode(momentCode.getText());
 		m.setDescription(description.getText());
 		m.setPlace(place.getText());
 		m.setType(momentType.getText());
+		
+		editButton.setEnabled(true);
+		saveButton.setEnabled(false);
+		cancelButton.setEnabled(false);
+		disableFields();
 		
 		courseView.updateMoment(m);
 	}

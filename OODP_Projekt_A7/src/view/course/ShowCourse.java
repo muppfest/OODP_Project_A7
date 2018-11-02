@@ -48,13 +48,15 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 	private JButton backButton = new JButton("Gå tillbaka");
 	private JButton showTeachersButton = new JButton("Visa kursens lärare");
 	
-	private JLabel title = new JLabel("Kurs");
+	private JLabel title;
 	
 	public ShowCourse(Course course, CourseView courseView) {
 		super();
 		this.courseView = courseView;
+		
+		title = new JLabel(course.getName());
 		title.setFont(new Font("Arial", Font.BOLD, 20));
-				
+		
 		id = course.getCourseId();
 		courseCode = new JTextField(course.getCourseCode());
 		courseName = new JTextField(course.getName());

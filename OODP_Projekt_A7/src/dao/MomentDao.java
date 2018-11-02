@@ -135,7 +135,7 @@ public class MomentDao implements IDao<Moment> {
 	
 	@Override
 	public boolean update(Moment object) {
-		String statementString = "UPDATE moments SET momentCode = ?, type = ?, description = ?, grade = ?, date = ?, credit = ?, place = ? WHERE courseId = ?";
+		String statementString = "UPDATE moments SET momentCode = ?, type = ?, description = ?, grade = ?, date = ?, credit = ?, place = ? WHERE momentId = ?";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);
@@ -146,7 +146,7 @@ public class MomentDao implements IDao<Moment> {
 			preparedStatement.setDate(5, object.getDate());
 			preparedStatement.setDouble(6, object.getCredit());
 			preparedStatement.setString(7, object.getPlace());
-			preparedStatement.setInt(8, object.getCourseId());
+			preparedStatement.setInt(8, object.getMomentId());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

@@ -7,12 +7,14 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.Course;
 import model.person.Teacher;
+import view.ComboBoxItem;
 import view.IListPanel;
 import view.course.CourseView;
 import view.teacher.TeacherListRow;
@@ -21,6 +23,7 @@ public class ListTeachers extends JPanel implements IListPanel {
 	private CourseView courseView;
 	private int courseId;
 	private String courseName;
+	private JComboBox<ComboBoxItem> comboBox = new JComboBox();
 	
 	public ListTeachers(CourseView courseView, Course course) {
 		this.courseView = courseView;
@@ -40,14 +43,42 @@ public class ListTeachers extends JPanel implements IListPanel {
 		headers.add(new JLabel());
 		headers.setLayout(new GridLayout(0,3));
 		add(headers);
+		
+		JComboBox<ComboBoxItem> comboBox = new JComboBox();	
+		List<Teacher> teachers = courseView.getListOfTeachers();
+		List<Teacher> courseTeachers = course.getTeachers();
+		
+		for(int i = 0; i < courseTeachers.size(); i++) {
+			for(int j = 0; j < teachers.size(); j++) {
+				if(courseTeachers.get(i).getTeacherId() == teachers.get(j).getTeacherId()) {
+					teachers.remove(j);
+				}
+			}
+		}
 				
-		for(Teacher teacher : course.getTeachers()) {
+		for(Teacher teacher : courseTeachers) {
 			TeacherListRow teacherRow = new TeacherListRow(teacher, this);
 			add(teacherRow);
 		}
+
+		for(Teacher teacher : teachers) {
+			ComboBoxItem item = new ComboBoxItem(teacher.getTeacherId(), teacher.getName());
+			comboBox.addItem(item);
+		}
 		
-		JButton createButton = new JButton("Lägg till lärare");
+		add(comboBox);
+		
+		JButton createButton = new JButton("Lägg till befintlig lärare");
 		createButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				insert((ComboBoxItem) comboBox.getSelectedItem());
+			}
+		});
+		
+		JButton createNewButton = new JButton("Lägg till ny lärare");
+		createNewButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -55,21 +86,35 @@ public class ListTeachers extends JPanel implements IListPanel {
 			}
 		});
 		
+		JButton backButton = new JButton("Tillbaka");
+		backButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				courseView.show(courseId);
+			}
+		});
+		
 		add(createButton);
+		add(createNewButton);
+		add(backButton);
 		
 		setLayout(new GridLayout(0,1));
 	}
 
+	public void insert(ComboBoxItem item) {
+		courseView.insertCourseTeacher(courseId, item.getIndex());
+	}
+	
 	@Override
 	public void show(int id) {
-		courseView.showTeacher(id);
+		courseView.showTeacher(id, courseId);
 		
 	}
 
 	@Override
 	public void create() {
-		// TODO Auto-generated method stub
-		
+		courseView.createTeacher(courseId);
 	}
 
 	@Override
@@ -85,6 +130,7 @@ public class ListTeachers extends JPanel implements IListPanel {
 		
 		if(dialogResult == JOptionPane.YES_OPTION) {
 			courseView.deleteTeacher(courseId, id);
+			courseView.listTeachers(courseId);
 		}
 	}
 }

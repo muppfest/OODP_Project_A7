@@ -31,16 +31,7 @@ public class CourseController {
 	public Course ShowCourse(int id) {
 		Course c = courseDao.getById(id);
 		c.setMoments(momentDao.getAll().stream().filter(f -> f.getCourseId() == id).collect(Collectors.toList()));
-		
-		List<Teacher> teachers = teacherDao.getAllTeachersFromCourse(id);
-		
-		for(int i = 0; i < teachers.size(); i++) {
-			Teacher t = new Teacher();
-			t = teacherDao.getById(teachers.get(i).getTeacherId());
-			teachers.set(i, t);
-		}
-		
-		c.setTeachers(teachers);
+		c.setTeachers(teacherDao.getAllTeachersFromCourse(id));
 		
 		return c;
 	}
@@ -89,8 +80,11 @@ public class CourseController {
 	
 	public boolean deleteCourse(int id) {
 		if(deleteCourseMoments(id)) {
-			if(courseDao.delete(id)) {
-				return true;
+			if(deleteAllTeachersFromCourse(id)) {
+				if(courseDao.delete(id)) {
+					return true;
+				}
+				return false;
 			}
 			return false;
 		}
@@ -130,7 +124,7 @@ public class CourseController {
 		return false;
 	}
 	
-	public boolean deleteCourseTeachers(int courseId, int teacherId) {
+	public boolean deleteTeacherFromCourse(int courseId, int teacherId) {
 		if(teacherDao.deleteTeacherFromCourse(courseId, teacherId)) {
 			return true;
 		}
@@ -138,7 +132,36 @@ public class CourseController {
 		return false;
 	}
 	
+	public boolean deleteAllTeachersFromCourse(int courseId) {
+		if(teacherDao.deleteAllTeachersFromCourse(courseId)) {
+			return true;
+		} else {
+			System.out.println("Något gick fel");
+			return false;
+		}
+	}
+	
+	public boolean insertTeacherToCourse(int courseId, int teacherId) {
+		if(teacherDao.insertTeacherToCourse(courseId, teacherId)) {
+			return true;
+		} else {
+			System.out.println("Något gick fel");
+			return false;
+		}
+	}
+	
+	public boolean teacherAlreadyExistInCourse(int courseId, int teacherId) {
+		if(teacherDao.teacherAlreadyExistInCourse(courseId, teacherId)) {
+			return false;
+		} 
+		return true;
+	}
+	
 	public String getCourseName(int id) {
 		return courseDao.getById(id).getName();
+	}
+	
+	public List<Teacher> listTeachers() {
+		return teacherDao.getAll();
 	}
 }

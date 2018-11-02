@@ -15,12 +15,15 @@ import view.View;
 import view.moment.CreateMoment;
 import view.moment.ListMoments;
 import view.moment.ShowMoment;
+import view.teacher.CreateCourseTeacher;
 import view.teacher.ListTeachers;
 import view.teacher.ShowTeacher;
 
 public class CourseView extends JPanel implements IView<Course> {
 	private View frame;
 	private CourseController controller;
+	
+	private JPanel panel;
 	
 	private ListCourses listCoursesPanel;
 	private ShowCourse showCoursePanel;
@@ -30,19 +33,29 @@ public class CourseView extends JPanel implements IView<Course> {
 	private ShowMoment showMomentPanel;
 	private ListTeachers listTeachersPanel;
 	private ShowTeacher showTeacherPanel;
+	private CreateCourseTeacher createCourseTeacherPanel;
+	 
 		
 	public CourseView(View frame) {
 		this.frame = frame;
 		controller = new CourseController();
 		list();
 	}
-	
+		
 	public View getFrame() {
 		return frame;
 	}
 	
 	public List<Course> getListOfCourses() {
 		return controller.listCourses();
+	}
+	
+	public List<Teacher> getListOfTeachers() {
+		return controller.listTeachers();
+	}
+	
+	public String getCourseName(int courseId) {
+		return controller.getCourseName(courseId);
 	}
 	
 	public void createMoment(int courseId, String courseName) {
@@ -60,11 +73,29 @@ public class CourseView extends JPanel implements IView<Course> {
 		frame.refresh();
 	}
 	
-	public void showTeacher(int teacherId) {
+	public void showTeacher(int teacherId, int courseId) {
 		Teacher teacher = controller.showTeacher(teacherId);
-		showTeacherPanel = new ShowTeacher(this, teacher);
+		showTeacherPanel = new ShowTeacher(this, teacher, courseId);
 		removeAll();
 		add(showTeacherPanel);
+		frame.refresh();
+	}
+	
+	public void insertCourseTeacher(int courseId, int teacherId) {
+		if(controller.insertTeacherToCourse(courseId, teacherId)) {
+			JOptionPane.showMessageDialog(frame,
+				    "Läraren lade till i programmet.");
+					listTeachers(courseId);
+		} else {
+			JOptionPane.showMessageDialog(frame,
+				    "Något gick fel.");
+		}	
+	}
+	
+	public void createTeacher(int courseId) {
+		createCourseTeacherPanel = new CreateCourseTeacher(this, courseId);
+		removeAll();
+		add(createCourseTeacherPanel);
 		frame.refresh();
 	}
 	
@@ -72,6 +103,7 @@ public class CourseView extends JPanel implements IView<Course> {
 		if(controller.updateMoment(moment)) {
 			JOptionPane.showMessageDialog(frame,
 				    "Kursmomentet uppdaterades.");
+					showMoment(moment.getMomentId());
 		} else {
 			JOptionPane.showMessageDialog(frame,
 				    "Något gick fel.");
@@ -101,7 +133,7 @@ public class CourseView extends JPanel implements IView<Course> {
 	}
 	
 	public void deleteTeacher(int courseId, int teacherId) {
-		if(controller.deleteCourseTeachers(courseId, teacherId)) {
+		if(controller.deleteTeacherFromCourse(courseId, teacherId)) {
 			JOptionPane.showMessageDialog(frame,
 				    "Läraren togs bort från programmet.");
 		} else {

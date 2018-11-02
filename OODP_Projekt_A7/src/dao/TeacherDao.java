@@ -25,10 +25,9 @@ public class TeacherDao implements IDao<Teacher> {
 		db = db.getInstance();
 	}
 
-	@Override
 	public Teacher getById(int id) {
 		Teacher t = new Teacher();
-		String statementString = "SELECT teacherId, name, email, office FROM teachers WHERE teacherId = ?";
+		String statementString = "SELECT teacherId, name, email, phonenr, office FROM teachers WHERE teacherId = ?";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);
@@ -39,7 +38,8 @@ public class TeacherDao implements IDao<Teacher> {
 				t.setTeacherId(rs.getInt(1));
 				t.setName(rs.getString(2));
 				t.setEmail(rs.getString(3));
-				t.setOffice(rs.getString(4));
+				t.setPhoneNr(rs.getString(4));
+				t.setOffice(rs.getString(5));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -51,7 +51,7 @@ public class TeacherDao implements IDao<Teacher> {
 	@Override
 	public List<Teacher> getAll() {
 		List<Teacher> tlist = new ArrayList<Teacher>();
-		String sqlQueryString = "SELECT teacherId, name, email, office FROM teachers";
+		String sqlQueryString = "SELECT teacherId, name, email, phoneNr, office FROM teachers";
 		
 		try {
 			rs = db.executeQuery(sqlQueryString);
@@ -61,7 +61,8 @@ public class TeacherDao implements IDao<Teacher> {
 				t.setTeacherId(rs.getInt(1));
 				t.setName(rs.getString(2));
 				t.setEmail(rs.getString(3));
-				t.setOffice(rs.getString(4));
+				t.setPhoneNr(rs.getString(4));
+				t.setOffice(rs.getString(5));
 				tlist.add(t);
 			}
 		} catch (SQLException e) {
@@ -73,13 +74,14 @@ public class TeacherDao implements IDao<Teacher> {
 
 	@Override
 	public boolean insert(Teacher object) {
-		String statementString = "INSERT INTO teachers (name, email, office) VALUES (?,?,?)";
+		String statementString = "INSERT INTO teachers (name, email, phoneNr, office) VALUES (?,?,?,?)";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);
 			preparedStatement.setString(1, object.getName());
 			preparedStatement.setString(2, object.getEmail());
-			preparedStatement.setString(3, object.getOffice());
+			preparedStatement.setString(3, object.getPhoneNr());
+			preparedStatement.setString(4, object.getOffice());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -107,14 +109,15 @@ public class TeacherDao implements IDao<Teacher> {
 
 	@Override
 	public boolean update(Teacher object) {
-		String statementString = "UPDATE teachers SET name = ?, email = ?, office = ? WHERE teacherId = ?";
+		String statementString = "UPDATE teachers SET name = ?, email = ?, phoneNr = ?, office = ? WHERE teacherId = ?";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);
 			preparedStatement.setString(1, object.getName());
 			preparedStatement.setString(2, object.getEmail());
-			preparedStatement.setString(3, object.getOffice());
-			preparedStatement.setInt(4, object.getTeacherId());
+			preparedStatement.setString(3, object.getPhoneNr());
+			preparedStatement.setString(4, object.getOffice());
+			preparedStatement.setInt(5, object.getTeacherId());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -127,10 +130,29 @@ public class TeacherDao implements IDao<Teacher> {
 	public boolean insertTeacherToCourse(int courseId, int teacherId) {
 		String statementString = "INSERT INTO courseteachers (courseId, teacherId) VALUES (?,?)";
 		
+		if(!teacherAlreadyExistInCourse(courseId, teacherId)) {
+			try {
+				preparedStatement = db.preparedStatement(statementString);
+				preparedStatement.setInt(1, courseId);
+				preparedStatement.setInt(2, teacherId);
+				preparedStatement.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return false;
+			}
+			return true;
+		} else {
+			System.out.println("Något gick fel");
+			return false;
+		}
+	}
+	
+	public boolean deleteAllTeachersFromCourse(int courseId) {
+		String statementString = "DELETE FROM courseteachers WHERE courseId = ?";
+		
 		try {
 			preparedStatement = db.preparedStatement(statementString);
 			preparedStatement.setInt(1, courseId);
-			preparedStatement.setInt(2, teacherId);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -144,8 +166,8 @@ public class TeacherDao implements IDao<Teacher> {
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);
-			preparedStatement.setInt(1, teacherId);
-			preparedStatement.setInt(2, courseId);
+			preparedStatement.setInt(1, courseId);
+			preparedStatement.setInt(2, teacherId);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -168,15 +190,20 @@ public class TeacherDao implements IDao<Teacher> {
 				Teacher t = new Teacher();
 				t.setTeacherId(teacherId);
 				teachers.add(t);
-			} 
+			} 			
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		
+		for(int i = 0; i < teachers.size(); i++) {
+			teachers.set(i, getById(teachers.get(i).getTeacherId()));
+		}
+		
 		return teachers;
 	}
 	
 	public List<Course> getAllCoursesFromTeacher(int teacherId) {
-		String statementString = "SELECT courseId FROM courseteachers WHERE courseId = ?";
+		String statementString = "SELECT courseId FROM courseteachers WHERE teacherId = ?";
 		List<Course> courses = new ArrayList<Course>();
 		
 		try {
@@ -193,5 +220,25 @@ public class TeacherDao implements IDao<Teacher> {
 			System.out.println(e.getMessage());
 		}
 		return courses;
+	}
+	
+	public boolean teacherAlreadyExistInCourse(int courseId, int teacherId) {
+		String statementString = "SELECT * FROM courseteachers WHERE courseId = ? AND teacherId = ?";
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, courseId);
+			preparedStatement.setInt(2, teacherId);
+			
+			rs = preparedStatement.executeQuery();
+			
+			if(rs.getFetchSize() > 0) {
+				return true;
+			}
+			return false;
+		} catch (SQLException e) {
+			System.out.println("Något gick fel");
+			return false;
+		}
 	}
 }
