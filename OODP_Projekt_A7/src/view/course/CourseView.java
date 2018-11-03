@@ -81,6 +81,17 @@ public class CourseView extends JPanel implements IView<Course> {
 		frame.refresh();
 	}
 	
+	public void updateTeacher(Teacher teacher, int courseId) {
+		if(controller.updateTeacher(teacher)) {
+			JOptionPane.showMessageDialog(frame,
+				    "Läraren uppdaterades.");
+					listTeachers(courseId);
+		} else {
+			JOptionPane.showMessageDialog(frame,
+				    "Något gick fel.");
+		}				
+	}
+	
 	public void insertCourseTeacher(int courseId, int teacherId) {
 		if(controller.insertTeacherToCourse(courseId, teacherId)) {
 			JOptionPane.showMessageDialog(frame,
@@ -90,6 +101,17 @@ public class CourseView extends JPanel implements IView<Course> {
 			JOptionPane.showMessageDialog(frame,
 				    "Något gick fel.");
 		}	
+	}
+	
+	public void insertNewCourseTeacher(Teacher teacher, int courseId) {
+		if(controller.insertNewTeacherIntoCourse(teacher, courseId)) {
+			JOptionPane.showMessageDialog(frame,
+				    "En ny lärare lades till i kursen.");
+					listTeachers(courseId);
+		} else {
+			JOptionPane.showMessageDialog(frame,
+				    "Något gick fel.");
+		}
 	}
 	
 	public void createTeacher(int courseId) {
@@ -132,10 +154,20 @@ public class CourseView extends JPanel implements IView<Course> {
 		}	
 	}
 	
-	public void deleteTeacher(int courseId, int teacherId) {
+	public void deleteTeacherFromCourse(int courseId, int teacherId) {
 		if(controller.deleteTeacherFromCourse(courseId, teacherId)) {
 			JOptionPane.showMessageDialog(frame,
 				    "Läraren togs bort från programmet.");
+		} else {
+			JOptionPane.showMessageDialog(frame,
+				    "Något gick fel.");
+		}
+	}
+	
+	public void deleteTeacher(int teacherId) {
+		if(controller.deleteTeacher(teacherId)) {
+			JOptionPane.showMessageDialog(frame,
+				    "Läraren togs bort.");
 		} else {
 			JOptionPane.showMessageDialog(frame,
 				    "Något gick fel.");

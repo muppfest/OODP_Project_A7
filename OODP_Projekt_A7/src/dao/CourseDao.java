@@ -21,6 +21,7 @@ public class CourseDao implements IDao<Course> {
 	private DbConnectionManager db = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet rs = null;
+	private int lastInsertedId;
 	
 	public CourseDao() {
 		db = db.getInstance();
@@ -51,6 +52,7 @@ public class CourseDao implements IDao<Course> {
 			System.out.println(e.getMessage());
 		}
 		
+		db.closeConnection();
 		return c;
 	}
 
@@ -78,6 +80,7 @@ public class CourseDao implements IDao<Course> {
 			System.out.println(e.getMessage());
 		}
 		
+		db.closeConnection();
 		return clist;
 	}
 
@@ -94,7 +97,12 @@ public class CourseDao implements IDao<Course> {
 			preparedStatement.setString(5, object.getCourseScheduleURL().toString());
 			preparedStatement.setString(6, object.getCoursePlanURL().toString());			
 			preparedStatement.setDate(7, object.getStartDate());
-			preparedStatement.executeUpdate();
+			rs = preparedStatement.executeQuery();
+
+			if(rs.next()) {
+				lastInsertedId = rs.getInt(1);
+			}
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -111,6 +119,7 @@ public class CourseDao implements IDao<Course> {
 			preparedStatement = db.preparedStatement(statementString);
 			preparedStatement.setInt(1, id);
 			preparedStatement.executeUpdate();
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -133,11 +142,16 @@ public class CourseDao implements IDao<Course> {
 			preparedStatement.setDate(7, object.getStartDate());
 			preparedStatement.setInt(8, object.getCourseId());
 			preparedStatement.executeUpdate();
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
 		
 		return true;
+	}
+	
+	public int getLastInsertedId() {
+		return lastInsertedId;
 	}
 }

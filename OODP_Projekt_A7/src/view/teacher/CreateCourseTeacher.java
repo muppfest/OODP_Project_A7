@@ -1,14 +1,20 @@
 package view.teacher;
 
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.Course;
+import model.person.Teacher;
 import view.ComboBoxItem;
 import view.course.CourseView;
 
@@ -21,17 +27,60 @@ public class CreateCourseTeacher extends JPanel {
 	private JTextField phoneNr;
 	private JTextField office;
 	
+	private JButton createButton = new JButton("Lägg till ny lärare");
+	private JButton backButton = new JButton("Gå tillbaka");
+	
+	private int courseId;
+	
 	public CreateCourseTeacher(CourseView courseView, int courseId) {
 		this.courseView = courseView;
+		this.courseId = courseId;
 		courseName = courseView.getCourseName(courseId);
-		List<Course> courses = courseView.getListOfCourses();		
-		JComboBox<ComboBoxItem> comboBox = new JComboBox();	
 		
-		for(Course course : courses) {
-			ComboBoxItem item = new ComboBoxItem(course.getCourseId(), course.getName());
-			comboBox.addItem(item);
-		}
+		name = new JTextField();
+		email = new JTextField();
+		phoneNr = new JTextField();
+		office = new JTextField();
+	
+		JLabel nameLabel = new JLabel("Namn");
+		JLabel emailLabel = new JLabel("E-postadress");
+		JLabel phoneNrLabel = new JLabel("Telefonnummer");
+		JLabel officeLabel = new JLabel("Kontorsrum");
 		
-		add(comboBox);
+		add(nameLabel);
+		add(name);
+		add(emailLabel);
+		add(email);
+		add(phoneNrLabel);
+		add(phoneNr);
+		add(officeLabel);
+		add(office);
+				
+		createButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Teacher teacher = new Teacher();
+				teacher.setName(name.getText());
+				teacher.setEmail(email.getText());
+				teacher.setPhoneNr(phoneNr.getText());
+				teacher.setOffice(office.getText());
+				
+				courseView.insertNewCourseTeacher(teacher, courseId);
+			}
+		});
+		
+		backButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				courseView.listTeachers(courseId);				
+			}
+		});
+		
+		add(createButton);
+		add(backButton);
+		
+		setLayout(new GridLayout(0,1));
 	}
 }

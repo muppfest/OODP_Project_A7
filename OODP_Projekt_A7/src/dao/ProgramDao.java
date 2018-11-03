@@ -22,6 +22,7 @@ public class ProgramDao implements IDao<Program> {
 	private DbConnectionManager db = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet rs = null;
+	private int lastInsertedId;
 	
 	public ProgramDao() {
 		db = db.getInstance();
@@ -43,7 +44,7 @@ public class ProgramDao implements IDao<Program> {
 				p.setName(rs.getString(3));
 				p.setDescription(rs.getString(4));
 			}
-			
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -68,6 +69,7 @@ public class ProgramDao implements IDao<Program> {
 				p.setDescription(rs.getString(4));
 				plist.add(p);
 			}
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -84,7 +86,12 @@ public class ProgramDao implements IDao<Program> {
 			preparedStatement.setString(1, object.getProgramCode());
 			preparedStatement.setString(2, object.getName());
 			preparedStatement.setString(3, object.getDescription());
-			preparedStatement.executeUpdate();
+			rs = preparedStatement.executeQuery();
+
+			if(rs.next()) {
+				lastInsertedId = rs.getInt(1);
+			}
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -101,6 +108,7 @@ public class ProgramDao implements IDao<Program> {
 			preparedStatement = db.preparedStatement(statementString);
 			preparedStatement.setInt(1, id);
 			preparedStatement.executeUpdate();
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -120,6 +128,7 @@ public class ProgramDao implements IDao<Program> {
 			preparedStatement.setString(3, object.getDescription());
 			preparedStatement.setInt(4, object.getProgramId());
 			preparedStatement.executeUpdate();
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -127,38 +136,7 @@ public class ProgramDao implements IDao<Program> {
 		
 		return true;
 	}
-	
-	/*
-	public List<Course> getCoursesInProgram(int programId) {
-		List<Course> courses = new ArrayList<Course>();
-		String statementString = "SELECT programCoursesId, courseId, programId FROM programcourses WHERE programId = ?";
-				
-		try {
-			preparedStatement = db.preparedStatement(statementString);
-			preparedStatement.setInt(1, programId);
-			rs = preparedStatement.executeQuery();
-			
-			while(rs.next()) {
-				
-			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return courses;
+	public int getLastInsertedId() {
+		return lastInsertedId;
 	}
-	
-	public boolean addCourseToProgram(int courseId, int programId) {
-		String statementString = "INSERT INTO programcourses (courseId, programId) VALUES (?,?)";
-		
-		try {
-			preparedStatement = db.preparedStatement(statementString);
-			preparedStatement.setInt(1, courseId);
-			preparedStatement.setInt(2, programId);
-			preparedStatement.executeUpdate();
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
-			return false;
-		}
-		return true;
-	} */
 }

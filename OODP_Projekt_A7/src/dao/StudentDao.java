@@ -21,6 +21,7 @@ public class StudentDao implements IDao<Student> {
 	private DbConnectionManager db = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet rs = null;
+	private int lastInsertedId;
 	
 	public StudentDao() {
 		db = db.getInstance();
@@ -45,6 +46,7 @@ public class StudentDao implements IDao<Student> {
 				s.setAddress(rs.getString(6));
 				s.setCity(rs.getString(7));
 			}
+			db.closeConnection();
 			
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -72,6 +74,7 @@ public class StudentDao implements IDao<Student> {
 				s.setProgramId(rs.getInt(7));
 				slist.add(s);
 			}
+			db.closeConnection();
 			
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -82,7 +85,7 @@ public class StudentDao implements IDao<Student> {
 
 	@Override
 	public boolean insert(Student object) {
-		String statementString = "INSERT INTO students (name, email, phoneNr, address, city) VALUES (?,?,?,?,?)";
+		String statementString = "INSERT INTO students (name, email, phoneNr, address, city) VALUES (?,?,?,?,?) RETURNING studentId";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);
@@ -91,8 +94,13 @@ public class StudentDao implements IDao<Student> {
 			preparedStatement.setString(3, object.getPhoneNr());
 			preparedStatement.setString(4, object.getAddress());
 			preparedStatement.setString(5, object.getCity());
-			preparedStatement.executeUpdate();
+			rs = preparedStatement.executeQuery();
 			
+			if(rs.next()) {
+				lastInsertedId = rs.getInt(1);
+			}
+			
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -109,6 +117,7 @@ public class StudentDao implements IDao<Student> {
 			preparedStatement = db.preparedStatement(statementString);
 			preparedStatement.setInt(1, id);
 			preparedStatement.executeUpdate();
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -131,6 +140,7 @@ public class StudentDao implements IDao<Student> {
 			preparedStatement.setString(6, object.getCity());
 			preparedStatement.setInt(7, object.getStudentId());
 			preparedStatement.executeUpdate();
+			db.closeConnection();
 			
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -138,5 +148,8 @@ public class StudentDao implements IDao<Student> {
 		}
 		
 		return true;
+	}
+	public int getLastInsertedId() {
+		return lastInsertedId;
 	}
 }

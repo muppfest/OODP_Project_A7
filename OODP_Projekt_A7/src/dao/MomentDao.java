@@ -19,7 +19,7 @@ public class MomentDao implements IDao<Moment> {
 	private DbConnectionManager db = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet rs = null;
-	
+	private int lastInsertedId;	
 	
 	public MomentDao() {
 		db = db.getInstance();
@@ -46,6 +46,7 @@ public class MomentDao implements IDao<Moment> {
 				m.setPlace(rs.getString(8));
 				m.setCourseId(rs.getInt(9));
 			} 
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -73,7 +74,8 @@ public class MomentDao implements IDao<Moment> {
 				m.setPlace(rs.getString(8));
 				m.setCourseId(rs.getInt(9));
 				mlist.add(m);
-			} 
+			}
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -95,7 +97,12 @@ public class MomentDao implements IDao<Moment> {
 			preparedStatement.setDouble(6, object.getCredit());
 			preparedStatement.setString(7, object.getPlace());
 			preparedStatement.setInt(8, object.getCourseId());
-			preparedStatement.executeUpdate();
+			rs = preparedStatement.executeQuery();
+
+			if(rs.next()) {
+				lastInsertedId = rs.getInt(1);
+			}
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -112,6 +119,7 @@ public class MomentDao implements IDao<Moment> {
 			preparedStatement = db.preparedStatement(statementString);
 			preparedStatement.setInt(1, id);
 			preparedStatement.executeUpdate();
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -126,6 +134,7 @@ public class MomentDao implements IDao<Moment> {
 			preparedStatement = db.preparedStatement(statementString);
 			preparedStatement.setInt(1, courseId);
 			preparedStatement.executeUpdate();
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -148,12 +157,14 @@ public class MomentDao implements IDao<Moment> {
 			preparedStatement.setString(7, object.getPlace());
 			preparedStatement.setInt(8, object.getMomentId());
 			preparedStatement.executeUpdate();
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
 		return true;
 	}
-	
-	
+	public int getLastInsertedId() {
+		return lastInsertedId;
+	}
 }

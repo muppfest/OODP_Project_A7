@@ -20,6 +20,7 @@ public class TeacherDao implements IDao<Teacher> {
 	private DbConnectionManager db = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet rs = null;
+	private int lastInsertedId;
 	
 	public TeacherDao() {
 		db = db.getInstance();
@@ -41,6 +42,8 @@ public class TeacherDao implements IDao<Teacher> {
 				t.setPhoneNr(rs.getString(4));
 				t.setOffice(rs.getString(5));
 			}
+			
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -65,6 +68,9 @@ public class TeacherDao implements IDao<Teacher> {
 				t.setOffice(rs.getString(5));
 				tlist.add(t);
 			}
+			
+			db.closeConnection();
+			
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -74,7 +80,7 @@ public class TeacherDao implements IDao<Teacher> {
 
 	@Override
 	public boolean insert(Teacher object) {
-		String statementString = "INSERT INTO teachers (name, email, phoneNr, office) VALUES (?,?,?,?)";
+		String statementString = "INSERT INTO teachers (name, email, phoneNr, office) VALUES (?,?,?,?) RETURNING teacherId";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);
@@ -82,12 +88,18 @@ public class TeacherDao implements IDao<Teacher> {
 			preparedStatement.setString(2, object.getEmail());
 			preparedStatement.setString(3, object.getPhoneNr());
 			preparedStatement.setString(4, object.getOffice());
-			preparedStatement.executeUpdate();
+			rs = preparedStatement.executeQuery();
+
+			if(rs.next()) {
+				lastInsertedId = rs.getInt(1);
+			}
+			
+			db.closeConnection();
+			
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
-		
 		return true;
 	}
 
@@ -99,11 +111,11 @@ public class TeacherDao implements IDao<Teacher> {
 			preparedStatement = db.preparedStatement(statementString);
 			preparedStatement.setInt(1, id);
 			preparedStatement.executeUpdate();
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
-		
 		return true;
 	}
 
@@ -119,11 +131,11 @@ public class TeacherDao implements IDao<Teacher> {
 			preparedStatement.setString(4, object.getOffice());
 			preparedStatement.setInt(5, object.getTeacherId());
 			preparedStatement.executeUpdate();
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
-		
 		return true;
 	}
 	
@@ -136,6 +148,8 @@ public class TeacherDao implements IDao<Teacher> {
 				preparedStatement.setInt(1, courseId);
 				preparedStatement.setInt(2, teacherId);
 				preparedStatement.executeUpdate();
+				db.closeConnection();
+				
 			} catch (SQLException e) {
 				System.out.println(e.getMessage());
 				return false;
@@ -154,6 +168,7 @@ public class TeacherDao implements IDao<Teacher> {
 			preparedStatement = db.preparedStatement(statementString);
 			preparedStatement.setInt(1, courseId);
 			preparedStatement.executeUpdate();
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -169,6 +184,22 @@ public class TeacherDao implements IDao<Teacher> {
 			preparedStatement.setInt(1, courseId);
 			preparedStatement.setInt(2, teacherId);
 			preparedStatement.executeUpdate();
+			db.closeConnection();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean deleteAllCoursesFromTeacher(int teacherId) {
+		String statementString = "DELETE FROM courseteachers WHERE teacherId = ?";
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, teacherId);
+			preparedStatement.executeUpdate();
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -199,6 +230,7 @@ public class TeacherDao implements IDao<Teacher> {
 			teachers.set(i, getById(teachers.get(i).getTeacherId()));
 		}
 		
+		db.closeConnection();
 		return teachers;
 	}
 	
@@ -219,6 +251,8 @@ public class TeacherDao implements IDao<Teacher> {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		
+		db.closeConnection();
 		return courses;
 	}
 	
@@ -229,16 +263,21 @@ public class TeacherDao implements IDao<Teacher> {
 			preparedStatement = db.preparedStatement(statementString);
 			preparedStatement.setInt(1, courseId);
 			preparedStatement.setInt(2, teacherId);
-			
 			rs = preparedStatement.executeQuery();
 			
 			if(rs.getFetchSize() > 0) {
+				db.closeConnection();
 				return true;
 			}
+			db.closeConnection();
 			return false;
 		} catch (SQLException e) {
 			System.out.println("Något gick fel");
 			return false;
 		}
+	}
+	
+	public int getLastInsertTeacherId() {
+		return lastInsertedId;
 	}
 }

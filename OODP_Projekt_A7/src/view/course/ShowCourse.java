@@ -41,7 +41,7 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 	private JTextField finalGrade;
 	private JTextField description;
 	
-	private JButton editButton = new JButton("Redigera");
+	private JButton editButton = new JButton("Redigera kurs");
 	private JButton saveButton = new JButton("Spara ändringar");
 	private JButton cancelButton = new JButton("Avbryt");
 	private JButton showMomentsButton = new JButton("Visa kursmoment");
@@ -107,6 +107,7 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 				
 		setLayout(new GridLayout(0,1));		
 		
+		if(!coursePlanURL.getText().isEmpty()) {
 		coursePlanURL.addMouseListener(new MouseListener() {			
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -143,7 +144,9 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 				
 			}
 		});
+		}
 		
+		if(!courseScheduleURL.getText().isEmpty()) {
 		courseScheduleURL.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -180,6 +183,7 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 				
 			}
 		});
+		}
 		
 		saveButton.addActionListener(new ActionListener() {
 			
@@ -255,7 +259,9 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 		c.setCourseId(id);
 		c.setCourseCode(courseCode.getText());
 		c.setName(courseName.getText());
-		c.setStartDate(Date.valueOf(date.getText()));
+		if(!date.getText().isEmpty()) {
+			c.setStartDate(Date.valueOf(date.getText()));
+		}
 		c.setCoursePlanURL(coursePlanURL.getText());
 		c.setCourseScheduleURL(courseScheduleURL.getText());
 		c.setDescription(description.getText());

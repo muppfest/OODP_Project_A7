@@ -50,6 +50,26 @@ public class CourseController {
 		return t;
 	}
 	
+	public boolean updateTeacher(Teacher teacher) {
+		if(teacherDao.update(teacher)) {
+			return true;
+		} else {
+			System.out.println("Någit gick fel");
+			return false;
+		}
+	}
+	
+	public boolean deleteTeacher(int teacherId) {
+		if(teacherDao.deleteAllCoursesFromTeacher(teacherId)) {
+			if(teacherDao.delete(teacherId)) {
+				return true;
+			}
+		} 
+		
+		System.out.println("Något gick fel");
+		return false;
+	}
+	
 	public Moment showMoment(int momentId) {
 		Moment moment = momentDao.getById(momentId);
 		moment.setCourse(courseDao.getById(moment.getCourseId()));
@@ -155,6 +175,16 @@ public class CourseController {
 			return false;
 		} 
 		return true;
+	}
+	
+	public boolean insertNewTeacherIntoCourse(Teacher teacher, int courseId) {
+		if(teacherDao.insert(teacher)) {
+			if(insertTeacherToCourse(courseId, teacherDao.getLastInsertTeacherId())) {
+				return true;
+			}
+		}
+		System.out.println("Något gick fel");
+		return false;
 	}
 	
 	public String getCourseName(int id) {

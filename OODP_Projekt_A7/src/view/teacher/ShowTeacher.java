@@ -114,37 +114,58 @@ public class ShowTeacher extends JPanel implements IShowPanel<Teacher>{
 
 	@Override
 	public void edit() {
-		// TODO Auto-generated method stub
-		
+		editButton.setVisible(false);
+		saveButton.setVisible(true);
+		cancelButton.setVisible(true);
+		enableFields();
+		refresh();
 	}
 
 	@Override
 	public void save() {
-		// TODO Auto-generated method stub
+		Teacher t = new Teacher();
+		t.setTeacherId(teacherId);
+		t.setName(name.getText());
+		t.setEmail(email.getText());
+		t.setOffice(office.getText());
+		t.setPhoneNr(phoneNr.getText());
 		
+		editButton.setEnabled(true);
+		saveButton.setEnabled(false);
+		cancelButton.setEnabled(false);
+		disableFields();
+		
+		courseView.updateTeacher(t, courseId);
 	}
 
 	@Override
 	public void enableFields() {
-		// TODO Auto-generated method stub
-		
+		name.setEditable(true);
+		email.setEditable(true);
+		phoneNr.setEditable(true);
+		office.setEditable(true);
 	}
 
 	@Override
 	public void disableFields() {
-		// TODO Auto-generated method stub
-		
+		name.setEditable(false);
+		email.setEditable(false);
+		phoneNr.setEditable(false);
+		office.setEditable(false);
 	}
 
 	@Override
 	public void cancel() {
-		// TODO Auto-generated method stub
-		
+		saveButton.setVisible(false);;
+		cancelButton.setVisible(false);;
+		editButton.setVisible(true);;
+		disableFields();
+		refresh();	
 	}
 
 	@Override
 	public void refresh() {
-		// TODO Auto-generated method stub
-		
+		revalidate();
+		repaint();	
 	}
 }

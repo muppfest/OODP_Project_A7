@@ -19,6 +19,7 @@ public class GroupDao implements IDao<Group> {
 	private DbConnectionManager db = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet rs = null;
+	private int lastInsertedId;
 	
 	public GroupDao() {
 		db = db.getInstance();
@@ -39,6 +40,7 @@ public class GroupDao implements IDao<Group> {
 				g.setName(rs.getString(2));
 				g.setDescription(rs.getString(3));
 			}
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -61,6 +63,7 @@ public class GroupDao implements IDao<Group> {
 				g.setDescription(rs.getString(3));
 				glist.add(g);
 			}
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -76,7 +79,11 @@ public class GroupDao implements IDao<Group> {
 			preparedStatement = db.preparedStatement(statementString);
 			preparedStatement.setString(1, object.getName());
 			preparedStatement.setString(2, object.getDescription());
-			preparedStatement.executeUpdate();
+			rs = preparedStatement.executeQuery();
+
+			if(rs.next()) {
+				lastInsertedId = rs.getInt(1);
+			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -93,6 +100,7 @@ public class GroupDao implements IDao<Group> {
 			preparedStatement = db.preparedStatement(statementString);
 			preparedStatement.setInt(1, id);
 			preparedStatement.executeUpdate();
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -111,11 +119,16 @@ public class GroupDao implements IDao<Group> {
 			preparedStatement.setString(2, object.getDescription());
 			preparedStatement.setInt(3, object.getGroupId());
 			preparedStatement.executeUpdate();
+			db.closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
 		
 		return true;
+	}
+	
+	public int getLastInsertedId() {
+		return lastInsertedId;
 	}
 }

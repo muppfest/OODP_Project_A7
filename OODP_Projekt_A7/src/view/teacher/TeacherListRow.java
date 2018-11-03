@@ -37,7 +37,7 @@ public class TeacherListRow extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				listTeachers.delete(teacher.getTeacherId());
+				listTeachers.deleteFromCourse(teacher.getTeacherId());
 			}
 		});
 		

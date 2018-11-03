@@ -55,7 +55,8 @@ public class ListTeachers extends JPanel implements IListPanel {
 				}
 			}
 		}
-				
+		
+		
 		for(Teacher teacher : courseTeachers) {
 			TeacherListRow teacherRow = new TeacherListRow(teacher, this);
 			add(teacherRow);
@@ -77,6 +78,12 @@ public class ListTeachers extends JPanel implements IListPanel {
 			}
 		});
 		
+		if(teachers.size() == 0) {
+			createButton.setEnabled(false);
+		} else {
+			createButton.setEnabled(true);
+		}
+		
 		JButton createNewButton = new JButton("Lägg till ny lärare");
 		createNewButton.addActionListener(new ActionListener() {
 			
@@ -86,7 +93,7 @@ public class ListTeachers extends JPanel implements IListPanel {
 			}
 		});
 		
-		JButton backButton = new JButton("Tillbaka");
+		JButton backButton = new JButton("Gå tillbaka");
 		backButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -95,7 +102,18 @@ public class ListTeachers extends JPanel implements IListPanel {
 			}
 		});
 		
+		JButton deleteButton = new JButton("Ta bort vald lärare från systemet");
+		deleteButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ComboBoxItem item = (ComboBoxItem) comboBox.getSelectedItem();
+				delete(item.getIndex());
+			}
+		});
+		
 		add(createButton);
+		add(deleteButton);
 		add(createNewButton);
 		add(backButton);
 		
@@ -123,13 +141,22 @@ public class ListTeachers extends JPanel implements IListPanel {
 		
 	}
 
-	@Override
 	public void delete(int id) {
+		int dialogButton = JOptionPane.YES_NO_OPTION;
+		int dialogResult = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill ta bort läraren från alla kurser", "", dialogButton);
+		
+		if(dialogResult == JOptionPane.YES_OPTION) {
+			courseView.deleteTeacher(id);
+			courseView.listTeachers(courseId);
+		}
+	}
+	
+	public void deleteFromCourse(int id) {
 		int dialogButton = JOptionPane.YES_NO_OPTION;
 		int dialogResult = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill ta bort läraren från kursen?", "", dialogButton);
 		
 		if(dialogResult == JOptionPane.YES_OPTION) {
-			courseView.deleteTeacher(courseId, id);
+			courseView.deleteTeacherFromCourse(courseId, id);
 			courseView.listTeachers(courseId);
 		}
 	}

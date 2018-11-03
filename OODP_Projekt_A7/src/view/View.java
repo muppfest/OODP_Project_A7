@@ -28,7 +28,13 @@ public class View extends JFrame implements Observer {
 		programView = new ProgramView(this);
 		
 		title.setFont(new Font("Arial", Font.BOLD, 18));
-				
+		
+	    try {
+	        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+	      } catch (Exception e) {
+	        e.printStackTrace();
+	      }
+		
 		setMinimumSize(new Dimension(1024, 768));
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
