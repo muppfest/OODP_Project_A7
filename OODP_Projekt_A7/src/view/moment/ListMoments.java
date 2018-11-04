@@ -1,3 +1,7 @@
+/**
+ * Vy för lista kursmoment inom en kurs gjord av Marcus Vretling Pistelli
+ */
+
 package view.moment;
 
 import java.awt.Font;
@@ -34,18 +38,15 @@ public class ListMoments extends JPanel implements IListPanel<Moment> {
 		
 		JLabel typeLabel = new JLabel("Kursmoment");
 		typeLabel.setFont(new Font("Arial", Font.BOLD, 14));
-		JLabel dateLabel = new JLabel("Slutdatum");
-		dateLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel creditLabel = new JLabel("Högskolepoäng");
 		creditLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		
 		JPanel headers = new JPanel();
 		headers.add(typeLabel);
 		headers.add(creditLabel);
-		headers.add(dateLabel);
 		headers.add(new JLabel());
 		headers.add(new JLabel());
-		headers.setLayout(new GridLayout(0,5));
+		headers.setLayout(new GridLayout(0,4));
 		add(headers);
 		
 		for(Moment moment : course.getMoments()) {

@@ -1,3 +1,7 @@
+/**
+ * Vy för att lista lärare gjord av Marcus Vretling Pistelli
+ */
+
 package view.teacher;
 
 import java.awt.Font;
@@ -69,7 +73,7 @@ public class ListTeachers extends JPanel implements IListPanel {
 		
 		add(comboBox);
 		
-		JButton createButton = new JButton("Lägg till befintlig lärare");
+		JButton createButton = new JButton("Lägg till vald lärare");
 		createButton.addActionListener(new ActionListener() {
 			
 			@Override

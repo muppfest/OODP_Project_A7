@@ -1,5 +1,10 @@
+/**
+ * Vy för att skapa lärare gjord av Marcus Vretling Pistelli
+ */
+
 package view.teacher;
 
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,12 +35,17 @@ public class CreateCourseTeacher extends JPanel {
 	private JButton createButton = new JButton("Lägg till ny lärare");
 	private JButton backButton = new JButton("Gå tillbaka");
 	
+	private JLabel title;
+	
 	private int courseId;
 	
 	public CreateCourseTeacher(CourseView courseView, int courseId) {
 		this.courseView = courseView;
 		this.courseId = courseId;
 		courseName = courseView.getCourseName(courseId);
+		
+		title = new JLabel("Lägg till lärare i " + courseView.getCourseName(courseId));
+		title.setFont(new Font("Arial", Font.BOLD, 20));
 		
 		name = new JTextField();
 		email = new JTextField();
@@ -47,6 +57,7 @@ public class CreateCourseTeacher extends JPanel {
 		JLabel phoneNrLabel = new JLabel("Telefonnummer");
 		JLabel officeLabel = new JLabel("Kontorsrum");
 		
+		add(title);
 		add(nameLabel);
 		add(name);
 		add(emailLabel);

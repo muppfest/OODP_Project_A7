@@ -1,3 +1,7 @@
+/**
+ * Huvudvyn för kurser av Marcus Vretling Pistelli
+ */
+
 package view.course;
 
 import java.util.List;

@@ -1,3 +1,7 @@
+/**
+ * Vy för att visa lärare gjord av Marcus Vretling Pistelli
+ */
+
 package view.teacher;
 
 import java.awt.Font;

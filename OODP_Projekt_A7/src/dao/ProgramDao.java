@@ -79,7 +79,7 @@ public class ProgramDao implements IDao<Program> {
 
 	@Override
 	public boolean insert(Program object) {
-		String statementString = "INSERT INTO programs (programCode, name, description) VALUES (?,?,?)";
+		String statementString = "INSERT INTO programs (programCode, name, description) VALUES (?,?,?) RETURNING programId";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);

@@ -85,7 +85,7 @@ public class MomentDao implements IDao<Moment> {
 
 	@Override
 	public boolean insert(Moment object) {
-		String statementString = "INSERT INTO moments (momentCode, type, description, grade, date, credit, place, courseId) VALUES (?,?,?,?,?,?,?,?)";
+		String statementString = "INSERT INTO moments (momentCode, type, description, grade, date, credit, place, courseId) VALUES (?,?,?,?,?,?,?,?) RETURNING momentId";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);

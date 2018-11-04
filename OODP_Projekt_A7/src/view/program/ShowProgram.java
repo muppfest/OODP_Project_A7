@@ -1,3 +1,7 @@
+/**
+ * Vy för att visa program gjord av Marcus Vretling Pistelli
+ */
+
 package view.program;
 
 import java.awt.Font;
@@ -24,6 +28,7 @@ public class ShowProgram extends JPanel implements IShowPanel<Program> {
 	private JTextField description;
 	
 	private JButton editButton = new JButton("Redigera program");
+	private JButton showCoursesButton = new JButton("Visa kurser inom programmet");
 	private JButton saveButton = new JButton("Spara ändringar");
 	private JButton cancelButton = new JButton("Avbryt");
 	
@@ -53,6 +58,14 @@ public class ShowProgram extends JPanel implements IShowPanel<Program> {
 		add(description);
 		
 		setLayout(new GridLayout(0,1));
+		
+		showCoursesButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				programView.listCourses(program.getProgramId());
+			}
+		});
 		
 		saveButton.addActionListener(new ActionListener() {
 			
@@ -88,6 +101,7 @@ public class ShowProgram extends JPanel implements IShowPanel<Program> {
 		});
 		
 		add(editButton);
+		add(showCoursesButton);
 		add(saveButton);
 		add(cancelButton);		
 		add(backButton);

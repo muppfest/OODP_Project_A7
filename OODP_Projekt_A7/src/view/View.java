@@ -1,3 +1,7 @@
+/**
+ * Huvudvy för hela view-delen gjord av Marcus Vretling Pistelli
+ */
+
 package view;
 
 import java.awt.BorderLayout;

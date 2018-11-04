@@ -1,3 +1,7 @@
+/**
+ * Vy för att skapa kurser gjord av Marcus Vretling Pistelli
+ */
+
 package view.course;
 
 import java.awt.Font;
@@ -7,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -59,9 +65,10 @@ public class CreateCourse extends JPanel implements ICreatePanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				if(courseName.getText().isEmpty() || courseCode.getText().isEmpty()){
 					JOptionPane.showMessageDialog(courseView,
-						    "Kursnamn, kurskod, datum, url till kursplan och url till schema måste fyllas i.");
+						    "Kursnamn och kurskod måste fyllas i");
 				} else {
 					create();
 				}				
@@ -105,12 +112,27 @@ public class CreateCourse extends JPanel implements ICreatePanel {
 		if(!date.getText().isEmpty()) {
 			c.setStartDate(Date.valueOf(date.getText()));
 		}
-				
+		
 		c.setCoursePlanURL(coursePlanURL.getText());
 		c.setCourseScheduleURL(courseScheduleURL.getText());
 		c.setDescription(description.getText());
 		c.setFinalGrade(finalGrade.getText());
 		
 		courseView.insert(c);
+	}
+	
+	public boolean IsValidDateFormat() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setLenient(false);
+		
+		try {
+			java.util.Date d = dateFormat.parse(date.getText());
+			if(dateFormat.format(d).equals(date.getText())) {
+				return true;
+			}
+		} catch (ParseException ex) {
+			return false;
+		}
+		return false;			
 	}
 }

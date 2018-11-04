@@ -1,3 +1,7 @@
+/**
+ * Vy för att lista kurser gjord av Marcus Vretling Pistelli
+ */
+
 package view.course;
 
 import java.awt.Font;

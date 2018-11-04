@@ -86,7 +86,7 @@ public class CourseDao implements IDao<Course> {
 
 	@Override
 	public boolean insert(Course object) {
-		String statementString = "INSERT INTO courses (courseCode, name, description, finalGrade, courseScheduleURL, coursePlanURL, startDate) VALUES (?,?,?,?,?,?,?)";
+		String statementString = "INSERT INTO courses (courseCode, name, description, finalGrade, courseScheduleURL, coursePlanURL, startDate) VALUES (?,?,?,?,?,?,?) RETURNING courseId";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);
@@ -153,5 +153,62 @@ public class CourseDao implements IDao<Course> {
 	
 	public int getLastInsertedId() {
 		return lastInsertedId;
+	}
+	
+	public List<Course> getAllCoursesFromProgram(int programId) {
+		String statementString = "SELECT courseId FROM programcourses WHERE programId = ?";
+		List<Course> courses = new ArrayList<Course>();
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, programId);
+			rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				Course c = new Course();
+				c.setCourseId(rs.getInt(1));
+				courses.add(c);
+			}
+			db.closeConnection();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		for(int i = 0; i < courses.size(); i++) {
+			courses.set(i, getById(courses.get(i).getCourseId()));
+		}
+		
+		return courses;
+	}
+	
+	public boolean insertCourseIntoProgram(int courseId, int programId) {
+		String statementString = "INSERT INTO programcourses (courseId, programId) VALUES (?,?)";
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, courseId);
+			preparedStatement.setInt(2, programId);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean deleteCoursesFromProgram(int courseId, int programId) {
+		String statementString = "DELETE FROM programcourses WHERE courseId = ? AND programId = ?";
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, courseId);
+			preparedStatement.setInt(2, programId);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		
+		return true;
 	}
 }

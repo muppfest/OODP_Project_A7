@@ -11,24 +11,47 @@ import model.Course;
 import model.Program;
 import model.person.Student;
 import model.person.Teacher;
+/**
+ * Programkontroller gjord av Marcus Vretling Pistelli
+ */
 
 public class ProgramController {
-	private IDao<Program> programDao;
-	private IDao<Course> courseDao;
-	private IDao<Teacher> teacherDao;
-	private IDao<Student> studentDao;
-	
+	private ProgramDao programDao;
+	private CourseDao courseDao;
+		
 	public ProgramController() {
 		programDao = new ProgramDao();
 		courseDao = new CourseDao();
-		teacherDao = new TeacherDao();
-		studentDao = new StudentDao();
 	}
 	
 	public Program showProgram(int id) {
 		Program p = programDao.getById(id);
+		p.setCourses(courseDao.getAllCoursesFromProgram(id));
 		
 		return p;
+	}
+	
+	public boolean insertCourseIntoProgram(int courseId, int programId) {
+		if(courseDao.insertCourseIntoProgram(courseId, programId)) {
+			return true; 
+		} 		
+		
+		System.out.println("Något gick fel");
+		return false;
+	}
+	
+	public boolean deleteCourseFromProgram(int courseId, int programId) {
+		if(courseDao.deleteCoursesFromProgram(courseId, programId)) {
+			return true;
+		}
+		
+		System.out.println("Något gick fel");
+		return false;
+	}
+	
+	public List<Course> listCourses() {
+		List<Course> courses = courseDao.getAll();
+		return courses;
 	}
 	
 	public List<Program> listProgram() {
@@ -58,5 +81,11 @@ public class ProgramController {
 		} 
 		System.out.println("Något gick fel");
 		return false;
+	}
+	
+	public List<Course> listCoursesInProgram(int programId) {
+		List<Course> courses = courseDao.getAllCoursesFromProgram(programId);
+		
+		return courses;
 	}
 }

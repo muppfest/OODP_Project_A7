@@ -1,3 +1,7 @@
+/**
+ * Klass som avnänds för att kunna ha ett ID/Index samt ett namn i dropdownmenyer i form av JComboBox. gjord av Marcus Vretling Pistelli
+ */
+
 package view;
 
 public class ComboBoxItem {

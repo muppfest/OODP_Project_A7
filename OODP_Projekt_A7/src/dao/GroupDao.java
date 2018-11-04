@@ -73,7 +73,7 @@ public class GroupDao implements IDao<Group> {
 
 	@Override
 	public boolean insert(Group object) {
-		String statementString = "INSERT INTO groups (name, description) VALUES (?,?)";
+		String statementString = "INSERT INTO groups (name, description) VALUES (?,?) RETURNING groupId";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);

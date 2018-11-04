@@ -1,3 +1,7 @@
+/**
+ * Kurskontroller gjord av Marcus Vretling Pistelli
+ */
+
 package controller;
 
 import java.util.ArrayList;

@@ -1,3 +1,7 @@
+/**
+ * Huvudvyn för för program gjord av Marcus Vretling Pistelli
+ */
+
 package view.program;
 
 import java.util.List;
@@ -19,6 +23,7 @@ public class ProgramView extends JPanel implements IView<Program> {
 	private ListPrograms listProgramsPanel;
 	private ShowProgram showProgramPanel;
 	private CreateProgram createProgramPanel;
+	private ListProgramCourses listProgramCoursesPanel;
 		
 	public ProgramView(View frame) {
 		this.frame = frame;
@@ -28,6 +33,41 @@ public class ProgramView extends JPanel implements IView<Program> {
 
 	public View getFrame() {
 		return frame;
+	}
+	
+	public void insertProgramCourse(int courseId, int programId) {
+		if(controller.insertCourseIntoProgram(courseId, programId)) {
+			JOptionPane.showMessageDialog(frame,
+				    "Kursen lades till i programmet.");
+					listCourses(programId);
+		} else {
+			JOptionPane.showMessageDialog(frame,
+				    "Något gick fel.");
+		}	
+	}
+	
+	public void deleteCourseFromProgram(int courseId, int programId) {
+		if(controller.deleteCourseFromProgram(courseId, programId)) {
+			JOptionPane.showMessageDialog(frame,
+				    "Kursen togs bort från programmet.");
+					listCourses(programId);
+		} else {
+			JOptionPane.showMessageDialog(frame,
+				    "Något gick fel.");
+		}	
+	}
+	
+	public List<Course> getListOfCourses() {
+		List<Course> courses = controller.listCourses();
+		return courses;
+	}
+	
+	public void listCourses(int programId) {
+		List<Course> courses = controller.listCoursesInProgram(programId);
+		listProgramCoursesPanel = new ListProgramCourses(this, courses, programId);
+		removeAll();
+		add(listProgramCoursesPanel);
+		frame.refresh();
 	}
 	
 	@Override
@@ -45,6 +85,10 @@ public class ProgramView extends JPanel implements IView<Program> {
 		removeAll();
 		add(createProgramPanel);
 		frame.refresh();
+	}
+	
+	public void createCourse() {
+		
 	}
 
 
@@ -92,5 +136,8 @@ public class ProgramView extends JPanel implements IView<Program> {
 				    "Något gick fel.");
 		}
 	}
-
+	
+	public String getProgramName(int programId) {
+		return controller.showProgram(programId).getName();
+	}
 }

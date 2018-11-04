@@ -1,3 +1,7 @@
+/**
+ * Delvy för att lista kursmoment i en specifik kurs gjord av Marcus Vretling Pistelli
+ */
+
 package view.moment;
 
 import java.awt.GridLayout;
@@ -13,7 +17,6 @@ import model.Moment;
 public class MomentListRow extends JPanel {
 	private JPanel listMoments;
 	private JLabel type;
-	private JLabel date;
 	private JLabel credit;
 	
 	private JButton showButton = new JButton("Visa kursmoment");
@@ -24,14 +27,8 @@ public class MomentListRow extends JPanel {
 		
 		type = new JLabel(moment.getType());
 		credit = new JLabel(Double.toString(moment.getCredit()) + " hp");
-		
-		if(moment.getDate() == null) {
-			date = new JLabel();
-		} else {
-			date = new JLabel(moment.getDate().toString());
-		}
-		
-		setLayout(new GridLayout(0,5));
+				
+		setLayout(new GridLayout(0,4));
 		
 		showButton.addActionListener(new ActionListener() {
 			
@@ -51,7 +48,6 @@ public class MomentListRow extends JPanel {
 		
 		add(type);
 		add(credit);
-		add(date);
 		add(showButton);
 		add(deleteButton);
 	}

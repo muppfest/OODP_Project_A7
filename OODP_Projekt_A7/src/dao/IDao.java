@@ -1,3 +1,7 @@
+/**
+ * DAO-interface gjord av Marcus Vretling Pistelli
+ */
+
 package dao;
 
 import java.util.List;

@@ -1,3 +1,7 @@
+/**
+ * Vy för att visa kurser gjord av Marcus Vretling Pistelli
+ */
+
 package view.course;
 
 import java.awt.Color;
@@ -5,17 +9,16 @@ import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.TrayIcon.MessageType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.Date;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,13 +27,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.Course;
-import model.Moment;
 import view.IShowPanel;
 import view.moment.ListMoments;
 
 public class ShowCourse extends JPanel implements IShowPanel<Course> {
 	private CourseView courseView;
-	private ListMoments listMoments;
 	
 	private int id;
 	private JTextField courseCode;
@@ -113,7 +114,11 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 			public void mouseReleased(MouseEvent e) {
 				if(!coursePlanURL.isEditable()) {
 					try {
-						Desktop.getDesktop().browse(new URL(course.getCoursePlanURL()).toURI());
+						if(coursePlanURL.getText().startsWith("http://")) {
+							Desktop.getDesktop().browse(new URL(course.getCoursePlanURL()).toURI());
+						} else {
+							Desktop.getDesktop().browse(new URL("http://" + course.getCoursePlanURL()).toURI());
+						}
 					} catch (IOException | URISyntaxException exception) {
 						System.out.println(exception);
 					}
@@ -152,7 +157,11 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 			public void mouseReleased(MouseEvent e) {
 				if(!courseScheduleURL.isEditable()) {
 					try {
-						Desktop.getDesktop().browse(new URL(course.getCourseScheduleURL()).toURI());
+						if(courseScheduleURL.getText().startsWith("http://")) {
+							Desktop.getDesktop().browse(new URL(course.getCourseScheduleURL()).toURI());
+						} else {
+							Desktop.getDesktop().browse(new URL("http://" + course.getCourseScheduleURL()).toURI());
+						}
 					} catch (IOException | URISyntaxException exception) {
 						System.out.println(exception);
 					}
@@ -189,8 +198,15 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				save();
+				if(!date.getText().isEmpty()) {
+					if(IsValidDateFormat()) {
+						save();
+					} else {
+						JOptionPane.showMessageDialog(courseView, "Datumet måste vara i följande format: åååå-mm-dd");
+					}
+				} else {
+					save();
+				}
 			}
 		});
 		editButton.addActionListener(new ActionListener() {
@@ -312,4 +328,18 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 		repaint();		
 	}
 
+	public boolean IsValidDateFormat() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setLenient(false);
+		
+		try {
+			java.util.Date d = dateFormat.parse(date.getText());
+			if(dateFormat.format(d).equals(date.getText())) {
+				return true;
+			}
+		} catch (ParseException ex) {
+			return false;
+		}
+		return false;			
+	}
 }

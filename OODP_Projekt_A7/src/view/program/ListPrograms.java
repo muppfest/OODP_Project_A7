@@ -1,3 +1,7 @@
+/**
+ * Vy för att lista program gjord av Marcus Vretling Pistelli
+ */
+
 package view.program;
 
 import java.awt.Font;
@@ -42,7 +46,7 @@ public class ListPrograms extends JPanel implements IListPanel<Program> {
 			ProgramListRow programRow = new ProgramListRow(this, program);
 			add(programRow);
 		}
-		
+				
 		JButton createButton = new JButton("Lägg till program");
 		createButton.addActionListener(new ActionListener() {
 			
