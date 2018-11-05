@@ -43,8 +43,7 @@ public class ListProgramCourses extends JPanel implements IListPanel<Course> {
 		headers.add(codeLabel);
 		headers.add(nameLabel);
 		headers.add(new JLabel());
-		headers.add(new JLabel());
-		headers.setLayout(new GridLayout(0,4));
+		headers.setLayout(new GridLayout(0,3));
 		add(headers);
 		
 		JComboBox<ComboBoxItem> comboBox = new JComboBox();
@@ -78,16 +77,7 @@ public class ListProgramCourses extends JPanel implements IListPanel<Course> {
 				insert(item);
 			}
 		});
-		
-		JButton createNewButton = new JButton("Lägg till ny kurs");
-		createNewButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				programView.createCourse();
-			}
-		});
-		
+				
 		JButton backButton = new JButton("Gå tillbaka");
 		backButton.addActionListener(new ActionListener() {
 			
@@ -98,7 +88,6 @@ public class ListProgramCourses extends JPanel implements IListPanel<Course> {
 		});
 		
 		add(createButton);
-		add(createNewButton);
 		add(backButton);
 		
 		setLayout(new GridLayout(0,1));

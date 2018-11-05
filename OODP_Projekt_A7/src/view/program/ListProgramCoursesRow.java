@@ -17,7 +17,6 @@ import model.Course;
 public class ListProgramCoursesRow extends JPanel {
 	private ListProgramCourses listProgramCourses;
 	
-	private JButton showButton = new JButton("Visa kurs");
 	private JButton deleteButton = new JButton("Ta bort kursen från programmet");
 	
 	public ListProgramCoursesRow(ListProgramCourses listProgramCourses, Course course) {
@@ -26,15 +25,7 @@ public class ListProgramCoursesRow extends JPanel {
 		JLabel code = new JLabel(course.getCourseCode());
 		JLabel name = new JLabel(course.getName());
 		
-		setLayout(new GridLayout(0,4));
-		
-		showButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				listProgramCourses.show(course.getCourseId());
-			}
-		});
+		setLayout(new GridLayout(0,3));
 		
 		deleteButton.addActionListener(new ActionListener() {
 			
@@ -46,7 +37,6 @@ public class ListProgramCoursesRow extends JPanel {
 		
 		add(code);
 		add(name);
-		add(showButton);
 		add(deleteButton);
 	}
 }
