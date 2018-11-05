@@ -44,7 +44,7 @@ public class View extends JFrame implements Observer {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Studentapplikationen");
 				
-		JButton studentButton = new JButton("Studenter");
+		JButton studentButton = new JButton("Grupper");
 		studentButton.addActionListener(new ActionListener() {
 			
 			@Override
