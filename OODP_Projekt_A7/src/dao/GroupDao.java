@@ -28,7 +28,7 @@ public class GroupDao implements IDao<Group> {
 	@Override
 	public Group getById(int id) {
 		Group g = new Group();
-		String statementString = "SELECT groupId, name, description FROM groups WHERE groupId = ?";
+		String statementString = "SELECT groupId, momentId, name, description FROM groups WHERE groupId = ?";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);
@@ -37,8 +37,9 @@ public class GroupDao implements IDao<Group> {
 			
 			while(rs.next()) {
 				g.setGroupId(rs.getInt(1));
-				g.setName(rs.getString(2));
-				g.setDescription(rs.getString(3));
+				g.setMomentId(rs.getInt(2));
+				g.setName(rs.getString(3));
+				g.setDescription(rs.getString(4));
 			}
 			db.closeConnection();
 		} catch (SQLException e) {
@@ -51,7 +52,7 @@ public class GroupDao implements IDao<Group> {
 	@Override
 	public List<Group> getAll() {
 		List<Group> glist = new ArrayList<Group>();
-		String sqlQueryString = "SELECT groupId, name, description FROM groups";
+		String sqlQueryString = "SELECT groupId, momentId, name, description FROM groups";
 		
 		try {
 			rs = db.executeQuery(sqlQueryString);
@@ -59,8 +60,9 @@ public class GroupDao implements IDao<Group> {
 			while(rs.next()) {
 				Group g = new Group();
 				g.setGroupId(rs.getInt(1));
-				g.setName(rs.getString(2));
-				g.setDescription(rs.getString(3));
+				g.setMomentId(rs.getInt(2));
+				g.setName(rs.getString(3));
+				g.setDescription(rs.getString(4));
 				glist.add(g);
 			}
 			db.closeConnection();
@@ -73,12 +75,13 @@ public class GroupDao implements IDao<Group> {
 
 	@Override
 	public boolean insert(Group object) {
-		String statementString = "INSERT INTO groups (name, description) VALUES (?,?) RETURNING groupId";
+		String statementString = "INSERT INTO groups (momentId, name, description) VALUES (?,?,?) RETURNING groupId";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);
-			preparedStatement.setString(1, object.getName());
-			preparedStatement.setString(2, object.getDescription());
+			preparedStatement.setInt(3, object.getGroupId());
+			preparedStatement.setString(2, object.getName());
+			preparedStatement.setString(3, object.getDescription());
 			rs = preparedStatement.executeQuery();
 
 			if(rs.next()) {
@@ -111,13 +114,14 @@ public class GroupDao implements IDao<Group> {
 
 	@Override
 	public boolean update(Group object) {
-		String statementString = "UPDATE groups SET name = ?, description = ? WHERE groupId = ?";
+		String statementString = "UPDATE groups SET momentId = ?, name = ?, description = ? WHERE groupId = ?";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);
-			preparedStatement.setString(1, object.getName());
-			preparedStatement.setString(2, object.getDescription());
-			preparedStatement.setInt(3, object.getGroupId());
+			preparedStatement.setInt(1, object.getMomentId());
+			preparedStatement.setString(2, object.getName());
+			preparedStatement.setString(3, object.getDescription());
+			preparedStatement.setInt(4, object.getGroupId());
 			preparedStatement.executeUpdate();
 			db.closeConnection();
 		} catch (SQLException e) {

@@ -8,8 +8,10 @@ public class Group {
 	private int groupId;
 	private String name;
 	private String description;
+	private int momentId;
 	private List<Student> students;
-	private List<Moment> moments;
+	
+	private Moment moment;
 	
 	public int getGroupId() {
 		return groupId;
@@ -23,6 +25,18 @@ public class Group {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public int getMomentId() {
+		return momentId;
+	}
+	public void setMomentId(int momentId) {
+		this.momentId = momentId;
+	}
+	public Moment getMoment() {
+		return moment;
+	}
+	public void setMoment(Moment moment) {
+		this.moment = moment;
+	}
 	public String getDescription() {
 		return description;
 	}
@@ -34,12 +48,6 @@ public class Group {
 	}
 	public void setStudents(List<Student> students) {
 		this.students = students;
-	}
-	public List<Moment> getMoments() {
-		return moments;
-	}
-	public void setMoments(List<Moment> moments) {
-		this.moments = moments;
 	}
 	public void printGroup() {
 		System.out.printf("Gruppid: %d%nNamn: %s%nBeskrivning: %s%n", getGroupId(), getName(), getDescription());

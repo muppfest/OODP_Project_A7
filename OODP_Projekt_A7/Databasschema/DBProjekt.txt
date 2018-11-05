@@ -30,11 +30,6 @@ city VARCHAR(255),
 address VARCHAR(255),
 programId INTEGER REFERENCES programs);
 
-CREATE TABLE groups 
-(groupId SERIAL PRIMARY KEY,
-name VARCHAR(255),
-description TEXT);
-
 CREATE TABLE moments
 (momentId SERIAL PRIMARY KEY,
 momentCode VARCHAR(255) NOT NULL,
@@ -46,11 +41,16 @@ credit DECIMAL(5,2),
 place VARCHAR(255),
 courseId INTEGER REFERENCES courses NOT NULL);
 
+CREATE TABLE groups 
+(groupId SERIAL PRIMARY KEY,
+name VARCHAR(255),
+description TEXT,
+momentId INTEGER REFERENCES moments NOT NULL);
+
 CREATE TABLE studentGroups
 (studentGroupId SERIAL PRIMARY KEY,
 groupId INTEGER REFERENCES groups NOT NULL,
-studentId INTEGER REFERENCES students NOT NULL,
-momentId INTEGER REFERENCES moments NOT NULL);
+studentId INTEGER REFERENCES students NOT NULL);
 
 CREATE TABLE courseTeachers
 (courseTeacherId SERIAL PRIMARY KEY,
