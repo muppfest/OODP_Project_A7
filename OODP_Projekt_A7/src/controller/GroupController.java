@@ -146,4 +146,8 @@ public class GroupController {
 		int courseId = momentDao.getById(momentId).getCourseId();
 		return courseDao.getById(courseId).getName();
 	}
+	
+	public int getLastInsertedId() {
+		return groupDao.getLastInsertedId();
+	}
 }

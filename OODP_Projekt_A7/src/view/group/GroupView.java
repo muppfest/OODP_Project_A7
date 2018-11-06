@@ -82,7 +82,7 @@ public class GroupView extends JPanel implements IView<Group> {
 		if(controller.insertGroup(group)) {
 			JOptionPane.showMessageDialog(frame,
 				    "Gruppen Lades till.");
-					show(group.getGroupId());
+					show(controller.getLastInsertedId());
 		} else {
 			JOptionPane.showMessageDialog(frame,
 				    "Något gick fel.");

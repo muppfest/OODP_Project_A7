@@ -26,14 +26,13 @@ public class CreateGroup extends JPanel {
 	
 	private JButton saveButton = new JButton("Lägg till grupp");
 	private JButton backButton = new JButton("Gå tillbaka");
+	private JTextField name = new JTextField();
+	private JTextField description = new JTextField();
+	private JComboBox<ComboBoxItem> comboBox = new JComboBox();
 	
 	public CreateGroup(GroupView groupView) {
 		this.groupView = groupView;
-		
-		JTextField name = new JTextField();
-		JTextField description = new JTextField();
-		
-		JComboBox<ComboBoxItem> comboBox = new JComboBox();
+				
 		List<Moment> moments = groupView.getAllMoments();
 		
 		for(Moment moment : moments) {
@@ -71,15 +70,21 @@ public class CreateGroup extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(name.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(groupView, "Namn måste fyllas i");
-				} else {
-					Group g = new Group();
-					g.setDescription(description.getText());
-					g.setName(name.getText());
-					groupView.insert(g);
-				}
+				create();
 			}
 		});
+	}
+	
+	public void create() {
+		if(name.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(groupView, "Namn måste fyllas i");
+		} else {
+			Group g = new Group();
+			ComboBoxItem item = (ComboBoxItem) comboBox.getSelectedItem();
+			g.setMomentId(item.getIndex());
+			g.setDescription(description.getText());
+			g.setName(name.getText());
+			groupView.insert(g);
+		}
 	}
 }

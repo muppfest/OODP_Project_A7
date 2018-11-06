@@ -74,14 +74,14 @@ public class GroupDao implements IDao<Group> {
 	}
 
 	@Override
-	public boolean insert(Group object) {
+	public boolean insert(Group group) {
 		String statementString = "INSERT INTO groups (momentId, name, description) VALUES (?,?,?) RETURNING groupId";
 		
 		try {
 			preparedStatement = db.preparedStatement(statementString);
-			preparedStatement.setInt(3, object.getGroupId());
-			preparedStatement.setString(2, object.getName());
-			preparedStatement.setString(3, object.getDescription());
+			preparedStatement.setInt(1, group.getMomentId());
+			preparedStatement.setString(2, group.getName());
+			preparedStatement.setString(3, group.getDescription());
 			rs = preparedStatement.executeQuery();
 
 			if(rs.next()) {
