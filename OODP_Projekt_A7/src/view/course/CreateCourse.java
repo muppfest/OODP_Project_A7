@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.Course;
-import model.person.Student;
+import model.Student;
 import view.ICreatePanel;
 
 public class CreateCourse extends JPanel implements ICreatePanel {
@@ -46,12 +46,19 @@ public class CreateCourse extends JPanel implements ICreatePanel {
 		add(title);
 		
 		JLabel codeLabel = new JLabel("Kurskod");
+		codeLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel nameLabel = new JLabel("Kursnamn");
+		nameLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel dateLabel = new JLabel("Startdatum");
+		dateLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel scheduleLabel = new JLabel("Schema");
+		scheduleLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel planLabel = new JLabel("Kursplan");
+		planLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel gradeLabel = new JLabel("Slutbetyg");
+		gradeLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel descriptionLabel = new JLabel("Beskrivning");
+		descriptionLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		
 		courseCode = new JTextField();
 		courseName = new JTextField();
@@ -70,8 +77,13 @@ public class CreateCourse extends JPanel implements ICreatePanel {
 					JOptionPane.showMessageDialog(courseView,
 						    "Kursnamn och kurskod måste fyllas i");
 				} else {
-					create();
-				}				
+					if(IsValidDateFormat(date.getText())) {
+						create();
+					} else {
+					JOptionPane.showMessageDialog(courseView,
+							"Datumet måste vara i följande format: åååå-mm-dd");
+					}	
+			}
 			}
 		});
 		
@@ -108,11 +120,7 @@ public class CreateCourse extends JPanel implements ICreatePanel {
 		
 		c.setCourseCode(courseCode.getText());
 		c.setName(courseName.getText());
-		
-		if(!date.getText().isEmpty()) {
-			c.setStartDate(Date.valueOf(date.getText()));
-		}
-		
+		c.setStartDate(Date.valueOf(date.getText()));
 		c.setCoursePlanURL(coursePlanURL.getText());
 		c.setCourseScheduleURL(courseScheduleURL.getText());
 		c.setDescription(description.getText());
@@ -121,13 +129,13 @@ public class CreateCourse extends JPanel implements ICreatePanel {
 		courseView.insert(c);
 	}
 	
-	public boolean IsValidDateFormat() {
+	public boolean IsValidDateFormat(String date) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setLenient(false);
 		
 		try {
-			java.util.Date d = dateFormat.parse(date.getText());
-			if(dateFormat.format(d).equals(date.getText())) {
+			java.util.Date d = dateFormat.parse(date);
+			if(dateFormat.format(d).equals(date)) {
 				return true;
 			}
 		} catch (ParseException ex) {

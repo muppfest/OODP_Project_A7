@@ -46,8 +46,11 @@ public class ShowProgram extends JPanel implements IShowPanel<Program> {
 		description.setEditable(false);
 		
 		JLabel codeLabel = new JLabel("Programkod");
+		codeLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		JLabel nameLabel = new JLabel("Namn");
+		nameLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		JLabel descriptionLabel = new JLabel("Beskrivning");
+		descriptionLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		
 		
 		add(codeLabel);

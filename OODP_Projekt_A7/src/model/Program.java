@@ -2,9 +2,6 @@ package model;
 
 import java.util.List;
 
-import model.person.Student;
-import model.person.Teacher;
-
 public class Program {
 	private int programId;
 	private String programCode;

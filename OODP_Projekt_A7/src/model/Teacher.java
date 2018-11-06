@@ -1,9 +1,6 @@
-package model.person;
+package model;
 
 import java.util.List;
-
-import model.Course;
-import model.Program;
 
 public class Teacher extends Person {
 	private int teacherId;

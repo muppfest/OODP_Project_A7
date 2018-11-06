@@ -12,8 +12,8 @@ import model.Course;
 import model.Group;
 import model.Moment;
 import model.Program;
-import model.person.Student;
-import model.person.Teacher;
+import model.Student;
+import model.Teacher;
 import view.View;
 
 public class test {

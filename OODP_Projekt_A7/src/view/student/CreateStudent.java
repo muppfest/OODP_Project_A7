@@ -15,11 +15,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import model.person.Student;
+import model.Student;
 import view.ICreatePanel;
+import view.group.GroupView;
+import view.program.ProgramView;
 
 public class CreateStudent extends JPanel implements ICreatePanel {
-	private StudentView studentView;
+	private GroupView groupView;
 	
 	private JTextField name;
 	private JTextField email;
@@ -31,18 +33,23 @@ public class CreateStudent extends JPanel implements ICreatePanel {
 	private JButton saveButton = new JButton("Lägg till student");
 	private JButton backButton = new JButton("Gå tillbaka");
 	
-	public CreateStudent(StudentView studentView) {
-		this.studentView = studentView;
+	public CreateStudent(GroupView groupView, int groupId) {
+		this.groupView = groupView;
 		
-		JLabel title = new JLabel("Lägg till student");
+		JLabel title = new JLabel("Lägg till student i gruppen " + groupView.getGroupName(groupId));
 		title.setFont(new Font("Arial", Font.BOLD, 20));
 		add(title);
 		
 		JLabel nameLabel = new JLabel("Fullständigt namn");
+		nameLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel emailLabel = new JLabel("E-postadress");
+		emailLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel phoneNrLabel = new JLabel("Telefonnummer");
+		phoneNrLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel addressLabel = new JLabel("Adress");
+		addressLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel cityLabel = new JLabel("Ort");
+		cityLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		
 		name = new JTextField();
 		email = new JTextField();
@@ -55,10 +62,10 @@ public class CreateStudent extends JPanel implements ICreatePanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(name.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(studentView,
+					JOptionPane.showMessageDialog(groupView,
 						    "Namn måste fyllas i.");
 				} else {
-					createStudent();
+					createStudent(groupId);
 				}				
 			}
 		});
@@ -67,7 +74,7 @@ public class CreateStudent extends JPanel implements ICreatePanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				studentView.list();
+				groupView.listStudents(groupId);
 			}
 		});
 		
@@ -87,7 +94,7 @@ public class CreateStudent extends JPanel implements ICreatePanel {
 		setLayout(new GridLayout(0,1));
 	}
 	
-	public void createStudent() {
+	public void createStudent(int groupId) {
 		Student s = new Student();
 		s.setName(name.getText());
 		s.setAddress(address.getText());
@@ -95,6 +102,6 @@ public class CreateStudent extends JPanel implements ICreatePanel {
 		s.setEmail(email.getText());
 		s.setPhoneNr(phoneNr.getText());
 		
-		studentView.insert(s);
+		groupView.insertNewStudent(s, groupId);
 	}
 }

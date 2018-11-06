@@ -2,8 +2,6 @@ package model;
 
 import java.util.List;
 
-import model.person.Student;
-
 public class Group {
 	private int groupId;
 	private String name;

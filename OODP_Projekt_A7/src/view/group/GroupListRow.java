@@ -1,6 +1,8 @@
 package view.group;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,18 +18,34 @@ public class GroupListRow extends JPanel {
 	
 	private JButton showButton;
 	private JButton deleteButton;
-	
+		
 	public GroupListRow(ListGroups listGroups, Group group) {
 		this.ListGroups = listGroups;
-		
+				
 		groupName = new JLabel(group.getName());
 		momentType = new JLabel(group.getMoment().getType());
 		courseName = new JLabel(group.getMoment().getCourse().getName());
 		
-		setLayout(new GridLayout(0,3));
+		setLayout(new GridLayout(0,5));
 		
 		showButton = new JButton("Visa grupp");
 		deleteButton = new JButton("Ta bort grupp");
+		
+		showButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listGroups.show(group.getGroupId());
+			}
+		});
+		
+		deleteButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listGroups.delete(group.getGroupId());
+			}
+		});
 		
 		add(groupName);
 		add(courseName);

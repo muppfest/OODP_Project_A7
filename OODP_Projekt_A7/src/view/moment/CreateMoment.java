@@ -8,6 +8,9 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -32,6 +35,7 @@ public class CreateMoment extends JPanel {
 	private JTextField grade;
 	private JTextField credit;
 	private JTextField place;
+	private JTextField date;
 	
 	private JButton saveButton = new JButton("Lägg till kursmoment");
 	private JButton backButton = new JButton("Gå tillbaka");
@@ -51,13 +55,22 @@ public class CreateMoment extends JPanel {
 		grade = new JTextField();
 		credit = new JTextField();
 		place = new JTextField();
+		date = new JTextField();
 		
 		JLabel codeLabel = new JLabel("Kursmomentskod");
+		codeLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel typeLabel = new JLabel("Typ");
+		typeLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel descriptionLabel = new JLabel("Beskrivning");
+		descriptionLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel gradeLabel = new JLabel("Betyg");
+		gradeLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel creditLabel = new JLabel("Högskolepoäng");
+		creditLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel placeLabel = new JLabel("Plats");
+		placeLabel.setFont(new Font("Arial", Font.BOLD, 14));
+		JLabel dateLabel = new JLabel("Slutdatum");
+		dateLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		
 		saveButton.addActionListener(new ActionListener() {
 			
@@ -67,7 +80,12 @@ public class CreateMoment extends JPanel {
 				JOptionPane.showMessageDialog(courseView,
 					    "Momentets typ och kod måste fyllas i.");
 			} else {
-				create();
+				if(IsValidDateFormat(date.getText())) {
+					create();
+				} else {
+				JOptionPane.showMessageDialog(courseView,
+						"Datumet måste vara i följande format: åååå-mm-dd");
+				}
 			}				
 	
 			}});
@@ -90,6 +108,8 @@ public class CreateMoment extends JPanel {
 		add(grade);
 		add(creditLabel);
 		add(credit);
+		add(dateLabel);
+		add(date);
 		add(placeLabel);
 		add(place);
 		add(saveButton);
@@ -106,9 +126,25 @@ public class CreateMoment extends JPanel {
 		if(!credit.getText().isEmpty()) {
 			m.setCredit(Double.parseDouble(credit.getText()));
 		} 
+		m.setDate(Date.valueOf(date.getText()));
 		m.setGrade(grade.getText());
 		m.setPlace(place.getText());
 		
 		courseView.insertMoment(m);
+	}
+	
+	public boolean IsValidDateFormat(String date) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setLenient(false);
+		
+		try {
+			java.util.Date d = dateFormat.parse(date);
+			if(dateFormat.format(d).equals(date)) {
+				return true;
+			}
+		} catch (ParseException ex) {
+			return false;
+		}
+		return false;			
 	}
 }

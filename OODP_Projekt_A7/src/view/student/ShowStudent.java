@@ -16,20 +16,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import model.person.Student;
+import model.Student;
 import view.IShowPanel;
+import view.group.GroupView;
 
 public class ShowStudent extends JPanel implements IShowPanel<Student> {
-	private StudentView studentView;
+	private GroupView groupView;
 	
 	private int id;
 	private int programId;
+	private int groupId;
 	private JTextField name;
 	private JTextField email;
 	private JTextField phoneNr;
 	private JTextField address;
 	private JTextField city;
-	private JTextField programName;
 	
 	private JButton editButton = new JButton("Redigera");
 	private JButton saveButton = new JButton("Spara ändringar");
@@ -37,9 +38,10 @@ public class ShowStudent extends JPanel implements IShowPanel<Student> {
 	
 	private JLabel title = new JLabel("Student");
 	
-	public ShowStudent(Student student, StudentView studentView) {
+	public ShowStudent(GroupView groupView, Student student, int groupId) {
 		super();
-		this.studentView = studentView;
+		this.groupView = groupView;
+		this.groupId = groupId;
 		title.setFont(new Font("Arial", Font.BOLD, 20));
 		
 		id = student.getStudentId();
@@ -49,14 +51,12 @@ public class ShowStudent extends JPanel implements IShowPanel<Student> {
 		phoneNr = new JTextField(student.getPhoneNr());
 		address = new JTextField(student.getAddress());
 		city = new JTextField(student.getCity());
-		programName = new JTextField(student.getProgram().getName());
 		
 		name.setEditable(false);
 		email.setEditable(false);
 		phoneNr.setEditable(false);
 		address.setEditable(false);
 		city.setEditable(false);
-		programName.setEditable(false);
 			
 		JLabel nameLabel = new JLabel("Namn");
 		JLabel emailLabel = new JLabel("E-postadress");
@@ -77,8 +77,6 @@ public class ShowStudent extends JPanel implements IShowPanel<Student> {
 		add(address);
 		add(cityLabel);
 		add(city);
-		add(programLabel);
-		add(programName);
 		
 		setLayout(new GridLayout(0,1));
 		
@@ -111,7 +109,7 @@ public class ShowStudent extends JPanel implements IShowPanel<Student> {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				studentView.list();		
+				groupView.listStudents(groupId);		
 			}
 		});
 		
@@ -149,7 +147,7 @@ public class ShowStudent extends JPanel implements IShowPanel<Student> {
 		cancelButton.setVisible(false);
 		disableFields();
 		
-		studentView.update(s);
+		groupView.updateStudent(s, groupId);
 	}
 
 	@Override

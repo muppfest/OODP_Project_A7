@@ -1,5 +1,5 @@
 /**
- * DAO-klass för att hämta och manipulera data i coursetabellen i databasen. 
+ * DAO-klass för att hämta och manipulera data i grupptabellen i databasen. 
  * 
  * Gjord av Marcus
  */
@@ -131,7 +131,7 @@ public class GroupDao implements IDao<Group> {
 		
 		return true;
 	}
-	
+		
 	public int getLastInsertedId() {
 		return lastInsertedId;
 	}

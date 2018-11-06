@@ -12,9 +12,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.rmi.ssl.SslRMIClientSocketFactory;
+
 import db.DbConnectionManager;
 import model.Program;
-import model.person.Student;
+import model.Student;
 
 public class StudentDao implements IDao<Student> {
 
@@ -149,7 +151,98 @@ public class StudentDao implements IDao<Student> {
 		
 		return true;
 	}
+	
+	public List<Student> getAllStudentsFromGroup(int groupId) {
+		List<Student> students = new ArrayList<Student>();
+		
+		String statementString = "SELECT studentId FROM studentGroups WHERE groupId = ?";
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, groupId);
+			
+			rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				Student s = new Student();
+				s.setStudentId(rs.getInt(1));
+				students.add(s);
+			}
+			db.closeConnection();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		for(int i = 0; i < students.size(); i++) {
+			students.set(i, getById(students.get(i).getStudentId()));
+		}
+		
+		return students;
+	}
+	
+	public boolean insertStudentIntoGroup(int studentId, int groupId) {
+		String statementString = "INSERT INTO studentgroups (studentId, groupId) VALUES (?,?)";
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, studentId);
+			preparedStatement.setInt(2, groupId);
+			preparedStatement.executeUpdate();
+			db.closeConnection();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
 	public int getLastInsertedId() {
 		return lastInsertedId;
+	}
+	
+	public boolean deleteStudentFromGroup(int groupId, int studentId) {
+		String statementString = "DELETE FROM studentgroups WHERE groupId = ? AND studentId = ?";
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, groupId);
+			preparedStatement.setInt(2, studentId);
+			preparedStatement.executeUpdate();
+			db.closeConnection();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean deleteStudentFromAllGroups(int studentId) {
+		String statementString = "DELETE FROM studentgroups WHERE studentId = ?";
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, studentId);
+			preparedStatement.executeUpdate();
+			db.closeConnection();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean deleteAllStudentsFromGroup(int groupId) {
+		String statementString = "DELETE FROM studentgroups WHERE groupId = ?";
+		
+		try {
+			preparedStatement = db.preparedStatement(statementString);
+			preparedStatement.setInt(1, groupId);
+			preparedStatement.executeUpdate();
+			db.closeConnection();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
 	}
 }

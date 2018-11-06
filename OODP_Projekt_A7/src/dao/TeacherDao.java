@@ -1,5 +1,5 @@
 /**
- * DAO-klass för att hämta och manipulera data i teachertabellen i databasen. 
+ * DAO-klass för att hämta och manipulera data i lärartabellen i databasen. 
  * 
  * Gjord av Marcus
  */
@@ -14,7 +14,7 @@ import java.util.List;
 
 import db.DbConnectionManager;
 import model.Course;
-import model.person.Teacher;
+import model.Teacher;
 
 public class TeacherDao implements IDao<Teacher> {
 	private DbConnectionManager db = null;

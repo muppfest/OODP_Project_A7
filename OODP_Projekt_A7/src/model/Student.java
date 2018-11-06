@@ -1,6 +1,4 @@
-package model.person;
-
-import model.Program;
+package model;
 
 public class Student extends Person {
 	private int studentId;

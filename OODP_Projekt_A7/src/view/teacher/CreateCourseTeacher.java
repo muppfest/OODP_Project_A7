@@ -15,11 +15,12 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.Course;
-import model.person.Teacher;
+import model.Teacher;
 import view.ComboBoxItem;
 import view.course.CourseView;
 
@@ -53,9 +54,13 @@ public class CreateCourseTeacher extends JPanel {
 		office = new JTextField();
 	
 		JLabel nameLabel = new JLabel("Namn");
+		nameLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel emailLabel = new JLabel("E-postadress");
+		emailLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel phoneNrLabel = new JLabel("Telefonnummer");
+		phoneNrLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel officeLabel = new JLabel("Kontorsrum");
+		officeLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		
 		add(title);
 		add(nameLabel);
@@ -71,6 +76,11 @@ public class CreateCourseTeacher extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				if(name.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(courseView, "Lärarens namn måste fyllas i");
+				} else {
+				
 				Teacher teacher = new Teacher();
 				teacher.setName(name.getText());
 				teacher.setEmail(email.getText());
@@ -78,6 +88,7 @@ public class CreateCourseTeacher extends JPanel {
 				teacher.setOffice(office.getText());
 				
 				courseView.insertNewCourseTeacher(teacher, courseId);
+				}
 			}
 		});
 		

@@ -1,5 +1,5 @@
 /**
- * DAO-klass för att hämta och manipulera data i coursetabellen i databasen. 
+ * DAO-klass för att hämta och manipulera data i kurstabellen i databasen. 
  * 
  * Gjord av Marcus
  */

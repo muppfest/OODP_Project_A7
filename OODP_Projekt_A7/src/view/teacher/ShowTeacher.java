@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import model.person.Teacher;
+import model.Teacher;
 import view.IShowPanel;
 import view.course.CourseView;
 import view.moment.ListMoments;
@@ -59,9 +59,13 @@ public class ShowTeacher extends JPanel implements IShowPanel<Teacher>{
 		office.setEditable(false);
 		
 		JLabel nameLabel = new JLabel("Namn");
+		nameLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		JLabel emailLabel = new JLabel("E-postadress");
+		emailLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		JLabel phoneNrLabel = new JLabel("Telefonnummer");
+		phoneNrLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		JLabel officeLabel = new JLabel("Kontorsrum");
+		officeLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		
 		add(title);
 		add(nameLabel);

@@ -4,9 +4,6 @@ import java.net.URL;
 import java.sql.Date;
 import java.util.List;
 
-import model.person.Student;
-import model.person.Teacher;
-
 public class Course {
 	private int courseId;
 	private String courseCode;

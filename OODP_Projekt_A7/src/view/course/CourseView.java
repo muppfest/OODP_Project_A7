@@ -13,7 +13,7 @@ import javax.swing.JScrollPane;
 import controller.CourseController;
 import model.Course;
 import model.Moment;
-import model.person.Teacher;
+import model.Teacher;
 import view.IView;
 import view.View;
 import view.moment.CreateMoment;

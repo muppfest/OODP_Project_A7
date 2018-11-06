@@ -9,9 +9,12 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -66,12 +69,19 @@ public class ShowMoment extends JPanel implements IShowPanel<Moment> {
 		place.setEditable(false);
 		
 		JLabel codeLabel = new JLabel("Kursmomentskod");
+		codeLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		JLabel typeLabel = new JLabel("Typ");
+		typeLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		JLabel dateLabel = new JLabel("Slutdatum");
+		dateLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		JLabel creditLabel = new JLabel("Högskolepoäng");
+		creditLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		JLabel gradeLabel = new JLabel("Betyg");
+		gradeLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		JLabel placeLabel = new JLabel("Plats");
+		placeLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		JLabel descriptionLabel = new JLabel("Beskrivning");
+		descriptionLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		
 		add(title);
 		add(codeLabel);
@@ -98,8 +108,15 @@ public class ShowMoment extends JPanel implements IShowPanel<Moment> {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				save();
+				if(!date.getText().isEmpty()) {
+					if(IsValidDateFormat(date.getText())) {
+						save();
+					} else {
+						JOptionPane.showMessageDialog(courseView, "Datumet måste vara i följande format: åååå-mm-dd");
+					}
+				} else {
+					save();
+				}
 			}
 		});
 		editButton.addActionListener(new ActionListener() {
@@ -147,9 +164,7 @@ public class ShowMoment extends JPanel implements IShowPanel<Moment> {
 		m.setCourseId(courseId);
 		m.setMomentId(momentId);
 		m.setCredit(Double.parseDouble(credit.getText()));
-		if(!date.getText().isEmpty()) {
-			m.setDate(Date.valueOf(date.getText()));
-		}
+		m.setDate(Date.valueOf(date.getText()));
 		m.setGrade(grade.getText());
 		m.setMomentCode(momentCode.getText());
 		m.setDescription(description.getText());
@@ -201,4 +216,19 @@ public class ShowMoment extends JPanel implements IShowPanel<Moment> {
 		repaint();		
 	}
 
+	
+	public boolean IsValidDateFormat(String date) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setLenient(false);
+		
+		try {
+			java.util.Date d = dateFormat.parse(date);
+			if(dateFormat.format(d).equals(date)) {
+				return true;
+			}
+		} catch (ParseException ex) {
+			return false;
+		}
+		return false;			
+	}
 }

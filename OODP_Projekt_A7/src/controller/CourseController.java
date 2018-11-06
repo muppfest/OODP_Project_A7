@@ -16,8 +16,8 @@ import dao.StudentDao;
 import dao.TeacherDao;
 import model.Course;
 import model.Moment;
-import model.person.Student;
-import model.person.Teacher;
+import model.Student;
+import model.Teacher;
 
 public class CourseController {
 	private CourseDao courseDao;

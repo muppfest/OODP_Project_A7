@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.Course;
-import model.person.Teacher;
+import model.Teacher;
 import view.ComboBoxItem;
 import view.IListPanel;
 import view.course.CourseView;
@@ -147,7 +147,7 @@ public class ListTeachers extends JPanel implements IListPanel {
 
 	public void delete(int id) {
 		int dialogButton = JOptionPane.YES_NO_OPTION;
-		int dialogResult = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill ta bort läraren från alla kurser", "", dialogButton);
+		int dialogResult = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill ta bort vald lärare från systemet", "", dialogButton);
 		
 		if(dialogResult == JOptionPane.YES_OPTION) {
 			courseView.deleteTeacher(id);

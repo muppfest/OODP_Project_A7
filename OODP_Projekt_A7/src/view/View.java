@@ -14,11 +14,12 @@ import javax.swing.*;
 
 import model.Observable;
 import view.course.CourseView;
+import view.group.GroupView;
 import view.program.ProgramView;
-import view.student.StudentView;
 
 public class View extends JFrame implements Observer {
-	private StudentView studentView;
+	private View view = this;
+	private GroupView groupView;
 	private CourseView courseView;
 	private ProgramView programView;
 	
@@ -27,9 +28,7 @@ public class View extends JFrame implements Observer {
 	private final JLabel title = new JLabel("Studentapplikationen");
 	
 	public View() {		
-		studentView = new StudentView(this);
 		courseView = new CourseView(this);
-		programView = new ProgramView(this);
 		
 		title.setFont(new Font("Arial", Font.BOLD, 18));
 		
@@ -44,16 +43,17 @@ public class View extends JFrame implements Observer {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Studentapplikationen");
 				
-		JButton studentButton = new JButton("Grupper");
-		studentButton.addActionListener(new ActionListener() {
+		JButton groupButton = new JButton("Grupper");
+		groupButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				groupView = new GroupView(view);
 				getContentPane().removeAll();
-				scrollPane = new JScrollPane(studentView);
+				scrollPane = new JScrollPane(groupView);
 				add(buttonPanel, BorderLayout.NORTH);
 				getContentPane().add(scrollPane, BorderLayout.CENTER);
-				studentView.list();
+				groupView.list();
 				refresh();
 			}
 		});
@@ -63,6 +63,7 @@ public class View extends JFrame implements Observer {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				courseView = new CourseView(view);
 				getContentPane().removeAll();
 				scrollPane = new JScrollPane(courseView);
 				add(buttonPanel, BorderLayout.NORTH);
@@ -77,6 +78,7 @@ public class View extends JFrame implements Observer {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				programView = new ProgramView(view);
 				getContentPane().removeAll();
 				scrollPane = new JScrollPane(programView);
 				add(buttonPanel, BorderLayout.NORTH);
@@ -89,7 +91,7 @@ public class View extends JFrame implements Observer {
 		buttonPanel = new JPanel();
 		
 		buttonPanel.add(title, BorderLayout.NORTH);
-		buttonPanel.add(studentButton);
+		buttonPanel.add(groupButton);
 		buttonPanel.add(courseButton);
 		buttonPanel.add(programButton);
 		

@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Course;
-import model.person.Teacher;
+import model.Teacher;
 import view.course.ListCourses;
 
 public class TeacherListRow extends JPanel {

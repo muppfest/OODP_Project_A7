@@ -35,8 +35,11 @@ public class CreateProgram extends JPanel {
 		add(title);
 		
 		JLabel codeLabel = new JLabel("Programkod");
-		JLabel nameLabel = new JLabel("Namn");;
+		codeLabel.setFont(new Font("Arial", Font.BOLD, 14));
+		JLabel nameLabel = new JLabel("Namn");
+		nameLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		JLabel descriptionLabel = new JLabel("Beskrivning");
+		descriptionLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		
 		programCode = new JTextField();
 		programName = new JTextField();
