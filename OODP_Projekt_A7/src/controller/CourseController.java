@@ -1,33 +1,28 @@
 /**
  * Kurskontroller gjord av Marcus Vretling Pistelli
+ * En controller som används i CourseView-klassen. Den hanterar modeller och dao-objekt som är relevanta till kurser. 
  */
 
 package controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import dao.CourseDao;
 import dao.IDao;
 import dao.MomentDao;
-import dao.ProgramDao;
-import dao.StudentDao;
 import dao.TeacherDao;
 import model.Course;
 import model.Moment;
-import model.Student;
 import model.Teacher;
 
 public class CourseController {
 	private CourseDao courseDao;
-	private StudentDao studentDao;
 	private TeacherDao teacherDao;
 	private MomentDao momentDao;
 	
 	public CourseController() {
 		courseDao = new CourseDao();
-		studentDao = new StudentDao();
 		teacherDao = new TeacherDao();
 		momentDao = new MomentDao();
 	}

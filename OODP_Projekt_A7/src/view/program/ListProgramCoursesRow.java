@@ -1,5 +1,5 @@
 /**
- * Delvy för att lista kurser inom ett specifikt program gjord av Marcus Vretling Pistelli
+ * Delvy för att lista kurser inom ett specifikt program gjord av Felix
  */
 
 package view.program;

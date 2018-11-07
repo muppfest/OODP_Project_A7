@@ -1,5 +1,7 @@
 /**
- * Huvudvyn för kurser av Marcus Vretling Pistelli
+ * Huvudvyn för kurser som implementerar interfacet IView. 
+ * Den styr allt grafiskt som har någon som helst koppling till kurser. 
+ * av Marcus Vretling Pistelli
  */
 
 package view.course;
@@ -8,7 +10,6 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import controller.CourseController;
 import model.Course;

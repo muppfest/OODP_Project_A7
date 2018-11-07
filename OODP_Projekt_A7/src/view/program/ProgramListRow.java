@@ -1,5 +1,6 @@
 /**
- * Delvy för att lista program gjord av Marcus Vretling Pistelli
+ * Delvy för att skapa rader åt listning av program 
+ * Gjord av Marcus Vretling Pistelli
  */
 
 package view.program;

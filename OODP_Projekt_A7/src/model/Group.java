@@ -1,3 +1,8 @@
+/**
+ * Modell som transporterar data samt speglar program-tabellen i databasen.
+ * Gjord av Felix
+ */
+
 package model;
 
 import java.util.List;

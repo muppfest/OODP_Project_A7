@@ -5,14 +5,11 @@ import java.util.List;
 import dao.CourseDao;
 import dao.IDao;
 import dao.ProgramDao;
-import dao.StudentDao;
-import dao.TeacherDao;
 import model.Course;
 import model.Program;
-import model.Student;
-import model.Teacher;
 /**
  * Programkontroller gjord av Marcus Vretling Pistelli
+ * Controller som ligger i klassen ProgramView och hanterar relevanta modeller och dao-objekt för programmodellen. 
  */
 
 public class ProgramController {

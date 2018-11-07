@@ -1,5 +1,6 @@
 /**
- * Delvy för att lista lärare gjord av Marcus Vretling Pistelli
+ * Delvy för att skapa en rad i en lista för lärare 
+ * Gjord av Marcus Vretling Pistelli
  */
 
 package view.course;

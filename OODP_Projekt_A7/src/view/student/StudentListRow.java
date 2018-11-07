@@ -1,10 +1,9 @@
 /**
- * View för rader av studenter vid listning av studenter gjord av: Marcus
+ * View för rader av studenter vid listning av studenter gjord av: Felix
  */
 
 package view.student;
 
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

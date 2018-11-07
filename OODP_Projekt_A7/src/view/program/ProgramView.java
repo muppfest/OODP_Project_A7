@@ -1,5 +1,6 @@
 /**
- * Huvudvyn för för program gjord av Marcus Vretling Pistelli
+ * Huvudvyn för för program 
+ * Gjord av Marcus Vretling Pistelli
  */
 
 package view.program;
@@ -14,7 +15,6 @@ import model.Course;
 import model.Program;
 import view.IView;
 import view.View;
-import view.moment.ListMoments;
 
 public class ProgramView extends JPanel implements IView<Program> {
 	private View frame;

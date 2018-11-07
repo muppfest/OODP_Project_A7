@@ -1,3 +1,8 @@
+/**
+ * Modell som transporterar data samt speglar course-tabellen i databasen.
+ * Gjord av Felix
+ */
+
 package model;
 
 import java.sql.Date;

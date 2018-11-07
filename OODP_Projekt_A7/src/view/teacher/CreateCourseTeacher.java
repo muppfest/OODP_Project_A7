@@ -1,5 +1,6 @@
 /**
- * Vy för att skapa lärare gjord av Marcus Vretling Pistelli
+ * Vy för att skapa lärare 
+Gjord av Marcus Vretling Pistelli och bearbetad av Felix
  */
 
 package view.teacher;
@@ -8,20 +9,14 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-import java.util.Vector;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import model.Course;
 import model.Teacher;
-import view.ComboBoxItem;
 import view.course.CourseView;
 
 public class CreateCourseTeacher extends JPanel {

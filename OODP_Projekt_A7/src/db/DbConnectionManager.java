@@ -1,3 +1,7 @@
+/**
+ * Har som uppgift att skapa en singleton-koppling mellan databasen och mjukvaran som är skapad av Åke Wallin.
+ */
+
 package db;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -66,5 +70,4 @@ public class DbConnectionManager {
 			System.out.println(e.getMessage());
 		}
 	}
-	
 }

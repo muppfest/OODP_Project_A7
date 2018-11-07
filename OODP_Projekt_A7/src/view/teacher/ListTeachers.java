@@ -1,5 +1,6 @@
 /**
- * Vy för att lista lärare gjord av Marcus Vretling Pistelli
+ * Vy för att lista lärare 
+ * Gjord av Marcus Vretling Pistelli
  */
 
 package view.teacher;

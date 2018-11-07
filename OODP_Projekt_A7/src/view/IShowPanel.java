@@ -1,3 +1,8 @@
+/**
+ * Interface för alla paneler som visar data i detalj. 
+ * Förtutom att visa viss data i detalj kan även datat uppdateras direkt i visa-panelen.
+ */
+
 package view;
 
 public interface IShowPanel<T> {	

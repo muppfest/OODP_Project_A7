@@ -1,3 +1,8 @@
+/**
+ * Modell som transporterar data samt speglar student-tabellen i databasen.
+ * Gjord av Marcus
+ */
+
 package model;
 
 import java.util.List;

@@ -1,5 +1,6 @@
 /**
- * Vy för lista kursmoment inom en kurs gjord av Marcus Vretling Pistelli
+ * Vy för lista kursmoment inom en kurs. Implementerar interfacet IListPanel.
+ * gjord av Marcus Vretling Pistelli och bearbetad av Felix
  */
 
 package view.moment;
@@ -8,7 +9,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,7 +19,6 @@ import model.Course;
 import model.Moment;
 import view.IListPanel;
 import view.course.CourseView;
-import view.course.ShowCourse;
 
 public class ListMoments extends JPanel implements IListPanel<Moment> {
 	private CourseView courseView;

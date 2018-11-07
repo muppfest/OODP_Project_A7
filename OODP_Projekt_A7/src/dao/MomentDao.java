@@ -1,5 +1,5 @@
 /**
- * DAO-klass för att hämta och manipulera data i kursmomentstabellen i databasen. 
+ * DAO-klass som implementerar ett simpelt DAO-interface med de mest basala CRUD-metoderna för att hämta och manipulera data i momenttabellen i databasen.  
  * 
  * Gjord av Marcus
  */

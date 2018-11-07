@@ -1,5 +1,6 @@
 /**
- * Vy för att skapa kursmoment gjord av Marcus Vretling Pistelli
+ * Vy för att skapa kursmoment 
+ * gjord av Marcus Vretling Pistelli
  */
 
 package view.moment;
@@ -11,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,7 +19,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import model.Course;
 import model.Moment;
 import view.course.CourseView;
 
@@ -80,7 +79,7 @@ public class CreateMoment extends JPanel {
 				JOptionPane.showMessageDialog(courseView,
 					    "Momentets typ och kod måste fyllas i.");
 			} else {
-				if(IsValidDateFormat(date.getText())) {
+				if(IsValidDateFormat(date.getText()) || date.getText().isEmpty()) {
 					create();
 				} else {
 				JOptionPane.showMessageDialog(courseView,
@@ -126,7 +125,9 @@ public class CreateMoment extends JPanel {
 		if(!credit.getText().isEmpty()) {
 			m.setCredit(Double.parseDouble(credit.getText()));
 		} 
-		m.setDate(Date.valueOf(date.getText()));
+		if(!date.getText().isEmpty()) {
+			m.setDate(Date.valueOf(date.getText()));
+		}
 		m.setGrade(grade.getText());
 		m.setPlace(place.getText());
 		

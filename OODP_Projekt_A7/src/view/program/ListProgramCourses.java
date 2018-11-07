@@ -1,5 +1,6 @@
 /**
- * Vy för att lista kurser inom ett program gjord av Marcus Vretling Pistelli
+ * Vy för att lista kurser inom ett program 
+ * gjord av Marcus Vretling Pistelli och bearbetad av Felix
  */
 
 package view.program;
@@ -17,7 +18,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.Course;
-import model.Program;
 import view.ComboBoxItem;
 import view.IListPanel;
 

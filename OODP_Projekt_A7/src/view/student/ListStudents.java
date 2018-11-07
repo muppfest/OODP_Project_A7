@@ -1,27 +1,20 @@
 /**
- * View för listning av studenter gjord av: Marcus
- */
+ * View för listning av studenter som implementerar IListPAnel. 
+ * Gjord av Marcus 
+ * */
 
 package view.student;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 import model.Student;
 import view.ComboBoxItem;

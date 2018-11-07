@@ -1,5 +1,6 @@
 /**
- * Vy för att visa program gjord av Marcus Vretling Pistelli
+ * Vy för att visa program 
+ * Gjord av Marcus Vretling Pistelli
  */
 
 package view.program;
@@ -11,13 +12,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.Program;
 import view.IShowPanel;
-import view.course.CourseView;
-import view.course.ListCourses;
 
 public class ShowProgram extends JPanel implements IShowPanel<Program> {
 	private ProgramView programView;
@@ -124,18 +124,22 @@ public class ShowProgram extends JPanel implements IShowPanel<Program> {
 
 	@Override
 	public void save() {
-		Program p = new Program();
-		p.setProgramId(id);
-		p.setName(programName.getText());
-		p.setProgramCode(programCode.getText());
-		p.setDescription(description.getText());
-		
-		editButton.setEnabled(true);
-		saveButton.setEnabled(false);
-		cancelButton.setEnabled(false);
-		disableFields();
-		
-		programView.update(p);
+		if(programName.getText().isEmpty() || programCode.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Programmets namn får inte vara tomt.");
+		} else {
+			Program p = new Program();
+			p.setProgramId(id);
+			p.setName(programName.getText());
+			p.setProgramCode(programCode.getText());
+			p.setDescription(description.getText());
+			
+			editButton.setEnabled(true);
+			saveButton.setEnabled(false);
+			cancelButton.setEnabled(false);
+			disableFields();
+			
+			programView.update(p);
+		}
 	}
 
 	@Override

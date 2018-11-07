@@ -1,3 +1,8 @@
+/**
+ * Delvy för att skapa rader i ListGroups. 
+ * Gjord av Felix
+ */
+
 package view.group;
 
 import java.awt.GridLayout;

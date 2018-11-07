@@ -1,5 +1,6 @@
 /**
- * Vy för att visa kurser gjord av Marcus Vretling Pistelli
+ * Vy som implementerar interfacet IShowPanel. Möjlighet att visa samt uppdatera en kurs samt att lista kursmoment och lärare. 
+ * Skapad av Marcus Vretling Pistelli
  */
 
 package view.course;
@@ -28,7 +29,6 @@ import javax.swing.JTextField;
 
 import model.Course;
 import view.IShowPanel;
-import view.moment.ListMoments;
 
 public class ShowCourse extends JPanel implements IShowPanel<Course> {
 	private CourseView courseView;
@@ -278,22 +278,26 @@ public class ShowCourse extends JPanel implements IShowPanel<Course> {
 
 	@Override
 	public void save() {
-		Course c = new Course();
-		c.setCourseId(id);
-		c.setCourseCode(courseCode.getText());
-		c.setName(courseName.getText());
-		c.setStartDate(Date.valueOf(date.getText()));
-		c.setCoursePlanURL(coursePlanURL.getText());
-		c.setCourseScheduleURL(courseScheduleURL.getText());
-		c.setDescription(description.getText());
-		c.setFinalGrade(finalGrade.getText());
-		
-		editButton.setEnabled(true);
-		saveButton.setEnabled(false);
-		cancelButton.setEnabled(false);
-		disableFields();
-		
-		courseView.update(c);
+		if(courseCode.getText().isEmpty() || courseName.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Kursens kod och namn får inte vara tomt.");
+		} else {
+			Course c = new Course();
+			c.setCourseId(id);
+			c.setCourseCode(courseCode.getText());
+			c.setName(courseName.getText());
+			c.setStartDate(Date.valueOf(date.getText()));
+			c.setCoursePlanURL(coursePlanURL.getText());
+			c.setCourseScheduleURL(courseScheduleURL.getText());
+			c.setDescription(description.getText());
+			c.setFinalGrade(finalGrade.getText());
+			
+			editButton.setEnabled(true);
+			saveButton.setEnabled(false);
+			cancelButton.setEnabled(false);
+			disableFields();
+			
+			courseView.update(c);
+		}
 	}
 
 	@Override

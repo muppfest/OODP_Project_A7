@@ -1,5 +1,6 @@
 /**
- * controller för grupper gjord av Marcus
+ * controller för grupper skapad av Marcus bearbetad av Felix
+ * controller som ligger i klassen GroupView och hanterar modeller och dao-objekt som är relevanta för modellen grupper.
  */
 
 
@@ -9,10 +10,8 @@ import java.util.List;
 
 import dao.CourseDao;
 import dao.GroupDao;
-import dao.IDao;
 import dao.MomentDao;
 import dao.StudentDao;
-import model.Course;
 import model.Group;
 import model.Moment;
 import model.Student;

@@ -1,5 +1,6 @@
 /**
- * DAO-klass för att hämta och manipulera data i kurstabellen i databasen. 
+ * DAO-klass som implementerar ett simpelt DAO-interface med de mest basala CRUD-metoderna för att hämta och manipulera data i kurstabellen i databasen. 
+ * Hämtar och manipulerar även kopplingstabellen programcourses. 
  * 
  * Gjord av Marcus
  */
@@ -7,7 +8,6 @@
 package dao;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

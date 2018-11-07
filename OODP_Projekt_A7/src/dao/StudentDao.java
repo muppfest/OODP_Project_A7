@@ -1,5 +1,6 @@
 /**
  * DAO-klass för att hämta och manipulera data i studenttabellen i databasen. 
+ * Hanterar även kopplingstabellen studentgroups.
  * 
  * Gjord av Marcus
  */
@@ -11,11 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.rmi.ssl.SslRMIClientSocketFactory;
-
 import db.DbConnectionManager;
-import model.Program;
 import model.Student;
 
 public class StudentDao implements IDao<Student> {

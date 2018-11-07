@@ -1,3 +1,8 @@
+/**
+ * Abstrakt klass som studenter och lärare ärver.
+ * Gjord av Marcus
+ */
+
 package model;
 
 public abstract class Person {

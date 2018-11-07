@@ -1,18 +1,18 @@
 /**
- * View för detaljer av studenter gjord av: Marcus
+ * View för att visa studenter 
+ * Gjord av: Marcus
  */
 
 package view.student;
 
-import java.util.List;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -132,22 +132,27 @@ public class ShowStudent extends JPanel implements IShowPanel<Student> {
 	}
 
 	@Override
-	public void save() {		
-		Student s = new Student();
-		s.setStudentId(id);	
-		s.setProgramId(programId);
-		s.setName(name.getText());
-		s.setAddress(address.getText());
-		s.setCity(city.getText());
-		s.setEmail(email.getText());
-		s.setPhoneNr(phoneNr.getText());
-		
-		editButton.setVisible(true);
-		saveButton.setVisible(false);
-		cancelButton.setVisible(false);
-		disableFields();
-		
-		groupView.updateStudent(s, groupId);
+	public void save() {	
+		if(!name.getText().isEmpty()) {
+			Student s = new Student();
+			s.setStudentId(id);	
+			s.setProgramId(programId);
+			s.setName(name.getText());
+			s.setAddress(address.getText());
+			s.setCity(city.getText());
+			s.setEmail(email.getText());
+			s.setPhoneNr(phoneNr.getText());
+			
+			editButton.setVisible(true);
+			saveButton.setVisible(false);
+			cancelButton.setVisible(false);
+			disableFields();
+			
+			groupView.updateStudent(s, groupId);			
+		} else {
+			JOptionPane.showMessageDialog(this, "Namnet får inte vara tomt.");
+		}
+
 	}
 
 	@Override

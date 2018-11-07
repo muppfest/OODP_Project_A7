@@ -1,3 +1,8 @@
+/**
+ * Vy för att lista grupper. Implementerar interfacet IListPanel. 
+ * Gjord av Felix
+ */
+
 package view.group;
 
 import java.awt.Font;

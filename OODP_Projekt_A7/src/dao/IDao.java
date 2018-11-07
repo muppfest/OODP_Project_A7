@@ -1,5 +1,5 @@
 /**
- * DAO-interface gjord av Marcus Vretling Pistelli
+ * DAO-interface med de mest basala CRUD-metoderna.
  */
 
 package dao;

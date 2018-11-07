@@ -1,5 +1,7 @@
 /**
- * Visa-vy för grupper gjord av Marcus
+ * Vy för att visa och redigera grupper. Även möjlighet att visa kopplade studenter.
+ * Implementerar interfacet IShowPanel. 
+ * Gjord av Marcus och bearbetad av Felix
  */
 
 package view.group;
@@ -120,12 +122,16 @@ public class ShowGroup extends JPanel implements IShowPanel<Group> {
 
 	@Override
 	public void save() {
+		if(!name.getText().isEmpty()) {
 		Group g = new Group();
 		g.setGroupId(groupId);
 		g.setMomentId(momentId);
 		g.setDescription(description.getText());
 		g.setName(name.getText());
 		groupView.update(g);
+		} else {
+			JOptionPane.showMessageDialog(this, "Gruppens namn får inte vara tomt");
+		}
 	}
 
 	@Override
@@ -142,9 +148,9 @@ public class ShowGroup extends JPanel implements IShowPanel<Group> {
 
 	@Override
 	public void cancel() {
-		saveButton.setVisible(false);;
-		cancelButton.setVisible(false);;
-		editButton.setVisible(true);;
+		saveButton.setVisible(false);
+		cancelButton.setVisible(false);
+		editButton.setVisible(true);
 		disableFields();
 		refresh();		
 	}

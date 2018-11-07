@@ -1,5 +1,6 @@
 /**
- * Vy för att lista kurser gjord av Marcus Vretling Pistelli
+ * Vy för att lista kurser. Implementerar interfacet IList.
+ * Gjord av Marcus Vretling Pistelli
  */
 
 package view.course;

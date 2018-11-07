@@ -1,5 +1,5 @@
 /**
- * View för skapande av studenter gjord av: Marcus
+ * View för skapande av studenter gjord av: Felix
  */
 
 package view.student;
@@ -18,7 +18,6 @@ import javax.swing.JTextField;
 import model.Student;
 import view.ICreatePanel;
 import view.group.GroupView;
-import view.program.ProgramView;
 
 public class CreateStudent extends JPanel implements ICreatePanel {
 	private GroupView groupView;

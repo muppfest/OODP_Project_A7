@@ -1,5 +1,6 @@
 /**
- * Vy för att visa lärare gjord av Marcus Vretling Pistelli
+ * Vy för att visa lärare 
+Gjord av Marcus Vretling Pistelli
  */
 
 package view.teacher;
@@ -11,6 +12,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -131,19 +133,23 @@ public class ShowTeacher extends JPanel implements IShowPanel<Teacher>{
 
 	@Override
 	public void save() {
-		Teacher t = new Teacher();
-		t.setTeacherId(teacherId);
-		t.setName(name.getText());
-		t.setEmail(email.getText());
-		t.setOffice(office.getText());
-		t.setPhoneNr(phoneNr.getText());
-		
-		editButton.setEnabled(true);
-		saveButton.setEnabled(false);
-		cancelButton.setEnabled(false);
-		disableFields();
-		
-		courseView.updateTeacher(t, courseId);
+		if(name.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Namnet får inte vara tomt.");
+		} else {
+			Teacher t = new Teacher();
+			t.setTeacherId(teacherId);
+			t.setName(name.getText());
+			t.setEmail(email.getText());
+			t.setOffice(office.getText());
+			t.setPhoneNr(phoneNr.getText());
+			
+			editButton.setEnabled(true);
+			saveButton.setEnabled(false);
+			cancelButton.setEnabled(false);
+			disableFields();
+			
+			courseView.updateTeacher(t, courseId);
+		}
 	}
 
 	@Override

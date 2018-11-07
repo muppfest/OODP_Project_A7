@@ -1,5 +1,6 @@
 /**
- * Huvudvy för grupper gjord av Marcus
+ * Huvudvy för grupper. Implementerar interfacet IView. 
+ * Gjord av Marcus
  */
 
 package view.group;

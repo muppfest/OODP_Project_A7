@@ -8,8 +8,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,7 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.Course;
-import model.Student;
 import view.ICreatePanel;
 
 public class CreateCourse extends JPanel implements ICreatePanel {
@@ -77,7 +74,7 @@ public class CreateCourse extends JPanel implements ICreatePanel {
 					JOptionPane.showMessageDialog(courseView,
 						    "Kursnamn och kurskod måste fyllas i");
 				} else {
-					if(IsValidDateFormat(date.getText())) {
+					if(IsValidDateFormat(date.getText()) || date.getText().isEmpty()) {
 						create();
 					} else {
 					JOptionPane.showMessageDialog(courseView,
@@ -120,7 +117,9 @@ public class CreateCourse extends JPanel implements ICreatePanel {
 		
 		c.setCourseCode(courseCode.getText());
 		c.setName(courseName.getText());
-		c.setStartDate(Date.valueOf(date.getText()));
+		if(!date.getText().isEmpty()) {
+			c.setStartDate(Date.valueOf(date.getText()));
+		}
 		c.setCoursePlanURL(coursePlanURL.getText());
 		c.setCourseScheduleURL(courseScheduleURL.getText());
 		c.setDescription(description.getText());

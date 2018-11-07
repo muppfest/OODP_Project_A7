@@ -1,5 +1,6 @@
 /**
- * DAO-klass för att hämta och manipulera data i lärartabellen i databasen. 
+ * DAO-klass för att hämta och manipulera data i lärartabellen i databasen.
+ * Hanterar även courseteachers-tabellen i databasen.  
  * 
  * Gjord av Marcus
  */

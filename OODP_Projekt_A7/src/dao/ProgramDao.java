@@ -1,5 +1,5 @@
 /**
- * DAO-klass för att hämta och manipulera data i programtabellen i databasen. 
+ * DAO-klass som implementerar ett simpelt DAO-interface med de mest basala CRUD-metoderna för att hämta och manipulera data i programtabellen i databasen.   
  * 
  * Gjord av Marcus
  */
@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import db.DbConnectionManager;
-import model.Course;
 import model.Program;
 
 import model.Program;

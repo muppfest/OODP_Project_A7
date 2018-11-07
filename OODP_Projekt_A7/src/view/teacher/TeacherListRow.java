@@ -1,5 +1,6 @@
 /**
- * Delvy för att lista lärare gjord av Marcus Vretling Pistelli
+ * Delvy för att skapa rader åt listning av lärare 
+ * gjord av Felix
  */
 
 package view.teacher;
@@ -12,9 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import model.Course;
 import model.Teacher;
-import view.course.ListCourses;
 
 public class TeacherListRow extends JPanel {
 	private JPanel listTeachers;

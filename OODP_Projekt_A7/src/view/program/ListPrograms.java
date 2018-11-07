@@ -1,5 +1,6 @@
 /**
- * Vy för att lista program gjord av Marcus Vretling Pistelli
+ * Vy för att lista program 
+ * Gjord av Marcus Vretling Pistelli
  */
 
 package view.program;

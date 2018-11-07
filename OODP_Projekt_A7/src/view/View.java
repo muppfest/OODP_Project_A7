@@ -1,5 +1,9 @@
 /**
- * Huvudvy för hela view-delen gjord av Marcus Vretling Pistelli
+ * Huvudvy för hela view-delen. 
+ * Tanken är att alla olika huvudpaneler ska ligga i denna frame. 
+ * Utifrån klick på knappar i knapp-panelen ändras vyn. 
+ * 
+ * gjord av Marcus Vretling Pistelli
  */
 
 package view;
