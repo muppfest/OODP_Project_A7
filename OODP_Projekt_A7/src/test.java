@@ -1,19 +1,5 @@
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import dao.CourseDao;
-import dao.GroupDao;
-import dao.MomentDao;
-import dao.ProgramDao;
-import dao.StudentDao;
-import dao.TeacherDao;
-import model.Course;
-import model.Group;
-import model.Moment;
-import model.Program;
-import model.Student;
-import model.Teacher;
 import view.View;
 
 public class test {

@@ -1,6 +1,5 @@
 package model;
 
-import java.net.URL;
 import java.sql.Date;
 import java.util.List;
 
@@ -17,7 +16,14 @@ public class Course {
 	private List<Student> students;
 	private List<Teacher> teachers;
 	private List<Moment> moments;
+	private List<Program> programs;
 	
+	public List<Program> getPrograms() {
+		return programs;
+	}
+	public void setPrograms(List<Program> programs) {
+		this.programs = programs;
+	}
 	public String getCourseScheduleURL() {
 		return courseScheduleURL;
 	}

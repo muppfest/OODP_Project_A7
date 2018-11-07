@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class Student extends Person {
 	private int studentId;
 	private String city;
@@ -7,6 +9,24 @@ public class Student extends Person {
 	private int programId;
 	
 	private Program program;
+	private List<Course> courses;
+	private List<Group> groups;
+	
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+
+	public List<Group> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(List<Group> groups) {
+		this.groups = groups;
+	}
 
 	public Program getProgram() {
 		return program;
