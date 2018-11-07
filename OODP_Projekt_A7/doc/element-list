@@ -1,0 +1,12 @@
+controller
+dao
+db
+Main
+model
+view
+view.course
+view.group
+view.moment
+view.program
+view.student
+view.teacher

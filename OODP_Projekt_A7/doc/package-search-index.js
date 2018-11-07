@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"controller"},{"l":"dao"},{"l":"db"},{"l":"Main"},{"l":"model"},{"l":"view"},{"l":"view.course"},{"l":"view.group"},{"l":"view.moment"},{"l":"view.program"},{"l":"view.student"},{"l":"view.teacher"}]

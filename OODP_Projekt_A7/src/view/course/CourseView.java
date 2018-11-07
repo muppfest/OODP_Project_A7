@@ -6,6 +6,7 @@
 
 package view.course;
 
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.JOptionPane;
